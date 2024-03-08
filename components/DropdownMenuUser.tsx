@@ -1,4 +1,4 @@
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -12,14 +12,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
   DropdownMenuTrigger,
-} from "@/components/ui/dropdown-menu"
-import React from "react"
+} from "@/components/ui/dropdown-menu";
+import React from "react";
 
 type DropdownMenuUserProps = {
-  children: React.ReactNode
-}
+  children: React.ReactNode;
+};
 
-export function DropdownMenuUser({children}:DropdownMenuUserProps) {
+export function DropdownMenuUser({ children }: DropdownMenuUserProps) {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -76,5 +76,5 @@ export function DropdownMenuUser({children}:DropdownMenuUserProps) {
         </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
-  )
+  );
 }
