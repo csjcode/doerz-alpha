@@ -1,6 +1,3 @@
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import Link from "next/link";
 import NavBar from "@/components/NavBar";
 import { Bungee } from "next/font/google";
 
