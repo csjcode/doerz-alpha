@@ -3,6 +3,7 @@ import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Bungee } from "next/font/google";
+import NavProfileMenu from "./NavAvatarMenu";
 
 const bungee = Bungee({
   display: "swap",
@@ -32,7 +33,15 @@ export default function Home() {
               <li>Contacts</li>
             </Link>
           </ul>
-          <DynamicThemeSwitcher />
+          <div className="flex flex-row items-end">
+            <div className="">
+              <DynamicThemeSwitcher />
+            </div>
+            <div className="mr-4">
+              {" "}
+              <NavProfileMenu />
+            </div>
+          </div>
         </div>
       </nav>
     </>
