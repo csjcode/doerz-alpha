@@ -17,7 +17,7 @@ const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
 export default function Home() {
   return (
     <>
-      <nav className="navbar w-full px-4 py-3 shadow-lg">
+      <nav className="navbar w-full px-4 py-3 shadow-md dark:bg-zinc-950 bg-zinc-200 border-y dark:border-zinc-800 border-zinc-400">
         <div className="flex items-center w-full">
           <section className={`${bungee.className} font-bold mr-auto text-xl`}>
             My Website Name
