@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Bungee } from "next/font/google";
 import NavProfileMenu from "./NavAvatarMenu";
+import WalletAdapter from "./WalletAdapter";
 
 const bungee = Bungee({
   display: "swap",
@@ -34,6 +35,9 @@ export default function Home() {
             </Link>
           </ul>
           <div className="flex flex-row items-end">
+            <div className="">
+              <WalletAdapter />
+            </div>
             <div className="">
               <DynamicThemeSwitcher />
             </div>

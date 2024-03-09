@@ -1,4 +1,6 @@
+"use client"
 import NavBar from "@/components/NavBar";
+import { ContextProvider } from "@/contexts/ContextProvider";
 import { Bungee } from "next/font/google";
 
 const bungee = Bungee({
@@ -10,10 +12,12 @@ const bungee = Bungee({
 export default function Home() {
   return (
     <>
-      <NavBar />
-      <div className="flex justify-center items-center h-screen w-full">
-        <div className={`${bungee.className} text-4xl`}>Home Page</div>
-      </div>
+      <ContextProvider>
+        <NavBar />
+        <div className="flex justify-center items-center h-screen w-full">
+          <div className={`${bungee.className} text-4xl`}>Home Page</div>
+        </div>
+      </ContextProvider>
     </>
   );
 }
