@@ -35,7 +35,7 @@ export default function Home() {
             </Link>
           </ul>
           <div className="flex flex-row items-end">
-            <div className="">
+            <div className="ml-4 border border-zinc-300 dark:border-zinc-900 rounded-lg">
               <WalletAdapter />
             </div>
             <div className="">
