@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "My Domain",
-  description: "Site for my domain",
+  title: "Solana app",
+  description: "Site for my Solana app",
 };
 
 export default function RootLayout({

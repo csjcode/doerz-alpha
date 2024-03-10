@@ -2,15 +2,21 @@
 import Image from "next/image";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import { Bungee } from "next/font/google";
+import { Bungee, Inter } from "next/font/google";
 import NavProfileMenu from "./NavAvatarMenu";
 import WalletAdapter from "./WalletAdapter";
 import { GoGear } from "react-icons/go";
 // import DropdownNetwork from "./DropdownNetwork";
-import NetworkSwitcher from "./NetworkSwitcher";
+// import NetworkSwitcher from "./NetworkSwitcher";
 import SelectNetwork from "./SelectNetwork";
 
 const bungee = Bungee({
+  display: "swap",
+  weight: "400",
+  subsets: ["latin"],
+});
+
+const inter = Inter({
   display: "swap",
   weight: "400",
   subsets: ["latin"],
@@ -24,8 +30,8 @@ export default function Home() {
     <>
       <nav className="navbar w-full px-4 py-3 shadow-md dark:bg-zinc-950 bg-zinc-200 border-y dark:border-zinc-800 border-zinc-400">
         <div className="flex items-center w-full">
-          <section className={`${bungee.className} font-bold mr-auto text-xl`}>
-            My Website Name
+          <section className={`${inter.className} font-bold mr-auto text-xl`}>
+            Solana App{" "}
           </section>
           <ul className="nav-links flex  gap-8 items-center">
             <Link href="/">
@@ -54,7 +60,6 @@ export default function Home() {
               {/* <SelectNetwork>
                 <NetworkSwitcher />
               </SelectNetwork> */}
-
             </div>
             <div className="mr-2 flex flex-row justify-center items-center h-10">
               <DynamicThemeSwitcher />
