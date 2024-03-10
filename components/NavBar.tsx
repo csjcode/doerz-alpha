@@ -5,6 +5,7 @@ import Link from "next/link";
 import { Bungee } from "next/font/google";
 import NavProfileMenu from "./NavAvatarMenu";
 import WalletAdapter from "./WalletAdapter";
+import { GoGear } from "react-icons/go";
 
 const bungee = Bungee({
   display: "swap",
@@ -38,10 +39,13 @@ export default function Home() {
             <div className="ml-4 border border-zinc-300 dark:border-zinc-900 rounded-lg">
               <WalletAdapter />
             </div>
-            <div className="">
+            <div className="flex flex-row justify-center items-center h-10">
+              <GoGear size={22} />
+            </div>
+            <div className="mr-2 flex flex-row justify-center items-center h-10">
               <DynamicThemeSwitcher />
             </div>
-            <div className="mr-4">
+            <div className="mr-2 flex flex-row justify-center items-center h-10">
               {" "}
               <NavProfileMenu />
             </div>
