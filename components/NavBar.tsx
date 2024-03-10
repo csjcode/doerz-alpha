@@ -6,6 +6,9 @@ import { Bungee } from "next/font/google";
 import NavProfileMenu from "./NavAvatarMenu";
 import WalletAdapter from "./WalletAdapter";
 import { GoGear } from "react-icons/go";
+// import DropdownNetwork from "./DropdownNetwork";
+import NetworkSwitcher from "./NetworkSwitcher";
+import SelectNetwork from "./SelectNetwork";
 
 const bungee = Bungee({
   display: "swap",
@@ -40,7 +43,18 @@ export default function Home() {
               <WalletAdapter />
             </div>
             <div className="flex flex-row justify-center items-center h-10">
-              <GoGear size={22} />
+              {/* <div className="form-control bg-opacity-100">
+                <label className="cursor-pointer label">
+                  <a>Autoconnect</a>
+                  <input type="checkbox" checked={autoConnect} onChange={(e) => setAutoConnect(e.target.checked)} className="toggle" />
+                </label>
+                <NetworkSwitcher />
+              </div> */}
+              <SelectNetwork />
+              {/* <SelectNetwork>
+                <NetworkSwitcher />
+              </SelectNetwork> */}
+
             </div>
             <div className="mr-2 flex flex-row justify-center items-center h-10">
               <DynamicThemeSwitcher />

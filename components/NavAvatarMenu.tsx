@@ -1,13 +1,13 @@
 import React from "react";
 import AvatarUser from "./AvatarUser";
-import { DropdownMenuUser } from "./DropdownMenuUser";
+import { DropdownMenuUser as DropdownUser } from "./DropdownUser";
 
-const NavProfileMenu = () => {
+const NavAvatarMenu = () => {
   return (
-    <DropdownMenuUser>
+    <DropdownUser>
       <AvatarUser />
-    </DropdownMenuUser>
+    </DropdownUser>
   );
 };
 
-export default NavProfileMenu;
+export default NavAvatarMenu;
