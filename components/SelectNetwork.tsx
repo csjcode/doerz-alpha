@@ -25,7 +25,7 @@ export function SelectNetwork() {
         </SelectTrigger>
         <SelectContent>
           <SelectGroup>
-            <SelectLabel>Fruits</SelectLabel>
+            <SelectLabel>Network</SelectLabel>
             <SelectItem value="mainnet-beta">main</SelectItem>
             <SelectItem value="devnet">dev</SelectItem>
             <SelectItem value="testnet">test</SelectItem>
