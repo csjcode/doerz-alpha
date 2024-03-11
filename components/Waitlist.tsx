@@ -18,12 +18,12 @@ const Waitlist = () => {
           </div>
           <div className="max-w-2xl mx-auto ">
             <h1 className="relative z-10 text-lg md:text-4xl  bg-clip-text text-transparent bg-gradient-to-b from-zinc-200 to-zinc-700 text-center font-sans font-bold">
-              Join the Token waitlist
+              Join the Solana App waitlist
             </h1>
             <p></p>
             <p className="text-zinc-500 max-w-lg mx-auto my-2 text-sm text-center relative z-10">
               Welcome to our new Solana app! Solana is bursting with new
-              innovations. Our tool aims to make it easier to develop new apps.
+              innovations. Our tool aims to make it easier to discover new apps.
             </p>
             <input
               type="text"
