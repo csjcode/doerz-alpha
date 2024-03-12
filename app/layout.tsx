@@ -24,7 +24,7 @@ export default function RootLayout({
         <NavbarContext>
           <NavBar />
           <NavbarDemos />
-          <div className="flex flex-col justify-center items-center h-screen w-full">
+          <div className="flex flex-col justify-center items-center w-full">
             {/* <div className={`${bungee.className} text-4xl`}>Home Page</div> */}
             {children}
           </div>
