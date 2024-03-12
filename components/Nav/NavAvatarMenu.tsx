@@ -1,6 +1,6 @@
 import React from "react";
-import AvatarUser from "./AvatarUser";
-import { DropdownMenuUser as DropdownUser } from "./DropdownUser";
+import AvatarUser from "../AvatarUser";
+import { DropdownMenuUser as DropdownUser } from "../DropdownUser";
 
 const NavAvatarMenu = () => {
   return (

@@ -1,7 +1,5 @@
 import { Metadata } from "next";
 import React from "react";
-import Image from "next/image";
-import CardDemo from "@/components/CardDemo";
 import CardDemoList from "@/components/CardDemoList";
 
 type CardPageProps = {};

@@ -4,11 +4,11 @@ import dynamic from "next/dynamic";
 import Link from "next/link";
 import { Bungee, Inter } from "next/font/google";
 import NavProfileMenu from "./NavAvatarMenu";
-import WalletAdapter from "./WalletAdapter";
+import WalletAdapter from "../WalletAdapter";
 import { GoGear } from "react-icons/go";
 // import DropdownNetwork from "./DropdownNetwork";
 // import NetworkSwitcher from "./NetworkSwitcher";
-import SelectNetwork from "./SelectNetwork";
+import SelectNetwork from "../SelectNetwork";
 
 const bungee = Bungee({
   display: "swap",
