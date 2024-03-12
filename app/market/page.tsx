@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const MarketPage = (props: MarketPageProps) => {
   return (
     <div>
-      {/* <CardDemoList /> */}
+      Market Dashboard
     </div>
   );
 };

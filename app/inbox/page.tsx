@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const InboxPage = (props: InboxPageProps) => {
   return (
     <div>
-      {/* <CardDemoList /> */}
+      Inbox
     </div>
   );
 };

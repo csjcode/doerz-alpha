@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 const TransactionsPage = (props: TransactionsPageProps) => {
   return (
     <div>
-      {/* <CardDemoList /> */}
+      Transactions
     </div>
   );
 };
