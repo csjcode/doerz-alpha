@@ -11,7 +11,7 @@ const useSolanaNetwork = (initialNetwork: string) => {
       let rpcUrl;
       switch (network) {
         case 'mainnet-beta':
-          rpcUrl = 'https://api.mainnet-beta.solana.com';
+          rpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL || "";
           break;
         case 'testnet':
           rpcUrl = 'https://api.testnet.solana.com';

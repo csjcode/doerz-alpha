@@ -1,8 +1,14 @@
-import { WalletAdapterNetwork, WalletError } from '@solana/wallet-adapter-base';
-import { ConnectionProvider, WalletProvider } from '@solana/wallet-adapter-react';
-import { Cluster, clusterApiUrl } from '@solana/web3.js';
-import { FC, ReactNode, useCallback, useMemo } from 'react';
-import { NetworkConfigurationProvider, useNetworkConfiguration } from './NetworkConfigurationProvider';
+import { WalletAdapterNetwork, WalletError } from "@solana/wallet-adapter-base";
+import {
+  ConnectionProvider,
+  WalletProvider,
+} from "@solana/wallet-adapter-react";
+import { Cluster, clusterApiUrl } from "@solana/web3.js";
+import { FC, ReactNode, useCallback, useMemo } from "react";
+import {
+  NetworkConfigurationProvider,
+  useNetworkConfiguration,
+} from "./NetworkConfigurationProvider";
 import dynamic from "next/dynamic";
 
 const ReactUIWalletModalProviderDynamic = dynamic(
@@ -11,49 +17,51 @@ const ReactUIWalletModalProviderDynamic = dynamic(
   { ssr: false }
 );
 
+const externalRpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL || "";
+
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    const { networkConfiguration } = useNetworkConfiguration();
-    const network = networkConfiguration as WalletAdapterNetwork;
-    const endpoint = useMemo(() => clusterApiUrl(network), [network]);
+  const { networkConfiguration } = useNetworkConfiguration();
+  // const network = networkConfiguration as WalletAdapterNetwork;
 
-    console.log(network);
 
-    const wallets = useMemo(
-        () => [
-            // new UnsafeBurnerWalletAdapter(),
-        ],
-        []
-    );
+//   const network = "mainnet-beta"; // Use 'mainnet-beta', 'testnet', or 'devnet'
+  const endpoint = useMemo(() => externalRpcUrl, []);
 
-    const onError = useCallback(
-        (error: WalletError) => {
-            // notify({ type: 'error', message: error.message ? `${error.name}: ${error.message}` : error.name });
-            console.error(error);
-        },
-        []
-    );
+//   console.log(network);
 
-    return (
-        // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
-        <ConnectionProvider endpoint={endpoint}>
-            <WalletProvider wallets={wallets} onError={onError} autoConnect>
-            {/* <WalletProvider wallets={wallets} onError={onError} autoConnect={autoConnect}> */}
-                <ReactUIWalletModalProviderDynamic>
-                    {children}
-                </ReactUIWalletModalProviderDynamic>
-			</WalletProvider>
-        </ConnectionProvider>
-    );
+  const wallets = useMemo(
+    () => [
+      // new UnsafeBurnerWalletAdapter(),
+    ],
+    []
+  );
+
+  const onError = useCallback((error: WalletError) => {
+    // notify({ type: 'error', message: error.message ? `${error.name}: ${error.message}` : error.name });
+    console.error(error);
+  }, []);
+
+  return (
+    // TODO: updates needed for updating and referencing endpoint: wallet adapter rework
+    <ConnectionProvider endpoint={endpoint}>
+      <WalletProvider wallets={wallets} onError={onError} autoConnect>
+        {/* <WalletProvider wallets={wallets} onError={onError} autoConnect={autoConnect}> */}
+        <ReactUIWalletModalProviderDynamic>
+          {children}
+        </ReactUIWalletModalProviderDynamic>
+      </WalletProvider>
+    </ConnectionProvider>
+  );
 };
 
 export const ContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
-    return (
-        <>
-            {/* <NetworkConfigurationProvider> */}
-              {/*   <AutoConnectProvider> */}
-                    <WalletContextProvider>{children}</WalletContextProvider>
-                {/* </AutoConnectProvider>*/}
-            {/* </NetworkConfigurationProvider> */}
-        </>
-    );
+  return (
+    <>
+      {/* <NetworkConfigurationProvider> */}
+      {/*   <AutoConnectProvider> */}
+      <WalletContextProvider>{children}</WalletContextProvider>
+      {/* </AutoConnectProvider>*/}
+      {/* </NetworkConfigurationProvider> */}
+    </>
+  );
 };

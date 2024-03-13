@@ -15,7 +15,7 @@ import dynamic from "next/dynamic";
 import useSolanaNetwork from "@/hooks/useSolanaNetwork";
 
 export function SelectNetwork() {
-  const { connection, setNetwork } = useSolanaNetwork('devnet');
+  const { connection, setNetwork } = useSolanaNetwork('mainnet-beta');
   const handleNetwork = (network: string) => {
 
     switch (network) {
@@ -31,7 +31,7 @@ export function SelectNetwork() {
       default:
         setNetwork('devnet');
     }
-    console.log(connection);
+    console.log(`connection in SelectNetwork: ${connection}`);
 
   };
 
