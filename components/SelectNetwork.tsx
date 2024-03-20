@@ -13,25 +13,41 @@ import {
 import React from "react";
 import dynamic from "next/dynamic";
 import useSolanaNetwork from "@/hooks/useSolanaNetwork";
+import useNetworkStore from "@/store/store";
 
 export function SelectNetwork() {
-  const { connection, setNetwork } = useSolanaNetwork('mainnet-beta');
+
+
+  const currentNetwork = useNetworkStore((state) => state.currentNetwork)
+  const updateNetwork = useNetworkStore((state) => state.updateNetwork)
+  // console.log(`currentNetwork in SelectNetwork: ${currentNetwork}`);
+
+  const { connection, setNetwork } = useSolanaNetwork(currentNetwork);
+
+
   const handleNetwork = (network: string) => {
 
+    let networkChoice;
     switch (network) {
       case 'mainnet-beta':
-        setNetwork('mainnet-beta');
+        networkChoice = 'mainnet-beta';
         break;
       case 'testnet':
-        setNetwork('testnet');
+        networkChoice = 'testnet';
         break;
       case 'devnet':
-        setNetwork('devnet');
+        networkChoice = 'devnet';
         break;
       default:
-        setNetwork('devnet');
+        networkChoice = 'devnet'
     }
-    console.log(`connection in SelectNetwork: ${connection}`);
+
+    console.log(`connection in SelectNetwork: ${networkChoice}`);
+
+    setNetwork(networkChoice);
+    updateNetwork(networkChoice);
+
+
 
   };
 
@@ -41,6 +57,7 @@ export function SelectNetwork() {
         onValueChange={(network) => {
           handleNetwork(network);
         }}
+        defaultValue={currentNetwork}
       >
         <SelectTrigger className="border-0 p-1 focus:ring-0 bg-none bg-zinc-200 dark:bg-zinc-950 outline-zinc-200 dark:outline-zinc-950 ring-offset-0">
           <SelectValue placeholder={<GoGear size={22} />} />

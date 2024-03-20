@@ -25,9 +25,6 @@ const TransactionsPage = (props: TransactionsPageProps) => {
       <div className="w-full">
         <WalletGetAccountInfo />
       </div>
-
-
-
     </div>
   );
 };
