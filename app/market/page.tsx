@@ -1,5 +1,7 @@
-import { Metadata } from "next";
 import React from "react";
+import TokenPrice from "@/components/TokenPrice";
+import { Metadata } from "next";
+
 
 type MarketPageProps = {};
 export const metadata: Metadata = {
@@ -9,7 +11,9 @@ export const metadata: Metadata = {
 const MarketPage = (props: MarketPageProps) => {
   return (
     <div>
-      Market Dashboard
+      <div className="text-xl">Market Dashboard</div>
+      <div className="text-lg">Coming soon...</div>
+      <TokenPrice />
     </div>
   );
 };

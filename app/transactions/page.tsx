@@ -4,6 +4,7 @@ import React from "react";
 import { useWallet } from "@solana/wallet-adapter-react";
 import SignInWallet from "@/components/SignInWallet";
 import WalletGetAccountInfo from "@/components/WalletGetAccountInfo";
+import WalletSendTransaction from "@/components/WalletSendTransaction";
 
 type TransactionsPageProps = {};
 export const metadata: Metadata = {
@@ -22,9 +23,17 @@ const TransactionsPage = (props: TransactionsPageProps) => {
       <div className="w-full">
         <SignMessage />
       </div>
-      <div className="w-full">
-        <WalletGetAccountInfo />
+      <div className="flex w-full mt-4 justify-center items-center">
+        <div className="p-4 border max-w-[260px]">
+          <WalletGetAccountInfo />
+        </div>
       </div>
+      <div className="flex w-full mt-4 justify-center items-center">
+        <div className="p-4 border max-w-[260px]">
+          <WalletSendTransaction />
+        </div>
+      </div>
+
     </div>
   );
 };
