@@ -28,12 +28,6 @@ export const useFetchTokenPrice = () => {
         'X-CG-DEMO-API-KEY': process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || '',
       });
 
-      console.log(process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY);
-
-
-      console.log(`fetchPrice URL: ${url}?${params}`);
-
-
       const response = await fetch(`${url}?${params}`, {
         method: 'GET',
         headers,
