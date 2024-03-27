@@ -89,7 +89,7 @@ const WalletGetAccountInfo: React.FC<Props> = () => {
   // console.log(accountInfo);
 
   return (
-    <div className="mt-4">
+    <div className="">
       <p>Current Network: {currentNetwork}</p>
       <p>{publicKey ? `Balance: ${balance} SOL` : "Connect your wallet"}</p>
 
