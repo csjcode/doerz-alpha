@@ -1,0 +1,44 @@
+"use client";
+import { useFetchTokenPrice } from "@/hooks/useFetchTokenPrice";
+import React, { useState, useEffect } from "react";
+
+// Define a type for the API response
+type CoinGeckoResponse = {
+  [key: string]: {
+    // The key is the token's CoinGecko ID
+    usd: number; // Assuming we're only interested in the USD price
+  };
+};
+
+const TokenPrice: React.FC = () => {
+  const [contractAddress, setContractAddress] = useState(
+    "WENWENvqqNya429ubCdR81ZmD69brwQaaBYY6p3LCpk"
+  );
+  const { price, isLoading, error, fetchPrice } = useFetchTokenPrice();
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    fetchPrice(contractAddress);
+  };
+
+  return (
+    <div className="flex flex-col mt-4 justify-center items-center">
+      <h1>Fetch Token Price</h1>
+      <form className="flex flex-col" onSubmit={handleSubmit}>
+        <input
+          className="dark:text-zinc-900 w-72"
+          type="text"
+          value={contractAddress}
+          onChange={(e) => setContractAddress(e.target.value)}
+          placeholder="Enter Contract Address"
+        />
+        <button type="submit">Fetch Price</button>
+      </form>
+      {isLoading && <p>Loading...</p>}
+      {error && <p>Error fetching price: {error}</p>}
+      {price !== null && <p>The price of the token in USD is: ${price}</p>}
+    </div>
+  );
+};
+
+export default TokenPrice;
