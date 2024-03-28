@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { ContextProvider } from "@/contexts/ContextProvider";
 import NavBar from "@/components/Nav/NavBar";
 import NavbarContext from "@/components/Nav/NavbarContext";
 import NavbarDemos from "@/components/Nav/NavbarDemos";
@@ -18,6 +17,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+
   return (
     <html className="dark" lang="en">
       <body className={`dark:bg-zinc-900 {inter.className}`}>
