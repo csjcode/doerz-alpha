@@ -15,10 +15,9 @@ export const useFetchTokenPrice = () => {
     error: null,
   });
 
-  const fetchPrice = async (contractAddress: string) => {
+  const fetchPrice = async (contractAddress: string, urlBase: string) => {
     setResult(prev => ({ ...prev, isLoading: true }));
     try {
-      const url = `https://api.coingecko.com/api/v3/simple/token_price/solana`;
       const params = new URLSearchParams({
         contract_addresses: contractAddress,
         vs_currencies: 'usd',
@@ -28,7 +27,7 @@ export const useFetchTokenPrice = () => {
         'X-CG-DEMO-API-KEY': process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || '',
       });
 
-      const response = await fetch(`${url}?${params}`, {
+      const response = await fetch(`${urlBase}?${params}`, {
         method: 'GET',
         headers,
       });
