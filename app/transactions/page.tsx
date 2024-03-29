@@ -13,8 +13,8 @@ export const metadata: Metadata = {
 };
 const TransactionsPage = (props: TransactionsPageProps) => {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex mb-4 text-4xl p-4 w-full justify-center items-center">
+    <div className="flex w-full flex-col">
+      <div className="mb-4 flex w-full items-center justify-center p-4 text-4xl">
         <h1>Transactions</h1>
       </div>
       <div className="w-full">
@@ -23,17 +23,16 @@ const TransactionsPage = (props: TransactionsPageProps) => {
       <div className="w-full">
         <SignMessage />
       </div>
-      <div className="flex w-full mt-4 justify-center items-center">
-        <div className="p-4 border max-w-[260px]">
+      <div className="mt-4 flex w-full items-center justify-center">
+        <div className="max-w-[260px] border p-4">
           <WalletGetAccountInfo />
         </div>
       </div>
-      <div className="flex w-full mt-4 justify-center items-center">
-        <div className="p-4 border max-w-[260px]">
+      <div className="mt-4 flex w-full items-center justify-center">
+        <div className="max-w-[260px] border p-4">
           <WalletSendTransaction />
         </div>
       </div>
-
     </div>
   );
 };

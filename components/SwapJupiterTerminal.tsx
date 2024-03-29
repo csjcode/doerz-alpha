@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { cn } from "@/utils/cn";
 import { Metadata } from "next";
 import Script from "next/script";
@@ -12,7 +12,7 @@ type SwapJupiterTerminalProps = {};
 const SwapJupiterTerminal = (props: SwapJupiterTerminalProps) => {
   const [isLoaded, setIsLoaded] = React.useState(false);
   const [loadTimestamp, setLoadTimestamp] = React.useState(0);
-  const rpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL
+  const rpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL;
 
   if (loadTimestamp === 0) {
     setLoadTimestamp(Date.now());
@@ -45,10 +45,13 @@ const SwapJupiterTerminal = (props: SwapJupiterTerminalProps) => {
           }, delay);
         }}
       /> */}
-        <div className="h-full flex flex-col justify-start items-center content-start gap-8 w-4/5">
+      <div className="flex h-full w-4/5 flex-col content-start items-center justify-start gap-8">
         {/* {!isLoaded && <Loader label="Loading Jupiter swap..." className="mt-8" />} */}
         <div
-          className={cn("max-w-[420px] px-3 transition-opacity", !isLoaded && "opacity-0")}
+          className={cn(
+            "max-w-[420px] px-3 transition-opacity",
+            !isLoaded && "opacity-0",
+          )}
           id="integrated-terminal"
         ></div>
       </div>

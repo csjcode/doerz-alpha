@@ -20,10 +20,9 @@ const bungee = Bungee({
 export default function Home() {
   return (
     <>
-      <div className="flex flex-col justify-center items-center h-screen w-full">
+      <div className="flex h-screen w-full flex-col items-center justify-center">
         <Waitlist />
       </div>
     </>
   );
 }
-

@@ -2,7 +2,6 @@ import React from "react";
 import TokenPrice from "@/components/TokenPrice";
 import { Metadata } from "next";
 
-
 type MarketPageProps = {};
 export const metadata: Metadata = {
   title: "Market - Solana app",

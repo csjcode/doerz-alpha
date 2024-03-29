@@ -15,52 +15,47 @@ import useNetworkStore from "@/store/store";
 const ReactUIWalletModalProviderDynamic = dynamic(
   async () =>
     (await import("@solana/wallet-adapter-react-ui")).WalletModalProvider,
-  { ssr: false }
+  { ssr: false },
 );
-
-
 
 const WalletContextProvider: FC<{ children: ReactNode }> = ({ children }) => {
   // const { networkConfiguration } = useNetworkConfiguration();
 
   // const externalRpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL || "";
-  const externalRpcUrl = useNetworkStore((state) => state.externalRpcUrl)
-  const currentNetwork = useNetworkStore((state) => state.currentNetwork)
+  const externalRpcUrl = useNetworkStore((state) => state.externalRpcUrl);
+  const currentNetwork = useNetworkStore((state) => state.currentNetwork);
   // console.log(`Context Provider currentNetwork ${currentNetwork}`);
 
   // console.log(`BEFORE switch Context Provider rpc url ${externalRpcUrl}`);
 
-  let rpcUrl:string;
+  let rpcUrl: string;
   switch (currentNetwork) {
-    case 'mainnet-beta':
+    case "mainnet-beta":
       rpcUrl = process.env.NEXT_PUBLIC_MAIN_RPC_URL || "";
       break;
-    case 'testnet':
+    case "testnet":
       rpcUrl = process.env.NEXT_PUBLIC_TEST_RPC_URL || "";
       break;
-    case 'devnet':
+    case "devnet":
       rpcUrl = process.env.NEXT_PUBLIC_DEV_RPC_URL || "";
     default:
       rpcUrl = process.env.NEXT_PUBLIC_DEV_RPC_URL || "";
   }
 
-
   // console.log(`AFTER switch Context Provider rpc url ${rpcUrl}`);
-
 
   // const network = networkConfiguration as WalletAdapterNetwork;
 
-
-//   const network = "mainnet-beta"; // Use 'mainnet-beta', 'testnet', or 'devnet'
+  //   const network = "mainnet-beta"; // Use 'mainnet-beta', 'testnet', or 'devnet'
   const endpoint = useMemo(() => rpcUrl, []);
 
-//   console.log(network);
+  //   console.log(network);
 
   const wallets = useMemo(
     () => [
       // new UnsafeBurnerWalletAdapter(),
     ],
-    []
+    [],
   );
 
   const onError = useCallback((error: WalletError) => {

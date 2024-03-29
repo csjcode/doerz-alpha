@@ -6,42 +6,42 @@ type Props = {};
 function NavbarDemos({}: Props) {
   return (
     <div>
-      <div className="w-full py-2 bg-zinc-300 dark:bg-zinc-900 border-bottom border-zinc-600">
-        <div className="w-full flex flex-row space-x-2 justify-center items-center">
+      <div className="border-bottom w-full border-zinc-600 bg-zinc-300 py-2 dark:bg-zinc-900">
+        <div className="flex w-full flex-row items-center justify-center space-x-2">
           <Link href="/cards/">
-          <div className="min-w-24 px-6 py-2 mx-2 dark:text-zinc-300 text-zinc-800 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Cards
-          </div>
+            <div className="mx-2 min-w-24 rounded-lg border border-zinc-800 px-6 py-2 text-zinc-800 hover:border-slate-500 dark:text-zinc-300 dark:hover:border-slate-700">
+              Cards
+            </div>
           </Link>
           <Link href="/transactions/">
-          <div className="min-w-24 px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Transactions
-          </div>
+            <div className="mx-2 min-w-24 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Transactions
+            </div>
           </Link>
           <Link href="/inbox/">
-          <div className="min-w-24 px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Inbox
-          </div>
+            <div className="mx-2 min-w-24 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Inbox
+            </div>
           </Link>
           <Link href="/wallets/">
-          <div className="px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Wallet
-          </div>
+            <div className="mx-2 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Wallet
+            </div>
           </Link>
           <Link href="/market/">
-          <div className="px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Market
-          </div>
+            <div className="mx-2 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Market
+            </div>
           </Link>
           <Link href="/swap/">
-          <div className="px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Swap
-          </div>
+            <div className="mx-2 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Swap
+            </div>
           </Link>
           <Link href="/basket/">
-          <div className="px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
-            Basket
-          </div>
+            <div className="mx-2 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700">
+              Basket
+            </div>
           </Link>
         </div>
       </div>

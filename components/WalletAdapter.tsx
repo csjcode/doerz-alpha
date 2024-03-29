@@ -2,11 +2,11 @@ import dynamic from "next/dynamic";
 import React, { useState } from "react";
 // import { useAutoConnect } from '../contexts/AutoConnectProvider';
 // import NetworkSwitcher from './NetworkSwitcher';
-require('./styles-wallet.css');
+require("./styles-wallet.css");
 const WalletMultiButtonDynamic = dynamic(
   async () =>
     (await import("@solana/wallet-adapter-react-ui")).WalletMultiButton,
-  { ssr: false }
+  { ssr: false },
 );
 
 const WalletAdapter = () => {
@@ -15,7 +15,7 @@ const WalletAdapter = () => {
 
   return (
     <div className="w-[10px tex-sm]">
-      <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex md:hidden text-lg" />
+      <WalletMultiButtonDynamic className="btn-ghost btn-sm relative flex text-lg md:hidden" />
     </div>
   );
 };

@@ -10,8 +10,8 @@ export const metadata: Metadata = {
 };
 const WalletsPage = (props: WalletsPageProps) => {
   return (
-    <div className="flex flex-col w-full">
-      <div className="flex mb-4 text-4xl p-4 w-full justify-center items-center">
+    <div className="flex w-full flex-col">
+      <div className="mb-4 flex w-full items-center justify-center p-4 text-4xl">
         <h1>Wallet Info</h1>
       </div>
       <div className="w-full">

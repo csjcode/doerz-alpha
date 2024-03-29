@@ -28,16 +28,13 @@ const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
 export default function Home() {
   return (
     <>
-      <nav className="navbar w-full px-4 py-3 shadow-md dark:bg-zinc-950 bg-zinc-200 border-y dark:border-zinc-800 border-zinc-400">
-        <div className="flex items-center w-full">
+      <nav className="navbar w-full border-y border-zinc-400 bg-zinc-200 px-4 py-3 shadow-md dark:border-zinc-800 dark:bg-zinc-950">
+        <div className="flex w-full items-center">
+          <section className={`${inter.className} mr-auto text-xl font-bold`}>
+            <Link href="/">Solana App </Link>
+          </section>
 
-            <section className={`${inter.className} font-bold mr-auto text-xl`}>
-            <Link href="/">
-              Solana App{" "}
-              </Link>
-            </section>
-
-          <ul className="nav-links flex  gap-8 items-center">
+          <ul className="nav-links flex  items-center gap-8">
             <Link href="/">
               <li>Home</li>
             </Link>
@@ -49,10 +46,10 @@ export default function Home() {
             </Link>
           </ul>
           <div className="flex flex-row items-end">
-            <div className="ml-4 border border-zinc-300 dark:border-zinc-900 rounded-lg">
+            <div className="ml-4 rounded-lg border border-zinc-300 dark:border-zinc-900">
               <WalletAdapter />
             </div>
-            <div className="flex flex-row justify-center items-center h-10">
+            <div className="flex h-10 flex-row items-center justify-center">
               {/* <div className="form-control bg-opacity-100">
                 <label className="cursor-pointer label">
                   <a>Autoconnect</a>
@@ -65,10 +62,10 @@ export default function Home() {
                 <NetworkSwitcher />
               </SelectNetwork> */}
             </div>
-            <div className="mr-2 flex flex-row justify-center items-center h-10">
+            <div className="mr-2 flex h-10 flex-row items-center justify-center">
               <DynamicThemeSwitcher />
             </div>
-            <div className="mr-2 flex flex-row justify-center items-center h-10">
+            <div className="mr-2 flex h-10 flex-row items-center justify-center">
               {" "}
               <NavProfileMenu />
             </div>

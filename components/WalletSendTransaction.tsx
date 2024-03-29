@@ -1,12 +1,17 @@
-"use client"
+"use client";
 import useSolanaNetwork from "@/hooks/useSolanaNetwork";
 import useNetworkStore from "@/store/store";
 import { WalletNotConnectedError } from "@solana/wallet-adapter-base";
 import { useConnection, useWallet } from "@solana/wallet-adapter-react";
-import { Keypair, PublicKey, SystemProgram, Transaction } from "@solana/web3.js";
+import {
+  Keypair,
+  PublicKey,
+  SystemProgram,
+  Transaction,
+} from "@solana/web3.js";
 import React, { FC, useCallback } from "react";
 
-type Props = {}
+type Props = {};
 
 const WalletSendTransaction = (props: Props) => {
   const currentNetwork = useNetworkStore((state) => state.currentNetwork);
@@ -20,9 +25,9 @@ const WalletSendTransaction = (props: Props) => {
     const transaction = new Transaction().add(
       SystemProgram.transfer({
         fromPubkey: publicKey,
-        toPubkey: new PublicKey('8JhUQRQSBg8g4wmgMoh3qvMzGSV2HLU38SDpWC6MswF1'),
+        toPubkey: new PublicKey("8JhUQRQSBg8g4wmgMoh3qvMzGSV2HLU38SDpWC6MswF1"),
         lamports: 1_000_000,
-      })
+      }),
     );
 
     if (!connection) return; // Add null check for connection
@@ -33,9 +38,9 @@ const WalletSendTransaction = (props: Props) => {
   }, [publicKey, sendTransaction, connection]);
   return (
     <button onClick={onClick} disabled={!publicKey}>
-    Send 1 lamport to a random address!
-  </button>
-  )
-}
+      Send 1 lamport to a random address!
+    </button>
+  );
+};
 
-export default WalletSendTransaction
+export default WalletSendTransaction;

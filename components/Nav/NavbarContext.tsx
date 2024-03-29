@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { ContextProvider } from "@/contexts/ContextProvider";
 import React from "react";
 
@@ -7,11 +7,7 @@ type NavbarContextProps = {
 };
 
 function NavbarContext({ children }: NavbarContextProps) {
-  return (
-    <ContextProvider>
-      {children}
-    </ContextProvider>
-  );
+  return <ContextProvider>{children}</ContextProvider>;
 }
 
 export default NavbarContext;

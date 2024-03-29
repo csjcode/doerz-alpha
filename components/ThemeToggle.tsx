@@ -27,7 +27,7 @@ function ThemeSwitcher() {
     const setTheme = () => {
       const root = window.document.documentElement;
       const operatingSystemThemeDark = window.matchMedia(
-        "(prefers-color-scheme: dark)"
+        "(prefers-color-scheme: dark)",
       );
 
       if (storedTheme === "darkTheme" && operatingSystemThemeDark.matches) {
@@ -48,19 +48,19 @@ function ThemeSwitcher() {
   }, [storedTheme]);
 
   return (
-    <div className="theme-switcher flex items-center ml-4">
+    <div className="theme-switcher ml-4 flex items-center">
       <button
         type="button"
-        className={`dark-mode-switch cursor-pointer mr-1 w-[42px] h-[42px] p-[11px] rounded-[100%]
-        border ${!isLight && "hidden"}`}
+        className={`dark-mode-switch mr-1 h-[42px] w-[42px] cursor-pointer rounded-[100%] border
+        p-[11px] ${!isLight && "hidden"}`}
         onClick={setDarkTheme}
       >
         <BsFillMoonStarsFill size={18} />
       </button>
       <button
         type="button"
-        className={`light-mode-switch cursor-pointer mr-2 w-[40px] h-[40px] p-[10px] rounded-[100%]
-        border ${isLight && "hidden"}`}
+        className={`light-mode-switch mr-2 h-[40px] w-[40px] cursor-pointer rounded-[100%] border
+        p-[10px] ${isLight && "hidden"}`}
         onClick={setLightTheme}
       >
         <BsSun size={18} />

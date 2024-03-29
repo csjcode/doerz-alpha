@@ -20,7 +20,7 @@ export const SignMessage: FC = () => {
         throw new Error("Wallet does not support message signing!");
       // Encode anything as bytes
       const message = new TextEncoder().encode(
-        "I read and agree to the terms and conditions!"
+        "I read and agree to the terms and conditions!",
       );
       // Sign the bytes using the wallet
       const signature = await signMessage(message);
@@ -36,10 +36,10 @@ export const SignMessage: FC = () => {
 
   return (
     <div className="flex flex-row justify-center">
-      <div className="relative group items-center">
+      <div className="group relative items-center">
         <div className=""></div>
         <button
-          className="border border-zinc-800 dark:border-slate-700 rounded-lg px-6 py-2 mx-2 dark:hover:border-slate-700 hover:border-slate-500"
+          className="mx-2 rounded-lg border border-zinc-800 px-6 py-2 hover:border-slate-500 dark:border-slate-700 dark:hover:border-slate-700"
           onClick={onClick}
           disabled={!publicKey}
         >

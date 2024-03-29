@@ -1,5 +1,5 @@
 // useFetchTokensInfo.ts
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from "react";
 
 interface TokenInfo {
   id: string;
@@ -30,23 +30,26 @@ export const useFetchTokensInfo = () => {
   });
 
   const fetchTokens = async (coinIds: string[]) => {
-    setResult(prev => ({ ...prev, isLoading: true }));
+    setResult((prev) => ({ ...prev, isLoading: true }));
     try {
       const params = new URLSearchParams({
-        ids: coinIds.join(','),
-        vs_currency: 'usd',
-        order: 'market_cap_desc',
-        price_change_percentage: '24h',
+        ids: coinIds.join(","),
+        vs_currency: "usd",
+        order: "market_cap_desc",
+        price_change_percentage: "24h",
       });
 
       const headers = new Headers({
-        'X-CG-DEMO-API-KEY': process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || '',
+        "X-CG-DEMO-API-KEY": process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || "",
       });
 
-      const response = await fetch(`https://api.coingecko.com/api/v3/coins/markets?${params}`, {
-        method: 'GET',
-        headers,
-      });
+      const response = await fetch(
+        `https://api.coingecko.com/api/v3/coins/markets?${params}`,
+        {
+          method: "GET",
+          headers,
+        },
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

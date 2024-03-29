@@ -16,39 +16,32 @@ import useSolanaNetwork from "@/hooks/useSolanaNetwork";
 import useNetworkStore from "@/store/store";
 
 export function SelectNetwork() {
-
-
-  const currentNetwork = useNetworkStore((state) => state.currentNetwork)
-  const updateNetwork = useNetworkStore((state) => state.updateNetwork)
+  const currentNetwork = useNetworkStore((state) => state.currentNetwork);
+  const updateNetwork = useNetworkStore((state) => state.updateNetwork);
   // console.log(`currentNetwork in SelectNetwork: ${currentNetwork}`);
 
   const { connection, setNetwork } = useSolanaNetwork(currentNetwork);
 
-
   const handleNetwork = (network: string) => {
-
     let networkChoice;
     switch (network) {
-      case 'mainnet-beta':
-        networkChoice = 'mainnet-beta';
+      case "mainnet-beta":
+        networkChoice = "mainnet-beta";
         break;
-      case 'testnet':
-        networkChoice = 'testnet';
+      case "testnet":
+        networkChoice = "testnet";
         break;
-      case 'devnet':
-        networkChoice = 'devnet';
+      case "devnet":
+        networkChoice = "devnet";
         break;
       default:
-        networkChoice = 'devnet'
+        networkChoice = "devnet";
     }
 
     console.log(`connection in SelectNetwork: ${networkChoice}`);
 
     setNetwork(networkChoice);
     updateNetwork(networkChoice);
-
-
-
   };
 
   return (
@@ -59,7 +52,7 @@ export function SelectNetwork() {
         }}
         defaultValue={currentNetwork}
       >
-        <SelectTrigger className="border-0 p-1 focus:ring-0 bg-none bg-zinc-200 dark:bg-zinc-950 outline-zinc-200 dark:outline-zinc-950 ring-offset-0">
+        <SelectTrigger className="border-0 bg-zinc-200 bg-none p-1 outline-zinc-200 ring-offset-0 focus:ring-0 dark:bg-zinc-950 dark:outline-zinc-950">
           <SelectValue placeholder={<GoGear size={22} />} />
         </SelectTrigger>
         <SelectContent>

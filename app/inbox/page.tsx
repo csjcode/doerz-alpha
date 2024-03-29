@@ -7,11 +7,7 @@ export const metadata: Metadata = {
   description: "Inbox Demo for my Solana app",
 };
 const InboxPage = (props: InboxPageProps) => {
-  return (
-    <div>
-      Inbox
-    </div>
-  );
+  return <div>Inbox</div>;
 };
 
 export default InboxPage;

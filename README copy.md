@@ -1,8 +1,6 @@
-
 # Install
 
 ## Install with NEXTJS, TAILWINDCSS and SHADCN
-
 
 Chart demo
 
@@ -32,12 +30,11 @@ https://ui.shadcn.com/docs/installation/next
 4. I deleted the tailwind.config.js as it conflicting with tailwind.config.ts
 5. I followed this to modify layout.tsx (2 areas to make a dark)
 
-    <html className="dark" lang="en">
-      <body className={`dark:bg-gray-800 {inter.className}`}>{children}</body>
-    </html>
+<html className="dark" lang="en">
+  <body className={`dark:bg-gray-800 {inter.className}`}>{children}</body>
+</html>
 
----------------------------------------------------------
-
+---
 
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 

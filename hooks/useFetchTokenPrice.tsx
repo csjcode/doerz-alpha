@@ -1,6 +1,6 @@
 // useFetchTokenPrice.ts
-"use client"
-import { useState } from 'react';
+"use client";
+import { useState } from "react";
 
 interface FetchResult {
   price: number | null;
@@ -16,19 +16,19 @@ export const useFetchTokenPrice = () => {
   });
 
   const fetchPrice = async (contractAddress: string, urlBase: string) => {
-    setResult(prev => ({ ...prev, isLoading: true }));
+    setResult((prev) => ({ ...prev, isLoading: true }));
     try {
       const params = new URLSearchParams({
         contract_addresses: contractAddress,
-        vs_currencies: 'usd',
+        vs_currencies: "usd",
       });
 
       const headers = new Headers({
-        'X-CG-DEMO-API-KEY': process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || '',
+        "X-CG-DEMO-API-KEY": process.env.NEXT_PUBLIC_X_CG_DEMO_API_KEY || "",
       });
 
       const response = await fetch(`${urlBase}?${params}`, {
-        method: 'GET',
+        method: "GET",
         headers,
       });
 

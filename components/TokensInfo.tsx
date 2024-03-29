@@ -3,6 +3,16 @@ import { useFetchTokensInfo } from "@/hooks/useFetchTokensInfo";
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import { formatUSD } from "@/utils/formatNumbers";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableFooter,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 
 const API_BASE_URL = "https://api.coingecko.com/api/v3/tokens/markets";
 const DEFAULT_TOKENS =
@@ -59,60 +69,78 @@ const TokensInfo = () => {
   if (error) return <p>Error fetching tokens: {error}</p>;
 
   return (
-    <div>
+    <div className="w-full">
       <div className="">
         <h1 className="text-2xl">Meme Index Basket</h1>
       </div>
       {tokens && tokens.length > 0 ? (
-        <ul>
-          {tokens.map((token: any) => {
-            // console.log(token);
-            const changeColor =
-              token.price_change_percentage_24h > 0
-                ? "text-green-600"
-                : "text-red-600";
-            return (
-              <li key={token.id} className="flex flex-row mt-2">
-                <div className="">
-                  <Image
-                    className="rounded-xl"
-                    src={token.image}
-                    alt={token.name}
-                    width={70}
-                    height={70}
-                  />
-                </div>
-                <div className="flex flex-row justify-center items-center ml-4 text-lg space-x-4">
-                  <div className="text-sm text-zinc-500">
-                    <p>#{token.market_cap_rank}</p>
-                  </div>
-                  <div className="flex flex-row justify-center items-center">
-                    <h2>{token.name}</h2>
-                    <div className="ml-4 text-sm text-zinc-500">
+        <Table className="w-full">
+          <TableCaption>Meme coin index.</TableCaption>
+
+          <TableBody className="flex w-full flex-col">
+            {tokens.map((token: any) => {
+              // console.log(token);
+              const changeColor =
+                token.price_change_percentage_24h > 0
+                  ? "text-green-600"
+                  : "text-red-600";
+              return (
+                <TableRow
+                  key={token.id}
+                  className="mt-4 flex md:flex-row flex-col rounded-3xl border border-purple-400 p-4"
+                >
+                  <TableCell className="x-space-4 flex w-[200px] flex-row items-center justify-center">
+                    <Image
+                      className="rounded-xl"
+                      src={token.image}
+                      alt={token.name}
+                      width={50}
+                      height={50}
+                    />
+                    <p className="ml-4 text-lg">{token.name}</p>
+                    <p className="ml-4 text-lg text-zinc-500">
                       {token.symbol.toUpperCase()}
-                    </div>
-                  </div>
-                  <div className="">
-                    <p>${token.current_price}</p>
-                  </div>
-                  <div className="">
-                    <p className={`${changeColor}`}>
+                    </p>
+                  </TableCell>
+                  {/* <TableCell className="flex flex-row justify-center items-center ml-4 text-lg space-x-4"> */}
+                  <TableCell className="flex w-[200px] flex-col items-center justify-center text-2xl text-zinc-500">
+                    <p>#{token.market_cap_rank}</p>
+                  </TableCell>
+                  {/* <TableCell className="w-[15%] flex flex-col justify-center items-center">
+                    <p>{token.name}</p>
+                    <p className="text-md text-zinc-500">
+                      {token.symbol.toUpperCase()}
+                    </p>
+                  </TableCell> */}
+                  <TableCell className="flex w-[200px] flex-col items-center justify-center">
+                    <p className="text-xl">${token.current_price}</p>
+                  </TableCell>
+                  <TableCell className="flex w-[200px] flex-col items-center justify-center">
+                    <p className={`${changeColor} text-xl`}>
                       {token.price_change_percentage_24h > 0 && "+"}
                       {Math.round(token.price_change_percentage_24h * 100) /
                         100}
                       % (24h)
                     </p>
-                  </div>
-                  <div className="text-sm text-zinc-300">
-                    <p>{formatUSD(token.fully_diluted_valuation)} (FDV)</p>
-                  </div>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+                  </TableCell>
+                  {/* <TableCell className="flex w-[200px] flex-col items-center justify-center text-sm text-zinc-300">
+                    <p className="text-xl">
+                      {formatUSD(token.fully_diluted_valuation)} (FDV)
+                    </p>
+                  </TableCell> */}
+                  <TableCell className="flex w-[200px] flex-col items-center justify-center text-sm text-zinc-300">
+                    <p className="dark:text-zinc-300 text-zinc-800 text-xl">
+                      {formatUSD(token.market_cap)}
+                    </p>
+                  </TableCell>
+
+                </TableRow>
+              );
+            })}
+          </TableBody>
+        </Table>
       ) : (
-        <p>No coin information available.</p>
+        <p>No tokens found.</p>
       )}
     </div>
   );

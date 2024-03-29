@@ -10,10 +10,10 @@ const outfit = Outfit({
   display: "swap",
   weight: "400",
   subsets: ["latin"],
-  variable: '--font-outfit',
+  variable: "--font-outfit",
 });
 
-const inter = Inter({ variable: '--font-inter',subsets: ["latin"] });
+const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Solana app",
@@ -25,14 +25,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-
   return (
     <html className={`dark ${outfit.variable} ${inter.variable}`} lang="en">
-      <body className={`dark:bg-zinc-900 {inter.className}`}>
+      <body className={`{inter.className} dark:bg-zinc-900`}>
         <NavbarContext>
           <NavBar />
           <NavbarDemos />
-          <div className="flex flex-col justify-center items-center w-full">
+          <div className="flex w-full flex-col items-center justify-center">
             {/* <div className={`${bungee.className} text-4xl`}>Home Page</div> */}
             {children}
           </div>

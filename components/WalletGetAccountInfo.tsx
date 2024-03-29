@@ -10,7 +10,7 @@ type Props = {};
 const WalletGetAccountInfo: React.FC<Props> = () => {
   const [balance, setBalance] = useState<number>(0);
   const [accountInfo, setAccountInfo] = useState<AccountInfo<Buffer> | null>(
-    null
+    null,
   );
   const connectionRef = useRef<Connection | null>(null);
 
@@ -50,7 +50,6 @@ const WalletGetAccountInfo: React.FC<Props> = () => {
 
     connectionRef.current = new Connection(rpcUrl);
 
-
     // Fetch initial account info
     connectionRef.current.getAccountInfo(publicKey).then((info) => {
       if (info) {
@@ -66,7 +65,7 @@ const WalletGetAccountInfo: React.FC<Props> = () => {
       } else {
         // console.log(`No account info found`);
         // setBalance(info.lamports / LAMPORTS_PER_SOL);
-        setBalance(0)
+        setBalance(0);
         setAccountInfo(null);
       }
     });
@@ -77,12 +76,13 @@ const WalletGetAccountInfo: React.FC<Props> = () => {
         setBalance(updatedAccountInfo.lamports / LAMPORTS_PER_SOL);
         setAccountInfo(updatedAccountInfo);
       },
-      "confirmed"
+      "confirmed",
     );
 
     // Cleanup subscription on component unmount
     return () => {
-      connectionRef.current !== null && connectionRef.current.removeAccountChangeListener(subscriptionId);
+      connectionRef.current !== null &&
+        connectionRef.current.removeAccountChangeListener(subscriptionId);
     };
   }, [connection, publicKey, currentNetwork]);
 
