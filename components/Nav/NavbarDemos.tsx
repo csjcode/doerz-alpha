@@ -38,6 +38,11 @@ function NavbarDemos({}: Props) {
             Swap
           </div>
           </Link>
+          <Link href="/basket/">
+          <div className="px-6 py-2 mx-2 border border-zinc-800 rounded-lg dark:hover:border-slate-700 hover:border-slate-500">
+            Basket
+          </div>
+          </Link>
         </div>
       </div>
     </div>
