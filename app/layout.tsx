@@ -4,8 +4,16 @@ import "./globals.css";
 import NavBar from "@/components/Nav/NavBar";
 import NavbarContext from "@/components/Nav/NavbarContext";
 import NavbarDemos from "@/components/Nav/NavbarDemos";
+import { Outfit } from "next/font/google";
 
-const inter = Inter({ subsets: ["latin"] });
+const outfit = Outfit({
+  display: "swap",
+  weight: "400",
+  subsets: ["latin"],
+  variable: '--font-outfit',
+});
+
+const inter = Inter({ variable: '--font-inter',subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Solana app",
@@ -19,7 +27,7 @@ export default function RootLayout({
 }>) {
 
   return (
-    <html className="dark" lang="en">
+    <html className={`dark ${outfit.variable} ${inter.variable}`} lang="en">
       <body className={`dark:bg-zinc-900 {inter.className}`}>
         <NavbarContext>
           <NavBar />

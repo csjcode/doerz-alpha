@@ -1,5 +1,5 @@
 "use client";
-import NavBar from "@/components/NavBar";
+// import NavBar from "@/components/NavBar";
 import { ContextProvider } from "@/contexts/ContextProvider";
 import { Bungee } from "next/font/google";
 import { BackgroundBeams } from "@/components/ui/background-beams";
