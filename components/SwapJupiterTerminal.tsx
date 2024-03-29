@@ -19,8 +19,8 @@ const SwapJupiterTerminal = (props: SwapJupiterTerminalProps) => {
   }
 
   return (
-    <div>
-      <Script
+    <div className="flex flex-col items-center">
+      {/* <Script
         src="https://terminal.jup.ag/main-v2.js"
         onReady={() => {
           window.Jupiter.init({
@@ -44,7 +44,7 @@ const SwapJupiterTerminal = (props: SwapJupiterTerminalProps) => {
             setIsLoaded(true);
           }, delay);
         }}
-      />
+      /> */}
         <div className="h-full flex flex-col justify-start items-center content-start gap-8 w-4/5">
         {/* {!isLoaded && <Loader label="Loading Jupiter swap..." className="mt-8" />} */}
         <div
