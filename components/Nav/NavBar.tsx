@@ -30,9 +30,13 @@ export default function Home() {
     <>
       <nav className="navbar w-full px-4 py-3 shadow-md dark:bg-zinc-950 bg-zinc-200 border-y dark:border-zinc-800 border-zinc-400">
         <div className="flex items-center w-full">
-          <section className={`${inter.className} font-bold mr-auto text-xl`}>
-            Solana App{" "}
-          </section>
+
+            <section className={`${inter.className} font-bold mr-auto text-xl`}>
+            <Link href="/">
+              Solana App{" "}
+              </Link>
+            </section>
+
           <ul className="nav-links flex  gap-8 items-center">
             <Link href="/">
               <li>Home</li>
