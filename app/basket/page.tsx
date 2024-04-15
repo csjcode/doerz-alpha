@@ -1,4 +1,4 @@
-import TokensInfo from "@/components/TokensInfo";
+import TokensInfo from "@/components/TokensInfo/TokensInfo";
 import { Metadata } from "next";
 import React from "react";
 
@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const BasketPage = (props: BasketPageProps) => {
   return (
     <div className={`mt-4 w-full px-8 font-outfit`}>
-      Basket
-      <TokensInfo />
+
+      <TokensInfo  displayAllocation={false} />
     </div>
   );
 };
