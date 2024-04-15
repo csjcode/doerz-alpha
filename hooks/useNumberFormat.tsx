@@ -11,7 +11,7 @@ export const useNumberFormat = (
   options?: UseNumberFormatOptions,
 ) => {
   const {
-    style = "decimal",
+    style = "currency",
     currency = "USD",
     locale = "en-US",
   } = options || {};
