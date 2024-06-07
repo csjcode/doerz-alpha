@@ -16,8 +16,8 @@ const outfit = Outfit({
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Solana app",
-  description: "Site for my Solana app",
+  title: "Doerz.fun",
+  description: "Rewards for doing things you love.",
 };
 
 export default function RootLayout({

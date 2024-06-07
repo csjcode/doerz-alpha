@@ -11,8 +11,8 @@ export const metadata: Metadata = {
 const BasketPage = (props: BasketPageProps) => {
   return (
     <div className={`mt-4 w-full px-8 font-outfit`}>
-
-      <TokensInfo  displayAllocation={false} />
+      <p>Nothing here yet for basket</p>
+      {/* <TokensInfo  displayAllocation={false} /> */}
     </div>
   );
 };

@@ -25,13 +25,14 @@ const inter = Inter({
 const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
   ssr: false,
 });
+
 export default function Home() {
   return (
     <>
-      <nav className="navbar w-full border-y border-zinc-400 bg-zinc-200 px-4 py-3 shadow-md dark:border-zinc-800 dark:bg-zinc-950">
+      <nav className="navbar w-full border-y border-zinc-200 bg-zinc-100 px-4 py-3 shadow-md dark:border-zinc-800 dark:bg-zinc-950">
         <div className="flex w-full items-center">
           <section className={`${inter.className} mr-auto text-xl font-bold`}>
-            <Link href="/">Solana App </Link>
+            <Link href="/">Doerz.fun</Link>
           </section>
 
           <ul className="nav-links flex  items-center gap-8">
