@@ -3,11 +3,11 @@ import React from "react";
 
 type DoerzInboxPageProps = {};
 export const metadata: Metadata = {
-  title: "Inbox - Solana app",
-  description: "Inbox Demo for my Solana app",
+  title: "DoerzInbox - Doerz.fun",
+  description: "DoerzInbox for Doerz.fun",
 };
 const DoerzInboxPage = (props: DoerzInboxPageProps) => {
-  return <div>Doerz Inbox</div>;
+  return <div>DoerzInbox</div>;
 };
 
 export default DoerzInboxPage;
