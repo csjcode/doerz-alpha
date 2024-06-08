@@ -5,6 +5,7 @@ import { Bungee } from "next/font/google";
 import { BackgroundBeams } from "@/components/ui/background-beams";
 import Waitlist from "@/components/Waitlist";
 import { Metadata } from "next";
+import Portal from "@/components/Portal";
 
 // export const metadata: Metadata = {
 //   title: "Solana app",
@@ -21,7 +22,7 @@ export default function Home() {
   return (
     <>
       <div className="flex h-screen w-full overflow-hidden flex-col items-center justify-center">
-        <Waitlist />
+        <Portal />
       </div>
     </>
   );

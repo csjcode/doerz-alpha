@@ -16,7 +16,7 @@ const outfit = Outfit({
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Doerz.fun",
+  title: "DOERZ.fun",
   description: "Rewards for doing things you love.",
 };
 
