@@ -1,6 +1,7 @@
+import LoginStepper from "@/components/LoginStepper";
 import { Metadata } from "next";
 import React from "react";
-import LoginStepper from "../LoginStepper";
+
 
 type LoginPageProps = {};
 export const metadata: Metadata = {

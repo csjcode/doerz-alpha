@@ -30,7 +30,7 @@ export default function RootLayout({
       <body className={`{inter.className} dark:bg-zinc-900`}>
         <NavbarContext>
           <NavBar />
-          <NavbarDemos />
+          {/* <NavbarDemos /> */}
           <div className="flex w-full flex-col items-center justify-center">
             {children}
           </div>
