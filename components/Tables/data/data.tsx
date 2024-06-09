@@ -97,7 +97,7 @@ export const statuses = [
   },
 ]
 
-export const priorities = [
+export const rewardSizes = [
   {
     label: "Low",
     value: "low",

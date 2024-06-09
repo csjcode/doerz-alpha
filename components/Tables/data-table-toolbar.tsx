@@ -5,7 +5,7 @@ import { Table } from "@tanstack/react-table"
 
 import { DataTableViewOptions } from "./data-table-view-options"
 
-import { priorities, statuses } from "./data/data"
+import { rewardSizes, statuses } from "./data/data"
 import { DataTableFacetedFilter } from "./data-table-faceted-filter"
 import { Input } from "../ui/input"
 import { Button } from "../ui/button"
@@ -37,11 +37,11 @@ export function DataTableToolbar<TData>({
             options={statuses}
           />
         )}
-        {table.getColumn("priority") && (
+        {table.getColumn("rewardSize") && (
           <DataTableFacetedFilter
-            column={table.getColumn("priority")}
-            title="Priority"
-            options={priorities}
+            column={table.getColumn("rewardSize")}
+            title="Reward Size"
+            options={rewardSizes}
           />
         )}
         {isFiltered && (
