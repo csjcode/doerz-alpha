@@ -4,13 +4,13 @@ import { Metadata } from "next";
 import React from "react";
 
 type WalletsPageProps = {};
-export const metadata: Metadata = {
-  title: "Wallets - Solana app",
-  description: "Wallets Demo for my Solana app",
-};
+// export const metadata: Metadata = {
+//   title: "Wallets - DOERZ.fun",
+//   description: "Connect your wallet",
+// };
 const WalletsPage = (props: WalletsPageProps) => {
   return (
-    <div className="flex w-full flex-col">
+    <div className="flex flex-col">
       <div className="mb-4 flex w-full items-center justify-center p-4 text-4xl">
         <h1>Wallet Info</h1>
       </div>

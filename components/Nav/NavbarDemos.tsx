@@ -6,8 +6,8 @@ type Props = {};
 function NavbarDemos({}: Props) {
   return (
     <div>
-      <div className="border-bottom w-full border-zinc-60 py-4 dark:bg-zinc-900">
-        <div className="flex w-full flex-row items-center justify-center">
+      <div className="border-bottom border-zinc-60 py-4 dark:bg-zinc-900">
+        <div className="flex flex-row items-center justify-center">
         <Link href="/inbox/">
             <div className="mx-2 min-w-24 rounded-lg border border-zinc-400 px-6 py-2 hover:border-slate-500 dark:hover:border-slate-700 hover-text-zinc-900">
               Inbox

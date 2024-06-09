@@ -1,5 +1,6 @@
 import { Metadata } from "next";
 import React from "react";
+import LoginStepper from "../LoginStepper";
 
 type LoginPageProps = {};
 export const metadata: Metadata = {
@@ -7,7 +8,13 @@ export const metadata: Metadata = {
   description: "Login for Doerz.fun",
 };
 const LoginPage = (props: LoginPageProps) => {
-  return <div>Login</div>;
+
+  return (
+    <div className="flex flex-col w-full justify-center items-center">
+      {/* <div>Login</div> */}
+      <div><LoginStepper /></div>
+    </div>
+  );
 };
 
 export default LoginPage;

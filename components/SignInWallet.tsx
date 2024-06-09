@@ -12,7 +12,7 @@ function SignInWallet({}: SignInWalletProps) {
     <>
       {!publicKey && (
         <div className="flex flex-col items-center justify-center">
-          <div className="">Wallet not connected</div>
+          <div className="pb-4">Wallet not connected</div>
           <div className="ml-4 rounded-lg border border-zinc-300 dark:border-zinc-900">
             <WalletAdapter />
           </div>

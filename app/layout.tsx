@@ -32,7 +32,6 @@ export default function RootLayout({
           <NavBar />
           <NavbarDemos />
           <div className="flex w-full flex-col items-center justify-center">
-            {/* <div className={`${bungee.className} text-4xl`}>Home Page</div> */}
             {children}
           </div>
         </NavbarContext>
