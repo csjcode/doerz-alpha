@@ -51,28 +51,48 @@ export const labels = [
 
 export const statuses = [
   {
-    value: "backlog",
-    label: "Backlog",
+    value: "upcoming",
+    label: "Upcoming",
     icon: RxQuestionMarkCircled,
   },
   {
-    value: "todo",
-    label: "Todo",
+    value: "available",
+    label: "Available",
     icon: RxCircle,
   },
   {
-    value: "in progress",
-    label: "In Progress",
+    value: "doing",
+    label: "Doing",
     icon: RxStopwatch,
   },
   {
-    value: "done",
-    label: "Done",
+    value: "submitted",
+    label: "Submitted",
     icon: RxCheckCircled,
   },
   {
-    value: "canceled",
-    label: "Canceled",
+    value: "validated",
+    label: "Validated",
+    icon: RxCrossCircled,
+  },
+  {
+    value: "rejected",
+    label: "Rejected",
+    icon: RxCrossCircled,
+  },
+  {
+    value: "rewarded",
+    label: "Rewarded",
+    icon: RxCrossCircled,
+  },
+  {
+    value: "expired",
+    label: "Expired",
+    icon: RxCrossCircled,
+  },
+  {
+    value: "notInterested",
+    label: "Not Interested",
     icon: RxCrossCircled,
   },
 ]
