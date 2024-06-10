@@ -12,6 +12,7 @@ import { Badge } from "../ui/badge"
 export const columns: ColumnDef<Task>[] = [
   {
     id: "select",
+    accessorKey: "select",
     header: ({ table }) => (
       <Checkbox
         checked={
@@ -32,14 +33,14 @@ export const columns: ColumnDef<Task>[] = [
       />
     ),
     enableSorting: false,
-    enableHiding: false,
+    enableHiding: true,
   },
   {
-    accessorKey: "id",
+    accessorKey: "taskId",
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Task Id" />
     ),
-    cell: ({ row }) => <div className="w-[80px]">{row.getValue("id")}</div>,
+    cell: ({ row }) => <div className="w-[80px]">{row.getValue("taskId")}</div>,
     enableSorting: true,
     enableHiding: true,
   },

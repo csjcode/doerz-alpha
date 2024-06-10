@@ -34,6 +34,11 @@ export const labels = [
     value: "developer",
     label: "Developer",
   },
+  {
+    value: "social",
+    label: "Social",
+  },
+
 
   {
     value: "bug",
