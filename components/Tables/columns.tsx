@@ -8,6 +8,8 @@ import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions"
 import { Checkbox } from "../ui/checkbox"
 import { Badge } from "../ui/badge"
+import { RxHeart, RxHeartFilled, RxInfoCircled } from "react-icons/rx";
+
 
 export const columns: ColumnDef<Task>[] = [
   {
@@ -31,6 +33,18 @@ export const columns: ColumnDef<Task>[] = [
         aria-label="Select row"
         className="translate-y-[2px]"
       />
+    ),
+    enableSorting: false,
+    enableHiding: true,
+  },
+  {
+    id: "favorite",
+    accessorKey: "favorite",
+    header: ({ table }) => (
+      <RxHeartFilled className="text-red-500" />
+    ),
+    cell: ({ row }) => (
+      <RxHeart className="text-zinc-500 cursor-pointer"/>
     ),
     enableSorting: false,
     enableHiding: true,
@@ -64,9 +78,13 @@ export const columns: ColumnDef<Task>[] = [
   },
   {
     accessorKey: "status",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Status" />
+    header: ({ table }) => (
+      <div className="flex flex-row justify-start items-center border-zinc-500"><RxInfoCircled className="text-blue-700 mr-1" /> <span>Status</span></div>
     ),
+
+    // header: ({ column }) => (
+    //   <DataTableColumnHeader column={column} title="Status" />
+    // ),
     cell: ({ row }) => {
       const status = statuses.find(
         (status) => status.value === row.getValue("status")

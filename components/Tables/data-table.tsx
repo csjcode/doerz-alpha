@@ -45,6 +45,10 @@ export function DataTable<TData, TValue>({
         taskId: false, // Ensure the 'id' column is hidden by default
         select: false,
       },
+      pagination: {
+        pageIndex: 0, // Start from the first page
+        pageSize: 20, // Number of rows per page
+      },
     },
     state: {
       sorting,

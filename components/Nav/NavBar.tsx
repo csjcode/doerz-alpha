@@ -29,7 +29,7 @@ const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
 export default function Home() {
   return (
     <>
-      <nav className="navbar border border-zinc-200 px-4 py-1 dark:border-zinc-800 dark:bg-zinc-950">
+      <nav className="navbar border border-zinc-200 px-4 py-1 dark:border-zinc-800 dark:bg-zinc-950 mb-4">
         <div className="flex w-full items-center">
           <section className={`${inter.className} mr-auto text-lg font-bold`}>
             <Link href="/">DOERZ.fun</Link>

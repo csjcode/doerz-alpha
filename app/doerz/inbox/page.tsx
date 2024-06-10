@@ -37,7 +37,7 @@ export default async function DoerzInboxPage(props: DoerzInboxPageProps){
 
   return (
     <div className="flex flex-col">
-      <div>Inbox</div>
+      {/* <div>Inbox</div> */}
       <DataTable data={tasks} columns={columns} />
 
     </div>
