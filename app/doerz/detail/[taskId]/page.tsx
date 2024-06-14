@@ -14,12 +14,12 @@ export const metadata: Metadata = {
 };
 const DoerzDetailIdPage = ({params}: DoerzDetailIdPageProps) => {
 
-  const pickEntry = data.find((entry) => entry.taskId === params.taskId);
+//   const pickEntry = data.find((entry) => entry.taskId === params.taskId);
 
-console.log(pickEntry);
+// console.log(pickEntry);
 
 
-  return <div>DoerzDetailId {params.taskId}</div>;
+  return <div>DoerzDetailId {params.taskId}</div>
 };
 
 export default DoerzDetailIdPage;

@@ -7,7 +7,7 @@ import { z } from "zod";
 import { taskSchema } from "@/components/Tables/data/schema";
 import { columns } from "@/components/Tables/columns";
 import { useFetchTasks } from "@/hooks/useFetchTasks";
-import FetchTasksInboxClient from "@/components/Tasks/FetchTasksInboxClient";
+import FetchTasks from "@/components/Tasks/FetchTasks";
 
 type DoerzInboxPageProps = {};
 
@@ -31,13 +31,14 @@ export const metadata: Metadata = {
 export default async function DoerzInboxPage(props: DoerzInboxPageProps) {
 
   // console.log(`test pre`);
+
   // const tasks = await getTasks();
   // console.log(`test post`);
   // const data = tasks || [];
 
   return (
     <div className="flex flex-col">
-      <FetchTasksInboxClient />
+      <FetchTasks />
     </div>
   );
 }

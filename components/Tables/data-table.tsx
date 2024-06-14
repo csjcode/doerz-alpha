@@ -95,7 +95,7 @@ export function DataTable<TData, TValue>({
           <TableBody>
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
-                console.log(row);
+                // console.log(row);
 
                 return (
                 <TableRow

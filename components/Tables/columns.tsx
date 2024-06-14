@@ -10,7 +10,7 @@ import { Checkbox } from "../ui/checkbox"
 import { Badge } from "../ui/badge"
 import { RxHeart, RxHeartFilled } from "react-icons/rx";
 import { AiOutlineCheckSquare,AiOutlineCrown } from "react-icons/ai";
-import ColumnCellTitle from "./ColumnCellTitle"
+import DisplayColumnTitle from "./display-column-title"
 
 
 
@@ -71,7 +71,7 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label)
 
       return (
-        <ColumnCellTitle row={row} label={label} />
+        <DisplayColumnTitle row={row} label={label} />
       )
     },
   },

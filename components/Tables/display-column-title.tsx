@@ -1,18 +1,26 @@
+"use client";
 import React from "react";
 import { Badge } from "../ui/badge";
-import { AiOutlineShareAlt, AiOutlineHeart, AiOutlineFileDone, AiOutlineFileText, AiOutlineCheckSquare } from "react-icons/ai";
+import {
+  AiOutlineShareAlt,
+  AiOutlineHeart,
+  AiOutlineFileDone,
+  AiOutlineFileText,
+  AiOutlineCheckSquare,
+} from "react-icons/ai";
+import { useRouter } from "next/navigation";
 
 type ColumnCellTitleProps = {
   row: any;
   label: any;
 };
 
-const ColumnCellTitle = ({ row, label }: ColumnCellTitleProps) => {
+const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
   const [expanded, setExpanded] = React.useState(false);
+  const router = useRouter();
 
   const handleCellTitleClick = () => {
     setExpanded(!expanded);
-    // alert(row.getValue("title"));
     console.log(row.getAllCells());
   };
 
@@ -20,7 +28,13 @@ const ColumnCellTitle = ({ row, label }: ColumnCellTitleProps) => {
     (value: string) =>
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.stopPropagation();
-      alert(value);
+      if (value === "validate") {
+        router.push(`/doerz/validate/${row.getValue("taskId")}`);
+      } else if(value === "detail") {
+        router.push(`/doerz/detail/${row.getValue("taskId")}`);
+      } else {
+        alert(value);
+      }
     };
 
   return (
@@ -53,26 +67,21 @@ const ColumnCellTitle = ({ row, label }: ColumnCellTitleProps) => {
             This is the description for {row.original["description"]}
           </p>
           <div className="mt-4 flex flex-row justify-start gap-2">
-
-
             <button
               className="flex flex-row items-center rounded-xl border border-zinc-200 px-4 py-2"
-              onClick={handleActionButtonClick("Detail")}
+              onClick={handleActionButtonClick("detail")}
             >
               <AiOutlineFileText className="mr-1" />
               <div className="text-sm">Detail/Images</div>
-
             </button>
 
             <button
               className="flex flex-row items-center rounded-xl border border-zinc-200 px-4 py-2"
-              onClick={handleActionButtonClick("Validate")}
+              onClick={handleActionButtonClick("validate")}
             >
               <AiOutlineCheckSquare className="mr-1" />
               <div className="text-sm">Validate</div>
             </button>
-
-
 
             <button
               className="flex flex-row items-center rounded-xl border border-zinc-200 px-4 py-2"
@@ -96,4 +105,4 @@ const ColumnCellTitle = ({ row, label }: ColumnCellTitleProps) => {
   );
 };
 
-export default ColumnCellTitle;
+export default DisplayColumnTitle;
