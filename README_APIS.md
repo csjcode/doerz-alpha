@@ -1,3 +1,17 @@
+# APIs
+
+* For local development use the data in the doerz-jsonserver repo.
+* Just clone the repo csjcode/doerz-jsonserver
+* Then follow instructions below.
+
+### doerz-jsonserver
+
+json-server --watch db.json --port 3003
+
+
+
+
+
 Here is a detailed example of a reward data object, including the fields you've mentioned and a few additional ones that might be useful. Additionally, I've included an example of a `RewardPool` as a parent to a reward, allowing multiple rewards to be funded from one pool.
 
 ### Reward Data Object Fields:
