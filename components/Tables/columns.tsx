@@ -8,7 +8,11 @@ import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions"
 import { Checkbox } from "../ui/checkbox"
 import { Badge } from "../ui/badge"
-import { RxHeart, RxHeartFilled, RxInfoCircled } from "react-icons/rx";
+import { RxHeart, RxHeartFilled } from "react-icons/rx";
+import { AiOutlineCheckSquare,AiOutlineCrown } from "react-icons/ai";
+import ColumnCellTitle from "./ColumnCellTitle"
+
+
 
 
 export const columns: ColumnDef<Task>[] = [
@@ -41,7 +45,7 @@ export const columns: ColumnDef<Task>[] = [
     id: "favorite",
     accessorKey: "favorite",
     header: ({ table }) => (
-      <RxHeartFilled className="text-red-500" />
+      <RxHeartFilled className="text-zinc-500" />
     ),
     cell: ({ row }) => (
       <RxHeart className="text-zinc-500 cursor-pointer"/>
@@ -67,24 +71,19 @@ export const columns: ColumnDef<Task>[] = [
       const label = labels.find((label) => label.value === row.original.label)
 
       return (
-        <div className="flex space-x-2">
-          {label && <Badge variant="outline">{label.label}</Badge>}
-          <span className="max-w-[500px] truncate font-medium">
-            {row.getValue("title")}
-          </span>
-        </div>
+        <ColumnCellTitle row={row} label={label} />
       )
     },
   },
   {
     accessorKey: "status",
-    header: ({ table }) => (
-      <div className="flex flex-row justify-start items-center border-zinc-500"><RxInfoCircled className="text-blue-700 mr-1" /> <span>Status</span></div>
-    ),
-
-    // header: ({ column }) => (
-    //   <DataTableColumnHeader column={column} title="Status" />
+    // header: ({ table }) => (
+    //   <div className="flex flex-row justify-start items-center border-zinc-500"><AiOutlineCheckSquare className="text-lg text-zinc-900 dark:text-zinc-100 mr-1" /> <span>Status</span></div>
     // ),
+
+    header: ({ column }) => (
+      <DataTableColumnHeader column={column} title="Status" />
+    ),
     cell: ({ row }) => {
       const status = statuses.find(
         (status) => status.value === row.getValue("status")
@@ -108,7 +107,12 @@ export const columns: ColumnDef<Task>[] = [
     },
   },
   {
-    accessorKey: "rewardSize",
+    accessorKey: "rewardSize", //AiOutlineCrown
+    // header: ({ column, table }) => (
+    //   <div className="flex flex-row justify-start items-center">
+    //     <AiOutlineCrown className="text-xl text-zinc-900 dark:text-zinc-100 mr-1" />
+    //   <span>Reward</span></div>
+    // ),
     header: ({ column }) => (
       <DataTableColumnHeader column={column} title="Reward Size" />
     ),

@@ -1,5 +1,9 @@
 # doerz-alpha
 
+DB and JSON chatgpt:
+https://chatgpt.com/c/bb1031e2-74ff-4250-8d52-00b3311179e4
+
+
 ## Status types
 
 * Upcoming
