@@ -29,9 +29,9 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.stopPropagation();
       if (value === "validate") {
-        router.push(`/doerz/validate/${row.getValue("taskId")}`);
+        router.push(`/doerz/validate/${row.getValue("taskIdName")}`);
       } else if(value === "detail") {
-        router.push(`/doerz/detail/${row.getValue("taskId")}`);
+        router.push(`/doerz/detail/${row.getValue("taskIdName")}`);
       } else {
         alert(value);
       }

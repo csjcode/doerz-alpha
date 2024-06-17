@@ -31,7 +31,7 @@ export function DataTable<TData, TValue>({
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
   const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
-    taskId: false, // Set initial visibility state here
+    taskIdName: false, // Set initial visibility state here
     select: false, // Set initial visibility state here
   });
   const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
@@ -42,7 +42,7 @@ export function DataTable<TData, TValue>({
     columns,
     initialState: {
       columnVisibility: {
-        taskId: false, // Ensure the 'id' column is hidden by default
+        taskIdName: false, // Ensure the 'id' column is hidden by default
         select: false,
       },
       pagination: {

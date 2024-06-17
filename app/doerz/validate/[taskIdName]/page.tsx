@@ -3,7 +3,7 @@ import React from "react";
 
 type DoerzValidatePageProps = {
   params: {
-    taskId: string;
+    taskIdName: string;
   };
 };
 export const metadata: Metadata = {
@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 const DoerzValidatePage = ({params}: DoerzValidatePageProps) => {
 
-  return <div>DoerzValidate {params.taskId}</div>;
+  return <div>DoerzValidate {params.taskIdName}</div>;
 };
 
 export default DoerzValidatePage;

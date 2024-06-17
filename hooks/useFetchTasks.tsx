@@ -1,24 +1,7 @@
 // useFetchTokensInfo.ts
 // import { TaskInfo } from "@/components/TokensInfo/types";
+import { Task } from "@/types";
 import { useState, useEffect } from "react";
-
-interface Task {
-  id: string;
-  dateCreated: number;
-  dateModified: number;
-  dateExpired: number;
-  rewardId: string;
-  tags: string[];
-  taskId: string;
-  title: string;
-  status: string;
-  label: string;
-  rewardSize: "small" | "medium" | "large";
-  brand: string;
-  description: string;
-  image: string;
-}
-
 
 interface FetchResult {
   tasks: Task[] | null;
