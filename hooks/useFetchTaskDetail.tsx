@@ -19,7 +19,7 @@ export const useFetchTaskDetail = (taskIdName: string) => {
   const fetchTaskDetail = useCallback(async (taskId: string) => {
     setResult((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await fetch(`http://localhost:3003/tasks?taskIdName=${taskIdName}`, {
+      const response = await fetch(`http://localhost:3000/api/tasks?taskIdName=${taskIdName}`, {
         method: "GET",
       });
 
