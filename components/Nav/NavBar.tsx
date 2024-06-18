@@ -1,14 +1,15 @@
 "use client";
-import Image from "next/image";
-import dynamic from "next/dynamic";
-import Link from "next/link";
-import { Bungee, Inter } from "next/font/google";
-import NavProfileMenu from "./NavAvatarMenu";
-import WalletAdapter from "../WalletAdapter";
-import { GoGear } from "react-icons/go";
+import dynamic from 'next/dynamic';
+import { Bungee, Inter } from 'next/font/google';
+import Image from 'next/image';
+import Link from 'next/link';
+import { GoGear } from 'react-icons/go';
+
 // import DropdownNetwork from "./DropdownNetwork";
 // import NetworkSwitcher from "./NetworkSwitcher";
-import SelectNetwork from "../SelectNetwork";
+import SelectNetwork from '../SelectNetwork';
+import WalletAdapter from '../WalletAdapter';
+import NavProfileMenu from './NavAvatarMenu';
 
 const bungee = Bungee({
   display: "swap",

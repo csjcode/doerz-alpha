@@ -1,5 +1,5 @@
 import React from "react";
-import AvatarUser from "../AvatarUser";
+import AvatarUser from "../User/AvatarUser";
 import { DropdownMenuUser as DropdownUser } from "../DropdownUser";
 
 const NavAvatarMenu = () => {
