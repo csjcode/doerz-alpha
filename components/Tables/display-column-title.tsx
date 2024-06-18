@@ -63,9 +63,9 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
           {/* {row.getValue("description")} */}
           {/* <p className="text-md font-bold">{row.getValue("title")}</p> */}
           <p className="font-bold"> {row.original["brand"]}</p>
-          <p className="font-light">
-            This is the description for {row.original["description"]}
-          </p>
+          <button className="font-light text-left" onClick={handleActionButtonClick("detail")}>
+            {row.original["description"]}
+          </button>
           <div className="mt-4 flex flex-row justify-start gap-2">
             <button
               className="flex flex-row items-center rounded-xl border border-zinc-200 px-4 py-2"

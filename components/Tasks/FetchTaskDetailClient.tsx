@@ -17,6 +17,8 @@ type FetchTaskDetailClientProps = {
 
 const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
   const { task, error, fetchTaskDetail } = useFetchTaskDetail(taskIdName);
+  console.log(`taskIdName is ${taskIdName}`);
+
 
   useEffect(() => {
     fetchTaskDetail(taskIdName);
@@ -64,6 +66,7 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
       </div>
     );
   } else if (data) {
+    console.log(`taskIdName is ${taskIdName}`);
     return (
       <div className="w- p-4 md:w-[60%]">
         <div className="flex flex-row items-center">
@@ -83,9 +86,11 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
         <div className="mt-4 text-lg font-bold">Reward Amount</div>
         <div className="mt-2">1,000 DOERZ</div>
         {/* <div className="mt-4 text-lg font-bold">Reward Validation</div> */}
+
+
         {data?.taskIdName && (
           <div className="mt-4">
-            <Link className="" href={`/doerz/validate/${data?.taskIdName}`}>
+            <Link className="" href={`/doerz/validate/${taskIdName}`}>
               <Button className="bg-blue-500 hover:bg-blue-600 dark:text-white">
                 <PiHandCoinsLight className="mr-2" size={24} />
                 Validate and Get Rewards
