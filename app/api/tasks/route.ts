@@ -37,7 +37,7 @@ export async function GET(req: NextRequest) {
 
     const data = await externalApiResponse.json();
 
-    console.log(`backend data: ${data}`);
+    // console.log(`backend data: ${data}`);
 
     return new NextResponse(JSON.stringify(data), {
       status: 200,

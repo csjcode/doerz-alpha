@@ -7,6 +7,9 @@ import { DateTime } from "luxon";
 import { DataTable } from "../Tables/data-table";
 import { columns } from "../Tables/columns";
 import { BeatLoader } from "react-spinners";
+import { PiHandCoinsLight } from "react-icons/pi";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 type FetchTaskDetailClientProps = {
   taskIdName: string;
@@ -48,13 +51,19 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
   if (!data) {
     return (
       <div className="flex h-full w-full flex-col items-center justify-center">
-      <div className="w-full mt-36">
-        <div className="text-md text-center text-zinc-700 dark:text-zinc-300">LOADING DATA...</div>
-          <BeatLoader className="p-2 text-2xl text-center" color="#36d7b7" size={25} />
+        <div className="mt-36 w-full">
+          <div className="text-md text-center text-zinc-700 dark:text-zinc-300">
+            LOADING DATA...
+          </div>
+          <BeatLoader
+            className="p-2 text-center text-2xl"
+            color="#36d7b7"
+            size={25}
+          />
+        </div>
       </div>
-    </div>
     );
-  } else {
+  } else if (data) {
     return (
       <div className="w- p-4 md:w-[60%]">
         <div className="flex flex-row items-center">
@@ -68,10 +77,12 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
             <div className="mr-2 mt-2 text-green-600">START: {dateStarted}</div>
             <div className="mr-2 mt-2 text-red-600">END: {dateExpired}</div>
           </div>
-          <p className="mt-2 text-lg font-light">{data?.description}</p>
+          <div className="mt-4 text-lg font-bold">Description</div>
+          <p className="text-lg font-light">{data?.description}</p>
         </div>
-        <div className="flex flex-row">
-          <ul className="mt-4 flex list-inside flex-col">
+        <div className="mt-4 flex flex-col">
+          <div className="text-lg font-bold">Reward Instructions</div>
+          <ul className="mt-1 flex list-inside flex-col">
             {data?.userInstructions &&
               data?.userInstructions.map((instruction, i) => (
                 <li
@@ -83,6 +94,18 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
               ))}
           </ul>
         </div>
+
+        <div className="mt-4 text-lg font-bold">Reward Validation</div>
+        {data?.taskIdName && (
+          <div className="mt-2">
+            <Link className="" href={`/doerz/validate/${data?.taskIdName}`}>
+              <Button className="bg-blue-500 hover:bg-blue-600">
+              Validate and Get Rewards
+              <PiHandCoinsLight className="ml-4"  size={24}/>
+              </Button>
+            </Link>
+          </div>
+        )}
 
         <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
           <span className="mr-2">Status: {data?.status}</span>
