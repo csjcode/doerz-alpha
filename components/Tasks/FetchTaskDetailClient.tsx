@@ -74,12 +74,25 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
         </div>
         <div className="flex flex-col leading-4">
           <div className="flex flex-col">
-            <div className="mr-2 mt-2 text-green-600">START: {dateStarted}</div>
-            <div className="mr-2 mt-2 text-red-600">END: {dateExpired}</div>
+            <div className="mr-2 mt-2 text-red-600">Expires: {dateExpired}</div>
+            {/* <div className="mr-2 mt-2 text-green-600">START: {dateStarted}</div> */}
           </div>
           <div className="mt-4 text-lg font-bold">Description</div>
           <p className="text-lg font-light">{data?.description}</p>
         </div>
+        <div className="mt-4 text-lg font-bold">Reward Amount</div>
+        <div className="mt-2">1,000 DOERZ</div>
+        {/* <div className="mt-4 text-lg font-bold">Reward Validation</div> */}
+        {data?.taskIdName && (
+          <div className="mt-4">
+            <Link className="" href={`/doerz/validate/${data?.taskIdName}`}>
+              <Button className="bg-blue-500 hover:bg-blue-600 dark:text-white">
+                <PiHandCoinsLight className="mr-2" size={24} />
+                Validate and Get Rewards
+              </Button>
+            </Link>
+          </div>
+        )}
         <div className="mt-4 flex flex-col">
           <div className="text-lg font-bold">Reward Instructions</div>
           <ul className="mt-1 flex list-inside flex-col">
@@ -94,18 +107,6 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
               ))}
           </ul>
         </div>
-
-        <div className="mt-4 text-lg font-bold">Reward Validation</div>
-        {data?.taskIdName && (
-          <div className="mt-2">
-            <Link className="" href={`/doerz/validate/${data?.taskIdName}`}>
-              <Button className="bg-blue-500 hover:bg-blue-600">
-              Validate and Get Rewards
-              <PiHandCoinsLight className="ml-4"  size={24}/>
-              </Button>
-            </Link>
-          </div>
-        )}
 
         <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
           <span className="mr-2">Status: {data?.status}</span>
