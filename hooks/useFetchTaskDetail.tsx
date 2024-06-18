@@ -17,9 +17,11 @@ export const useFetchTaskDetail = (taskIdName: string) => {
   });
 
   const fetchTaskDetail = useCallback(async (taskIdName: string) => {
+    console.log(`http://localhost:3000/api/tasks/${taskIdName}`);
+
     setResult((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks/?taskIdName=${taskIdName}`, {
+      const response = await fetch(`http://localhost:3000/api/tasks/${taskIdName}`, {
         method: "GET",
       });
 
@@ -43,6 +45,7 @@ export const useFetchTaskDetail = (taskIdName: string) => {
   useEffect(() => {
     fetchTaskDetail(taskIdName);
   }, [fetchTaskDetail, taskIdName]);
+
 
   return { ...result, fetchTaskDetail };
 };

@@ -10,6 +10,7 @@ import { BeatLoader } from "react-spinners";
 import { PiHandCoinsLight } from "react-icons/pi";
 import { Button } from "../ui/button";
 import Link from "next/link";
+import Countdown from "../Dates/Countdown";
 
 type FetchTaskDetailClientProps = {
   taskIdName: string;
@@ -17,12 +18,16 @@ type FetchTaskDetailClientProps = {
 
 const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
   const { task, error, fetchTaskDetail } = useFetchTaskDetail(taskIdName);
+  const [toggleDateFormat, setToggleDateFormat] = React.useState(false);
   console.log(`taskIdName is ${taskIdName}`);
-
 
   useEffect(() => {
     fetchTaskDetail(taskIdName);
   }, []);
+
+  const handleToggleDateFormat = () => {
+    setToggleDateFormat(!toggleDateFormat);
+  };
 
   const data = task || null;
   const formatDate = (timestamp: number) => {
@@ -77,7 +82,18 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
         </div>
         <div className="flex flex-col leading-4">
           <div className="flex flex-col">
-            <div className="mr-2 mt-2 text-red-600">Expires: {dateExpired}</div>
+            <div
+              onClick={handleToggleDateFormat}
+              className="mr-2 mt-2 text-red-600"
+            >
+              <span className="font-bold">Expires:</span>{" "}
+              {toggleDateFormat ? (
+                dateExpired
+              ) : (
+                <Countdown expires={dateExpired} />
+              )}{" "}
+            </div>
+            {/* {dateExpired} */}
             {/* <div className="mr-2 mt-2 text-green-600">START: {dateStarted}</div> */}
           </div>
           <div className="mt-4 text-lg font-bold">Description</div>
@@ -86,7 +102,6 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
         <div className="mt-4 text-lg font-bold">Reward Amount</div>
         <div className="mt-2">1,000 DOERZ</div>
         {/* <div className="mt-4 text-lg font-bold">Reward Validation</div> */}
-
 
         {data?.taskIdName && (
           <div className="mt-4">
@@ -121,6 +136,11 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
           <span className="mr-2">modified: {dateModified}</span>
           <span className="mr-2">rewardSize: {data?.rewardSize}</span>
         </div>
+
+        <div>
+          <Countdown expires={dateExpired} />
+        </div>
+
         <div className="flex flex-row">
           <ul className="mt-4 flex flex-row">
             {data?.tags.map((tag, i) => (
