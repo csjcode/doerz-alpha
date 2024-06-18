@@ -2,7 +2,7 @@
 import React, { useEffect } from "react";
 import { BeatLoader } from "react-spinners";
 import { useFetchTaskDetail } from "@/hooks/useFetchTaskDetail";
-import DisplayTaskDetail from "./DisplayTaskDetail";
+import DisplayTaskDetail from "../display/DisplayTaskDetail";
 
 type FetchTaskDetailClientProps = {
   taskIdName: string;

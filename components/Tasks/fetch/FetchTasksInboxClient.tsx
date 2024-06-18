@@ -1,8 +1,8 @@
 "use client"
 import { useFetchTasks } from '@/hooks/useFetchTasks';
 import React, { useEffect } from 'react'
-import { DataTable } from '../Tables/data-table';
-import { columns } from '../Tables/columns';
+import { DataTable } from '../../Tables/data-table';
+import { columns } from '../../Tables/columns';
 
 type FetchTasksInboxClientProps = {}
 
