@@ -1,6 +1,7 @@
 export interface Task {
   id: string;
   dateCreated: number;
+  dateStarted: number;
   dateModified: number;
   dateExpired: number;
   rewardId: string;
@@ -13,4 +14,5 @@ export interface Task {
   brand: string;
   description: string;
   image: string;
+  userInstructions: string[];
 }

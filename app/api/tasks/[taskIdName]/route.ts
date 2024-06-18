@@ -5,7 +5,8 @@ import { FetchOptions } from "@/app/api/types";
 
 interface RouteProps {
   params: {
-    taskId: string;
+    // taskId: string;
+    taskIdName: string;
   };
   req: NextRequest;
 }
@@ -21,7 +22,7 @@ export async function GET({ req, params }: RouteProps) {
     // http://localhost:3003/tasks?${params.taskId}
 
     const externalApiResponse = await fetchWithRetry(
-      `http://localhost:3003/tasks?taskId=${params.taskId}`,
+      `http://localhost:3003/tasks/?taskIdName=${params.taskIdName}`,
       options,
       3, // Number of retries
       500, // Initial backoff time in ms
@@ -33,7 +34,7 @@ export async function GET({ req, params }: RouteProps) {
 
     const data = await externalApiResponse.json();
 
-    console.log(`backend data: ${data}`);
+    // console.log(`backend data: ${JSON.stringify(data)}`);
 
     return new NextResponse(JSON.stringify(data), {
       status: 200,

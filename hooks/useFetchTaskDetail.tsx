@@ -8,7 +8,7 @@ interface FetchResult {
 }
 
 export const useFetchTaskDetail = (taskIdName: string) => {
-  console.log(taskIdName);
+  // console.log(taskIdName);
 
   const [result, setResult] = useState<FetchResult>({
     task: null,
@@ -19,7 +19,7 @@ export const useFetchTaskDetail = (taskIdName: string) => {
   const fetchTaskDetail = useCallback(async (taskId: string) => {
     setResult((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await fetch(`http://localhost:3000/api/tasks?taskIdName=${taskIdName}`, {
+      const response = await fetch(`http://localhost:3000/api/tasks/?taskIdName=${taskIdName}`, {
         method: "GET",
       });
 
@@ -28,7 +28,7 @@ export const useFetchTaskDetail = (taskIdName: string) => {
       }
 
       const data: Task[] = await response.json();
-      console.log(data);
+      // console.log(data);
 
       setResult({
         task: data.length ? data[0] : null,
