@@ -18,10 +18,9 @@ const Portal = () => {
       <div className="flex w-full grow justify-center gap-4 pb-8 pl-4 pt-8">
         <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
-            <div>I want to</div>{" "}
             <div>
               <u className="decoration-slate-400 decoration-dashed underline-offset-8">
-                do stuff
+                Do stuff
               </u>{" "}
               and get{" "}
               <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600">
@@ -46,10 +45,9 @@ const Portal = () => {
         </div>
         <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
-            <div>I want to</div>
             <div>
               {" "}
-              promote{" "}
+              Promote{" "}
               <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600">
                 something
               </u>

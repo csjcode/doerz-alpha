@@ -1,5 +1,5 @@
 export interface Task {
-  id: string;
+  taskId: string;
   dateCreated: number;
   dateStarted: number;
   dateModified: number;
@@ -15,4 +15,12 @@ export interface Task {
   description: string;
   image: string;
   userInstructions: string[];
+}
+
+export interface Favorite {
+  idFavorites: string;
+  username: string;
+  dateModified: number;
+  favoritesTaskId: string[];
+  favoritesTaskIdName: string[];
 }

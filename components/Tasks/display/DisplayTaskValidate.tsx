@@ -1,19 +1,38 @@
 import React, { useEffect } from "react";
-import Link from "next/link";
+import {
+  AiFillCheckCircle,
+  AiOutlineCheckCircle,
+  AiOutlineCrown,
+} from "react-icons/ai";
 import { PiHandCoinsLight } from "react-icons/pi";
-import { RxHeart, RxHeartFilled } from "react-icons/rx";
-import { Task } from "@/types";
-import Countdown from "../../Dates/Countdown";
+
 import { Button } from "@/components/ui/button";
+import { Task } from "@/types";
 import { formatDateTaskDetail } from "@/utils/dates";
-import DisplayTaskReward from "./DisplayTaskReward";
+
+import Countdown from "../../Dates/Countdown";
+import TaskReward from "./TaskReward";
+import TestingReminder from "@/components/messages/TestingReminder";
 
 type DisplayTaskDetailProps = {
   data: Task | null;
 };
 
+type ValidateResult = "none" | "loading" | "success" | "error";
+
 const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
   const [toggleDateFormat, setToggleDateFormat] = React.useState(false);
+  const [validateResult, setValidateResult] =
+    React.useState<ValidateResult>("none");
+
+  const handleValidateAction = () => {
+    console.log("handleValidateAction");
+    setValidateResult("loading");
+    setTimeout(() => {
+      setValidateResult("success");
+    }, 3000);
+  };
+
   const handleToggleDateFormat = () => {
     setToggleDateFormat(!toggleDateFormat);
   };
@@ -23,6 +42,44 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
   const dateStarted = formatDateTaskDetail(data?.dateStarted);
   const dateExpired = formatDateTaskDetail(data?.dateExpired);
   // const dateNow = DateTime.now().toFormat("LLL. d, yyyy (h:mm a)");
+
+  const styleValidateSuccess = "bg-green-500 hover:bg-green-500";
+  const styleValidateNone = "bg-blue-500 hover:bg-blue-600";
+  const styleValidateLoading = "bg-zinc-500 hover:bg-zinc-600";
+  const styleValidateError = "bg-red-500 hover:bg-red-600";
+
+  const getStyleValidateResult = (result: ValidateResult) => {
+    switch (result) {
+      case "none":
+        return styleValidateNone;
+      case "loading":
+        return styleValidateLoading;
+      case "success":
+        return styleValidateSuccess;
+      case "error":
+        return styleValidateError;
+    }
+  };
+
+  const getButtonIcon = (validateResult: ValidateResult) => {
+    switch (validateResult) {
+      case "success":
+        return <AiOutlineCheckCircle className="mr-2" size={24} />;
+      default:
+        return <AiOutlineCrown className="mr-2" size={24} />;
+    }
+  };
+
+  const getButtonText = (validateResult: ValidateResult,message:string="Validate and Get Rewards") => {
+    switch (validateResult) {
+      case "success":
+        return <span>Ownership Validated</span>;
+      case "loading":
+        return <span>Validating...</span>;
+      default:
+        return <span>{message}</span>;
+    }
+  };
 
   return (
     <div className="w- p-4 md:w-[60%]">
@@ -49,33 +106,47 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
         <div className="mt-4 text-lg font-bold">Description</div>
         <p className="text-lg font-light">{data?.description}</p>
       </div>
-      { data?.rewardSize && <DisplayTaskReward rewardSize={data?.rewardSize} />}
 
+      <div className="flex items-center justify-center my-8">
+        <div
+          className="my-4 flex w-[300px] flex-col rounded-xl border-2 border-zinc-800
+      bg-zinc-100 p-4 dark:bg-zinc-800 md:w-[600px] "
+        >
+          {data?.rewardSize && (
+            <div className="flex flex-row items-center justify-center text-center">
+              <TaskReward rewardSize={data?.rewardSize} />
+            </div>
+          )}
 
-      <div className="mt-4 flex flex-col">
-        <div className="text-lg font-bold">Reward Instructions</div>
-        <ul className="mt-1 flex list-inside flex-col">
-          {data?.userInstructions &&
-            data?.userInstructions.map((instruction: string) => (
-              <li
-                className={`mr-2 list-disc  rounded-xl px-2 py-1`}
-                key={instruction}
-              >
-                {instruction}
-              </li>
-            ))}
-        </ul>
+          <div className="mt-2 flex flex-row items-center justify-center">
+            <Button
+              className={`${getStyleValidateResult(validateResult)}  dark:text-white} px-8 px-8`}
+              onClick={handleValidateAction}
+            >
+              {getButtonIcon(validateResult)}
+              {getButtonText(validateResult,"Check Wallet for Ownership")}
+            </Button>
+          </div>
+          <div className="mt-2 p-2 text-center text-sm text-zinc-800 dark:text-zinc-200">
+            After initial user validation, there is a final system approval
+            verification, and if successful rewards will be deposited in your
+            wallet typically within 1-3 hours.
+          </div>
+
+          {validateResult === "success" && (
+            <>
+              {" "}
+              <hr className="my-2 h-1 border-t-0 bg-neutral-200 dark:bg-white/10" />
+              <div className="text-center">
+                <span className="font-bold">Status:</span> Verifying final
+                reward for deposit...
+              </div>
+            </>
+          )}
+          <hr className="my-2 h-1 border-t-0 bg-neutral-200 dark:bg-white/10" />
+          <TestingReminder />
+        </div>
       </div>
-
-      <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
-        <span className="mr-2">Status: {data?.status}</span>
-
-        <span className="mr-2">Brand: {data?.brand}</span>
-        <span className="mr-2">Label: {data?.label}</span>
-        <span className="mr-2">modified: {dateModified}</span>
-        <span className="mr-2">rewardSize: {data?.rewardSize}</span>
-      </div>
-
       <div>
         <Countdown expires={dateExpired} />
       </div>
