@@ -49,9 +49,9 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
 
   return (
     <div className="w- p-4 md:w-[60%]">
-      <div className="flex flex-row items-center">
+      <div className="flex flex-col items-start">
         <h1 className="text-2xl font-bold">{data?.title ?? "n/a"}</h1>{" "}
-        <span className="ml-1 border-0 border-zinc-100 px-2 py-1 text-xs text-zinc-500 dark:border-zinc-800">
+        <span className="border-0 border-zinc-100 py-1 text-xs text-zinc-500 dark:border-zinc-800">
           {data?.taskIdName ?? "n/a"}
         </span>
       </div>
@@ -87,17 +87,17 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
 
       <div className="mt-4 flex flex-col">
         <div className="text-lg font-bold">Reward Instructions</div>
-        <ul className="mt-1 flex list-inside flex-col">
+        <ol className="mt-1 flex ml-4 list-outside flex-col">
           {data?.userInstructions &&
             data?.userInstructions.map((instruction: string) => (
               <li
-                className={`mr-2 list-disc  rounded-xl px-2 py-1`}
+                className={`mr-2  list-decimal rounded-xl px-2 py-1`}
                 key={instruction}
               >
                 {instruction}
               </li>
             ))}
-        </ul>
+        </ol>
       </div>
 
       <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
