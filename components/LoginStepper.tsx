@@ -7,15 +7,18 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Button } from "./ui/button";
 
+
 type LoginStepperProps = {};
 
 const LoginStepper = (props: LoginStepperProps) => {
   const { connected } = useWallet();
+
   const router = useRouter();
   const searchParams = useSearchParams();
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [settings, setSettings] = React.useState(false);
   const step = searchParams.get("step");
+
 
   // console.log('params', params);
   // const params = useParams<{ step: string }>()

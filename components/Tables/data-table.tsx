@@ -19,6 +19,8 @@ import {
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
+import './index.css'
+
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -70,9 +72,9 @@ export function DataTable<TData, TValue>({
   });
 
   return (
-    <div className="space-y-4">
-      <DataTableToolbar table={table} />
-      <div className="rounded-md border">
+    <div className="flex flex-col space-y-4">
+      <div className=""><DataTableToolbar table={table} /></div>
+      <div className="rounded-md">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
@@ -96,12 +98,13 @@ export function DataTable<TData, TValue>({
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) => {
                 // console.log(row);
+                //
 
                 return (
                 <TableRow
                   key={row.id}
                   data-state={row.getIsSelected() && "selected"}
-                  className="hover:bg-yellow-50 dark:hover:bg-zinc-800"
+                  className=" dark:hover:bg-zinc-800 hover:bg-yellow-50 hover:border hover:border-b-zinc-500"
                 >
                   {row.getVisibleCells().map((cell) => (
                     <TableCell className="p-[4px]" key={cell.id}>

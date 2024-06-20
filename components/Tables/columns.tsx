@@ -1,7 +1,7 @@
 "use client"
 
 import { ColumnDef } from "@tanstack/react-table"
-
+import Image from "next/image";
 import { labels, rewardSizes, statuses } from "./data/data"
 import { Task } from "./data/schema"
 import { DataTableColumnHeader } from "./data-table-column-header"
@@ -9,6 +9,7 @@ import { DataTableRowActions } from "./data-table-row-actions"
 import { Checkbox } from "../ui/checkbox"
 import { Badge } from "../ui/badge"
 import { RxHeart, RxHeartFilled } from "react-icons/rx";
+import { MdOutlineImage } from "react-icons/md";
 import { AiOutlineCheckSquare,AiOutlineCrown } from "react-icons/ai";
 import DisplayColumnTitle from "./display-column-title"
 
@@ -49,6 +50,18 @@ export const columns: ColumnDef<Task>[] = [
     ),
     cell: ({ row }) => (
       <RxHeart className="text-zinc-500 cursor-pointer"/>
+    ),
+    enableSorting: false,
+    enableHiding: true,
+  },
+  {
+    id: "Image",
+    accessorKey: "imageThumbnail",
+    header: ({ table }) => (
+      <MdOutlineImage className="text-zinc-500" />
+    ),
+    cell: ({ row }) => (
+      <div className=""><Image src="/images/ph/75x50.png" alt="project image" width={75} height={50}/></div>
     ),
     enableSorting: false,
     enableHiding: true,

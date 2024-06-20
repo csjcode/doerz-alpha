@@ -30,7 +30,7 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
       event.stopPropagation();
       if (value === "validate") {
         router.push(`/doerz/validate/${row.getValue("taskIdName")}`);
-      } else if(value === "detail") {
+      } else if (value === "detail") {
         router.push(`/doerz/detail/${row.getValue("taskIdName")}`);
       } else {
         alert(value);
@@ -43,27 +43,32 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
       onClick={handleCellTitleClick}
     >
       {" "}
-      <div className="flex space-x-2">
-        {label && (
-          <Badge
-            className="border border-zinc-300 font-light dark:border-zinc-600"
-            variant="outline"
-          >
-            {label.label}
-          </Badge>
-        )}
-        <span
+      <div className="flex items-center space-x-2">
+        <div
           className={`max-w-[400px] truncate font-medium ${expanded && "text-lg"}`}
         >
           {row.getValue("title")}
-        </span>
+        </div>
+        {label && (
+          <div className="">
+            <Badge
+              className="border border-zinc-300 font-light dark:border-zinc-600"
+              variant="outline"
+            >
+              {label.label}
+            </Badge>
+          </div>
+        )}
       </div>
       {expanded && (
         <div className="mt-4 max-w-[450px]">
           {/* {row.getValue("description")} */}
           {/* <p className="text-md font-bold">{row.getValue("title")}</p> */}
           <p className="font-bold"> {row.original["brand"]}</p>
-          <button className="font-light text-left" onClick={handleActionButtonClick("detail")}>
+          <button
+            className="text-left font-light"
+            onClick={handleActionButtonClick("detail")}
+          >
             {row.original["description"]}
           </button>
           <div className="mt-4 flex flex-row justify-start gap-2">

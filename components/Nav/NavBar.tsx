@@ -4,12 +4,16 @@ import { Bungee, Inter } from 'next/font/google';
 import Image from 'next/image';
 import Link from 'next/link';
 import { GoGear } from 'react-icons/go';
+import { useUserProfileStore, useUserTasksStore } from "@/store/store";
+
 
 // import DropdownNetwork from "./DropdownNetwork";
 // import NetworkSwitcher from "./NetworkSwitcher";
 import SelectNetwork from '../SelectNetwork';
 import WalletAdapter from '../WalletAdapter';
 import NavProfileMenu from './NavAvatarMenu';
+import { useWallet } from '@solana/wallet-adapter-react';
+import { useEffect } from 'react';
 
 const bungee = Bungee({
   display: "swap",
@@ -28,6 +32,16 @@ const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
 });
 
 export default function Home() {
+  const { publicWalletAddress, updatePublicWalletAddress } = useUserProfileStore();
+  const { connected, publicKey } = useWallet();
+  useEffect(() => {
+    if (publicKey) {
+      updatePublicWalletAddress(publicKey.toString());
+    }
+  }, [publicKey, updatePublicWalletAddress]);
+
+
+
   return (
     <>
       <nav className="navbar border border-zinc-200 px-4 py-1 dark:border-zinc-800 dark:bg-zinc-950 mb-4">
