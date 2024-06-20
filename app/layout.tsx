@@ -5,6 +5,7 @@ import NavBar from "@/components/Nav/NavBar";
 import NavbarContext from "@/components/Nav/NavbarContext";
 import NavbarDemos from "@/components/Nav/NavbarDemos";
 import { Outfit } from "next/font/google";
+import NavFooter from "@/components/Nav/NavFooter";
 
 const outfit = Outfit({
   display: "swap",
@@ -34,6 +35,7 @@ export default function RootLayout({
           <div className="flex w-full flex-col items-center justify-center">
             {children}
           </div>
+          <NavFooter />
         </NavbarContext>
       </body>
     </html>

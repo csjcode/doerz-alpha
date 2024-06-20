@@ -37,28 +37,31 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
       }
     };
 
+  // console.log(`${JSON.stringify(row.original.tags)}`);
+
   return (
     <div
       className="flex cursor-pointer flex-col p-4"
       onClick={handleCellTitleClick}
     >
       {" "}
-      <div className="flex items-center space-x-2">
+      <div className="flex flex-col ">
         <div
-          className={`max-w-[400px] truncate font-medium ${expanded && "text-lg"}`}
+          className={`flex max-w-[400px] truncate pb-1 font-medium ${expanded && "text-lg"}`}
         >
-          {row.getValue("title")}
+          {row.original["title"]}
         </div>
+
+        <div className="flex flex-row">
         {label && (
           <div className="">
-            <Badge
-              className="border border-zinc-300 font-light dark:border-zinc-600"
-              variant="outline"
-            >
-              {label.label}
-            </Badge>
+            <div className="text-xs font-light">{label.label} / </div>
           </div>
         )}
+          {row.original.tags && row.original.tags.map((tag: string,i:number) => {
+            return <div className="text-xs text-zinc-500 border px-1" key={tag}>{tag.toUpperCase()}{i < row.original.tags.length-1 && ` `}</div>
+          })}
+        </div>
       </div>
       {expanded && (
         <div className="mt-4 max-w-[450px]">
