@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
 import { MdFormatListBulletedAdd } from "react-icons/md";
+import { VscOpenPreview } from "react-icons/vsc";
 
 type MakerzCreatePageProps = {};
 export const metadata: Metadata = {
@@ -11,15 +12,7 @@ export const metadata: Metadata = {
 };
 const MakerzCreatePage = (props: MakerzCreatePageProps) => {
   return (
-    <div>
-      {" "}
-      <div className="mb-4 flex flex-row ">
-        {/* <div>Makerz List</div> */}
-        <div className="ml-4 flex flex-row items-center">
-          <MdFormatListBulletedAdd className="text-zinc-500" />
-          <div className="ml-2">Create a Task</div>
-        </div>
-      </div>
+    <div className="w-full justify-center">
       <CreateMakerzTaskForm />
     </div>
   );
