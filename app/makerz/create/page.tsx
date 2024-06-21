@@ -1,4 +1,4 @@
-import CreateMakerzTaskForm from "@/components/forms/CreateMakerzTaskForm";
+import CreateMakerzTaskForm from "@/components/forms/makerz/CreateMakerzTaskForm";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";

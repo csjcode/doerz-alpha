@@ -18,9 +18,10 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { labels, statuses } from "../Tables/data/data";
+import { labels, statuses } from "../../Tables/data/data";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import { VscOpenPreview } from "react-icons/vsc";
+import PreviewMakerzTaskForm from "./PreviewMakerzTaskForm";
 
 const OWNER_USER = "csjcodetest";
 
@@ -163,7 +164,7 @@ const CreateMakerzTaskForm = () => {
                   }
                 >
                   <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select type" />
+                    <SelectValue placeholder="Select" />
                   </SelectTrigger>
                   <SelectContent>
                     <SelectGroup>
@@ -225,26 +226,6 @@ const CreateMakerzTaskForm = () => {
                 <p>{errors.description.message as string}</p>
               )}
             </div>
-            {/* <div className="my-4">
-        <label className="text-sm text-zinc-600 dark:text-zinc-400">
-          Status
-        </label>
-        <Select>
-          <SelectTrigger className="w-full">
-            <SelectValue placeholder="Select a status" />
-          </SelectTrigger>
-          <SelectContent>
-            <SelectGroup>
-              {statuses.map((status) => (
-                <SelectItem key={status.value} value={status.value}>
-                  {status.label}
-                </SelectItem>
-              ))}
-            </SelectGroup>
-          </SelectContent>
-        </Select>
-        {errors.status && <p>{errors.status.message as string}</p>}
-      </div> */}
             <div className="flex w-56 flex-row">
               <div className="my-4 mr-2">
                 <label className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -271,7 +252,9 @@ const CreateMakerzTaskForm = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {errors.ownerGroup && <p>{errors.ownerGroup.message as string}</p>}
+                {errors.ownerGroup && (
+                  <p>{errors.ownerGroup.message as string}</p>
+                )}
               </div>
 
               <div className="my-4 ">
@@ -333,94 +316,19 @@ const CreateMakerzTaskForm = () => {
           </div>
         </form>
       </div>
-      <div className="flex w-2/3 flex-col">
-        <div className="flex flex-row items-center justify-center">
-          <div className="flex flex-row text-center">
-            <VscOpenPreview />
-          </div>
-
-          <div className="ml-2">Task Preview</div>
-        </div>
-        <div className="mt-4 flex flex-col">
-          {title && (
-            <div className="flex flex-col text-xl font-bold">
-              Title: {title}
-            </div>
-          )}
-          {taskIdName && (
-            <div className="text-md flex flex-col font-light">
-              taskIdName: {taskIdName}
-            </div>
-          )}
-          {taskType && (
-            <div className="text-md flex flex-col font-light">
-              taskType: {taskType}
-            </div>
-          )}
-          {description && (
-            <div className="text-md flex flex-col font-light">
-              description: {description}
-            </div>
-          )}
-
-          {rewardInDOERZ && (
-            <div className="text-md flex flex-col font-light">
-              DOERZ rewards:{rewardInDOERZ}
-            </div>
-          )}
-          {draft && (
-            <div className="text-md flex flex-col font-light">
-              {draft === true ? "DRAFT: Yes" : "DRAFT: No"}
-            </div>
-          )}
-          {ownerGroup && (
-            <div className="text-md flex flex-col font-light">
-              Group Owner:{ownerGroup}
-            </div>
-          )}
-          {ownerAdmin && (
-            <div className="text-md flex flex-col font-light">
-              Group Admin:{ownerAdmin}
-            </div>
-          )}
-          {/* <div className="text-md flex flex-col font-light">
-            Task Types:{taskType}
-          </div>
-          <div className="text-md flex flex-col font-light">
-            Task Types:{taskType}
-          </div>
-          <div className="text-md flex flex-col font-light">
-            Task Types:{taskType}
-          </div> */}
-
-          {/* case "taskIdName":
-        setTaskIdName(value);
-        break;
-      case "taskType":
-        setTaskType(value);
-        break;
-      case "draft":
-        setDraft(!draft);
-        break;
-      case "title":
-        setTitle(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      case "groupOwner":
-        setGroupOwner(value);
-        break;
-      case "groupAdmin":
-        setGroupAdmin(value);
-        break;
-      case "rewardInDOERZ":
-        setRewardInDOERZ(value);
-        break;
-      case "image":
-        setImage(value); */}
-        </div>
-      </div>
+      <PreviewMakerzTaskForm
+        data={{
+          taskIdName,
+          taskType,
+          draft,
+          title,
+          description,
+          rewardInDOERZ,
+          ownerGroup,
+          ownerAdmin,
+          image,
+        }}
+      />
     </div>
   );
 };
