@@ -29,6 +29,8 @@ const CreateMakerzTaskForm = () => {
   const {
     register,
     handleSubmit,
+    setValue,
+    watch,
     formState: { errors },
   } = useForm({
     resolver: zodResolver(taskSchemaMakerzForm),
@@ -50,7 +52,7 @@ const CreateMakerzTaskForm = () => {
     >,
   ) => {
     const { name, value } = e.target;
-
+    setValue(name, value);
     switch (name) {
       case "taskIdName":
         setTaskIdName(value);
@@ -94,6 +96,8 @@ const CreateMakerzTaskForm = () => {
   const onSubmit = async (data: any) => {
     const rewardSize = getRewardSize(data.rewardInDOERZ);
 
+    console.log(`Submitted`);
+
     const newTask = {
       ...data,
       taskId: uuidv4(),
@@ -104,22 +108,35 @@ const CreateMakerzTaskForm = () => {
       rewardId: uuidv4(),
       rewardSize,
       ownerUser: OWNER_USER,
+      taskIdName,
+      draft,
+      taskType,
+      title,
+      description,
+      ownerGroup,
+      ownerAdmin,
+      rewardInDOERZ,
+      image,
     };
 
-    // Mock API call to JSON server
-    const response = await fetch("http://localhost:3000/tasks", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(newTask),
-    });
+    console.log(newTask);
 
-    if (response.ok) {
-      console.log("Task created successfully!");
-    } else {
-      console.error("Failed to create task.");
-    }
+    alert(JSON.stringify(newTask));
+
+    // Mock API call to JSON server
+    // const response = await fetch("http://localhost:3000/tasks", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newTask),
+    // });
+
+    // if (response.ok) {
+    //   console.log("Task created successfully!");
+    // } else {
+    //   console.error("Failed to create task.");
+    // }
   };
 
   return (
@@ -184,7 +201,7 @@ const CreateMakerzTaskForm = () => {
                 </label>
                 <Select
                   defaultValue="true"
-                  {...register("draft")}
+                  {...register("draft", { required: true })}
                   onValueChange={(value) =>
                     handleFormChange({
                       target: { name: "draft", value },
@@ -263,7 +280,7 @@ const CreateMakerzTaskForm = () => {
                 </label>
                 <Select
                   defaultValue="csjcodetest"
-                  {...register("ownerAdmin")}
+                  {...register("ownerAdmin", { required: true })}
                   onValueChange={(value) =>
                     handleFormChange({
                       target: { name: "ownerAdmin", value },
@@ -282,7 +299,9 @@ const CreateMakerzTaskForm = () => {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {errors.brand && <p>{errors.brand.message as string}</p>}
+                {errors.ownerAdmin && (
+                  <p>{errors.ownerAdmin.message as string}</p>
+                )}
               </div>
             </div>
             <div className="my-4">
@@ -301,7 +320,7 @@ const CreateMakerzTaskForm = () => {
                 <p>{errors.rewardInDOERZ.message as string}</p>
               )}
             </div>
-            <div className="my-4">
+            {/* <div className="my-4">
               <label className="text-sm text-zinc-600 dark:text-zinc-400">
                 Image URL
               </label>
@@ -311,7 +330,7 @@ const CreateMakerzTaskForm = () => {
                 })}
               />
               {errors.image && <p>{errors.image.message as string}</p>}
-            </div>
+            </div> */}
             <Button type="submit">Create Task</Button>
           </div>
         </form>
