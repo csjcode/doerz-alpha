@@ -55,11 +55,11 @@ const DisplayColumnTitle = ({ row, label }: ColumnCellTitleProps) => {
         <div className="flex flex-row">
         {label && (
           <div className="">
-            <div className="text-xs font-light">{label.label} / </div>
+            <div className="text-xs font-light text-zinc-800 border border-zinc-200 bg-blue-50 px-1 mr-1">{label.label}</div>
           </div>
         )}
           {row.original.tags && row.original.tags.map((tag: string,i:number) => {
-            return <div className="text-xs text-zinc-500 border px-1" key={tag}>{tag.toUpperCase()}{i < row.original.tags.length-1 && ` `}</div>
+            return <div className="text-xs text-zinc-500 border px-1 mr-1" key={tag}>{tag.toUpperCase()}{i < row.original.tags.length-1 && ` `}</div>
           })}
         </div>
       </div>

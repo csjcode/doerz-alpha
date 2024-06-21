@@ -43,7 +43,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
   const dateExpired = formatDateTaskDetail(data?.dateExpired);
   // const dateNow = DateTime.now().toFormat("LLL. d, yyyy (h:mm a)");
 
-  const styleValidateSuccess = "bg-green-500 hover:bg-green-500";
+  const styleValidateSuccess = "bg-green-500 hover:bg-green-500 disabled:bg-green-500 disabled:opacity-100 cursor-not-allowed";
   const styleValidateNone = "bg-blue-500 hover:bg-blue-600";
   const styleValidateLoading = "bg-zinc-500 hover:bg-zinc-600";
   const styleValidateError = "bg-red-500 hover:bg-red-600";
@@ -113,7 +113,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
       <div className="my-8 flex items-center justify-center">
         <div
           className="my-4 flex w-[300px] flex-col rounded-xl border-2 border-zinc-800
-      bg-zinc-100 p-4 dark:bg-zinc-800 md:w-[600px] "
+      bg-zinc-100 p-12 dark:bg-zinc-800 md:w-[600px] border-dashed"
         >
           {data?.rewardSize && (
             <div className="flex flex-row items-center justify-center text-center">
@@ -123,8 +123,9 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
 
           <div className="mt-2 flex flex-row items-center justify-center">
             <Button
-              className={`${getStyleValidateResult(validateResult)}  dark:text-white} px-8 px-8`}
+              className={`${getStyleValidateResult(validateResult)}  dark:text-white} px-12 py-6 text-lg `}
               onClick={handleValidateAction}
+              disabled={validateResult === "success"}
             >
               {getButtonIcon(validateResult)}
               {getButtonText(validateResult, "Check Wallet for Ownership")}
@@ -139,7 +140,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
             <>
               <div className="flex flex-col items-center justify-center ">
                 {" "}
-                <hr className="flexmy-2 h-1 border-t-0 bg-neutral-200 dark:bg-white/10" />
+                <hr className="flex h-1 border-t-0 bg-neutral-200 dark:bg-white/10" />
                 <div className="">
                   <div className="flex flex-row items-center">
                     <AiOutlineCrown className="text-purple-800 dark:text-purple-400" size="28" /><div className="ml-1 items-center text-sm font-bold text-purple-800 dark:text-purple-400">REWARD PENDING</div>

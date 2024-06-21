@@ -18,13 +18,20 @@ import {
 
 import { DataTablePagination } from "./data-table-pagination";
 import { DataTableToolbar } from "./data-table-toolbar";
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "../ui/table";
-import './index.css'
-
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "../ui/table";
+import "./index.css";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
+  tableType?: "doerz" | "makerz";
 }
 
 export function DataTable<TData, TValue>({
@@ -32,11 +39,14 @@ export function DataTable<TData, TValue>({
   data,
 }: DataTableProps<TData, TValue>) {
   const [rowSelection, setRowSelection] = React.useState({});
-  const [columnVisibility, setColumnVisibility] = React.useState<VisibilityState>({
-    taskIdName: false, // Set initial visibility state here
-    select: false, // Set initial visibility state here
-  });
-  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+  const [columnVisibility, setColumnVisibility] =
+    React.useState<VisibilityState>({
+      taskIdName: false, // Set initial visibility state here
+      select: false, // Set initial visibility state here
+    });
+  const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>(
+    [],
+  );
   const [sorting, setSorting] = React.useState<SortingState>([]);
 
   const table = useReactTable({
@@ -73,7 +83,9 @@ export function DataTable<TData, TValue>({
 
   return (
     <div className="flex flex-col space-y-4">
-      <div className=""><DataTableToolbar table={table} /></div>
+      <div className="">
+        <DataTableToolbar table={table} />
+      </div>
       <div className="rounded-md">
         <Table>
           <TableHeader>
@@ -86,7 +98,7 @@ export function DataTable<TData, TValue>({
                         ? null
                         : flexRender(
                             header.column.columnDef.header,
-                            header.getContext()
+                            header.getContext(),
                           )}
                     </TableHead>
                   );
@@ -101,21 +113,22 @@ export function DataTable<TData, TValue>({
                 //
 
                 return (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className=" dark:hover:bg-zinc-800 hover:bg-yellow-50 hover:border hover:border-b-zinc-500"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell className="p-[4px]" key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              )})
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className=" hover:border hover:border-b-zinc-300 hover:bg-yellow-50 dark:hover:bg-zinc-800"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell className="p-[4px]" key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext(),
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                );
+              })
             ) : (
               <TableRow>
                 <TableCell

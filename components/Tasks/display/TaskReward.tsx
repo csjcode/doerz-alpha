@@ -8,7 +8,7 @@ const TaskReward = ({ rewardSize }: TaskRewardProps) => {
   return (
     <div>
       {" "}
-      <div className="text-lg font-bold">Reward Amount</div>
+      <div className="text-lg font-bold">Reward</div>
       <div className="flex flex-row">
         <div className="">1,000 DOERZ</div>
         <div className="ml-2">

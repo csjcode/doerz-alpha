@@ -14,6 +14,11 @@ export interface Task {
   brand: string;
   description: string;
   image: string;
+  draft: "true" | "false"
+  ownerUser: string,
+  ownerGroup: string,
+  ownerAdmin: string,
+  ownerProject: string,
   userInstructions: string[];
 }
 

@@ -23,7 +23,7 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
 
   if (!data) {
     return (
-      <div className="flex h-full w-full flex-col items-center justify-center">
+      <div className="flex flex-col h-full w-full flex-col items-center justify-center">
         <div className="mt-36 w-full">
           <div className="text-md text-center text-zinc-700 dark:text-zinc-300">
             LOADING DATA...
@@ -33,6 +33,8 @@ const FetchTaskDetailClient = ({ taskIdName }: FetchTaskDetailClientProps) => {
             color="#36d7b7"
             size={25}
           />
+          <div className="h-96">{" "}</div>
+
         </div>
       </div>
     );

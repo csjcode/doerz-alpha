@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { fetchWithRetry } from "@/utils/fetchWithRetry";
 import { FetchOptions } from "@/app/api/types";
+import { Task } from "@/types";
 
 export async function GET(req: NextRequest, { params }: { params: { taskIdName: string } }) {
   const { taskIdName } = params;
@@ -24,8 +25,13 @@ export async function GET(req: NextRequest, { params }: { params: { taskIdName: 
     }
 
     const data = await externalApiResponse.json();
+    console.log(`data ${JSON.stringify(data)}`);
 
-    return NextResponse.json(data, {
+
+    const dataRemoveDrafts = data.filter((task: Task) => task.draft === "false");
+
+
+    return NextResponse.json(dataRemoveDrafts, {
       status: 200,
       headers: {
         "Content-Type": "application/json",

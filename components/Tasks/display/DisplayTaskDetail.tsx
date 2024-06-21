@@ -1,8 +1,4 @@
 import React, { useEffect } from "react";
-import Link from "next/link";
-
-import { PiHandCoinsLight } from "react-icons/pi";
-import { RxHeart, RxHeartFilled } from "react-icons/rx";
 import { Task } from "@/types";
 import Countdown from "../../Dates/Countdown";
 import { Button } from "@/components/ui/button";
