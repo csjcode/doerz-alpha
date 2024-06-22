@@ -1,10 +1,8 @@
-import CreateMakerzTaskForm from "@/components/forms/makerz/CreateMakerzTaskForm";
-import TestForm from "@/components/forms/makerz/TestForm";
+import CreateMakerzTaskForm from "@/components/forms/makerz/task/create/CreateMakerzTaskForm";
+import TestForm from "@/components/forms/makerz/task/create/TestForm";
 import { Metadata } from "next";
 import Link from "next/link";
 import React from "react";
-import { MdFormatListBulletedAdd } from "react-icons/md";
-import { VscOpenPreview } from "react-icons/vsc";
 
 type MakerzCreatePageProps = {};
 export const metadata: Metadata = {

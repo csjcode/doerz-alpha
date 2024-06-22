@@ -10,7 +10,7 @@ const PreviewMakerzTaskForm = ({data}: PreviewMakerzTaskFormProps) => {
   const { title, taskIdName, taskType, description, rewardInDOERZ, draft, ownerGroup, ownerAdmin } = data;
 
   return (
-    <div className="flex w-2/3 flex-col">
+    <div className="flex flex-col w-2/3 px-2">
     <div className="flex flex-row items-center justify-center">
       <div className="flex flex-row text-center">
         <VscOpenPreview size={18} className="text-zinc-500" />

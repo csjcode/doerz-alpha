@@ -1,166 +1,90 @@
 "use client";
-
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useReducer } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { taskSchemaMakerzForm } from "./schemaForms";
 import { v4 as uuidv4 } from "uuid";
-import { format } from "date-fns";
 import {
   Select,
   SelectContent,
   SelectGroup,
   SelectItem,
-  SelectLabel,
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
-import { labels, statuses } from "../../Tables/data/data";
+import { labels } from "@/components/Tables/data/data";
 import { MdFormatListBulletedAdd } from "react-icons/md";
-import { VscOpenPreview } from "react-icons/vsc";
+import { FaCircleCheck } from "react-icons/fa6";
 import PreviewMakerzTaskForm from "./PreviewMakerzTaskForm";
 import { generateShortDateTime } from "@/utils/dates";
-import { CiCircleCheck } from "react-icons/ci";
 import {
   PiNumberCircleOne,
   PiNumberCircleTwo,
   PiNumberCircleThree,
   PiNumberCircleFour,
 } from "react-icons/pi";
-import { FaCircleCheck } from "react-icons/fa6";
-
-const OWNER_USER = "csjcodetest";
-const OWNER_ORG = "doerzalpha";
+import {
+  OWNER_USER,
+  OWNER_GROUP,
+  OWNER_ADMIN,
+  OWNER_ORG,
+} from "@/config/testing";
+import { State, initialState, reducer } from "./reducerMakerzTaskFor";
+import { getRewardSize } from "./utils";
+import { onSubmit } from "./onSubmit";
 
 const CreateMakerzTaskForm = () => {
-  const [makerzFormStep, setMakerzFormStep] = useState(2);
-  const [taskIdNameShort, setTaskIdNameShort] = useState(
-    generateShortDateTime(),
-  );
-  const [draft, setDraft] = useState(true);
-  const [taskType, setTaskType] = useState("ownership");
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [ownerGroup, setOwnerGroup] = useState(OWNER_USER);
-  const [ownerAdmin, setOwnerAdmin] = useState(OWNER_USER);
-  const [rewardInDOERZ, setRewardInDOERZ] = useState("");
-  const [image, setImage] = useState("");
+  const [state, dispatch] = useReducer(reducer, initialState);
 
   const {
     register,
     handleSubmit,
     setValue,
-    watch,
     formState: { errors },
   } = useForm({
-    resolver: zodResolver(taskSchemaMakerzForm(taskType)),
+    resolver: zodResolver(taskSchemaMakerzForm(state.taskType)),
   });
 
   useEffect(() => {
-    setValue("draft", "true");
-    setValue("taskType", "ownership");
-    setValue("taskIdNameShort", taskIdNameShort);
-    setValue("ownerGroup", ownerGroup);
-    setValue("ownerAdmin", ownerAdmin);
+    setInitialValues();
   }, []);
+
+  const setInitialValues = () => {
+    const initialValues = {
+      draft: true,
+      taskType: "ownership",
+      taskIdNameShort: state.taskIdNameShort,
+      ownerGroup: OWNER_USER,
+      ownerAdmin: OWNER_USER,
+    };
+
+    Object.entries(initialValues).forEach(([key, value]) => {
+      setValue(key as keyof typeof initialValues, value);
+    });
+
+    dispatch({ type: "SET_INITIAL_VALUES", payload: initialValues });
+  };
 
   const handleFormChange = (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
   ) => {
     const { name, value } = e.target;
-    setValue(name, value);
-    switch (name) {
-      case "taskIdNameShort":
-        setTaskIdNameShort(`${value !== "" ? value : generateShortDateTime()}`);
-        break;
-      case "taskType":
-        setTaskType(value);
-        break;
-      case "draft":
-        setDraft(!draft);
-        break;
-      case "title":
-        setTitle(value);
-        break;
-      case "description":
-        setDescription(value);
-        break;
-      case "ownerGroup":
-        setOwnerGroup(value);
-        break;
-      case "ownerAdmin":
-        setOwnerAdmin(value);
-        break;
-      case "rewardInDOERZ":
-        setRewardInDOERZ(value);
-        break;
-      case "image":
-        setImage(value);
-        break;
-      default:
-        break;
-    }
+    const parsedValue = name === "draft" ? value === "true" : value;
+    setValue(name, parsedValue);
+    dispatch({
+      type: "SET_FIELD",
+      field: name as keyof State,
+      value: parsedValue,
+    });
   };
 
-  const getRewardSize = (rewardInDOERZ: number) => {
-    if (rewardInDOERZ < 500) return "small";
-    if (rewardInDOERZ >= 501 && rewardInDOERZ <= 2000) return "medium";
-    if (rewardInDOERZ >= 2001 && rewardInDOERZ <= 5001) return "large";
-    return "very high";
+  const handleSubmitForm = (data: any) => {
+    onSubmit(data, state);
   };
 
-  const onSubmit = async (data: any) => {
-    const rewardSize = getRewardSize(data.rewardInDOERZ);
-
-    console.log(`Submitted`);
-
-    const taskIdName = `${OWNER_ORG}-TASK-${taskIdNameShort}`;
-
-    const newTask = {
-      ...data,
-      taskId: uuidv4(),
-      dateCreated: Date.now(),
-      dateStarted: Date.now(),
-      dateModified: Date.now(),
-      dateExpired: Date.now() + 30 * 24 * 60 * 60 * 1000, // 30 days from now
-      rewardId: uuidv4(),
-      rewardSize,
-      ownerUser: OWNER_USER,
-      taskIdName,
-      draft,
-      taskType,
-      title,
-      description,
-      ownerGroup,
-      ownerAdmin,
-      ownerOrg: OWNER_USER,
-      rewardInDOERZ,
-      image,
-    };
-
-    console.log(newTask);
-
-    alert(JSON.stringify(newTask));
-    console.log("Task created successfully!");
-
-    // Mock API call to JSON server
-    // const response = await fetch("http://localhost:3000/tasks", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newTask),
-    // });
-
-    // if (response.ok) {
-    //   console.log("Task created successfully!");
-    // } else {
-    //   console.error("Failed to create task.");
-    // }
-  };
 
   const getErrorMessage = (errors: any, fieldName: string) => {
     if (errors[fieldName]) {
@@ -176,23 +100,24 @@ const CreateMakerzTaskForm = () => {
   return (
     <div className="mb-4 flex flex-col sm:flex-row">
       {/* <div>Makerz List</div> */}
-      <div className="mr-4 flex w-[300px] flex-col items-center border-r border-r-zinc-200">
+      <div className="mr-4 flex w-[300px] flex-col items-center border-r border-r-zinc-200 dark:border-r-zinc-800">
         <div className="visible w-full text-center sm:hidden">
           View Task Preview
         </div>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(handleSubmitForm)}>
           <div className="flex flex-col justify-start">
             <div className="flex flex-row items-center justify-start pl-4">
-              {/* <div className="mr-2 rounded border border-blue-500 bg-blue-500 px-2 py-1 text-xs text-white">
-                SAVE
-              </div> */}
               <MdFormatListBulletedAdd className="text-zinc-500" />
               <div className="ml-2 mr-2 font-medium">Create Task</div>
-              {makerzFormStep < 2 ? (
+              {state.makerzFormStep < 2 ? (
                 <div className="mr-1">
                   <PiNumberCircleOne
-                    className={`${makerzFormStep === 1 ? "text-green-700 dark:text-green-300" : "dark:zinc-600 text-zinc-400"}`}
+                    className={`${
+                      state.makerzFormStep === 1
+                        ? "text-green-700 dark:text-green-300"
+                        : "dark:zinc-600 text-zinc-400"
+                    }`}
                   />
                 </div>
               ) : (
@@ -200,10 +125,14 @@ const CreateMakerzTaskForm = () => {
                   <FaCircleCheck className="text-green-600 dark:text-green-400" />
                 </div>
               )}
-              {makerzFormStep < 3 ? (
+              {state.makerzFormStep < 3 ? (
                 <div className="mr-1">
                   <PiNumberCircleTwo
-                    className={`${makerzFormStep === 2 ? "text-green-700 dark:text-green-300" : "dark:zinc-600 text-zinc-400"}`}
+                    className={`${
+                      state.makerzFormStep === 2
+                        ? "text-green-700 dark:text-green-300"
+                        : "dark:zinc-600 text-zinc-400"
+                    }`}
                   />
                 </div>
               ) : (
@@ -211,10 +140,14 @@ const CreateMakerzTaskForm = () => {
                   <FaCircleCheck className="text-green-600 dark:text-green-400" />
                 </div>
               )}
-              {makerzFormStep < 4 ? (
+              {state.makerzFormStep < 4 ? (
                 <div className="mr-1">
                   <PiNumberCircleThree
-                    className={`${makerzFormStep === 3 ? "text-green-700 dark:text-green-300" : "dark:zinc-600 text-zinc-400"}`}
+                    className={`${
+                      state.makerzFormStep === 3
+                        ? "text-green-700 dark:text-green-300"
+                        : "dark:zinc-600 text-zinc-400"
+                    }`}
                   />
                 </div>
               ) : (
@@ -222,10 +155,14 @@ const CreateMakerzTaskForm = () => {
                   <FaCircleCheck className="text-green-600 dark:text-green-400" />
                 </div>
               )}
-              {makerzFormStep < 5 ? (
+              {state.makerzFormStep < 5 ? (
                 <div className="">
                   <PiNumberCircleFour
-                    className={`${makerzFormStep === 4 ? "text-green-700 dark:text-green-300" : "dark:zinc-600 text-zinc-400"}`}
+                    className={`${
+                      state.makerzFormStep === 4
+                        ? "text-green-700 dark:text-green-300"
+                        : "dark:zinc-600 text-zinc-400"
+                    }`}
                   />
                 </div>
               ) : (
@@ -233,10 +170,8 @@ const CreateMakerzTaskForm = () => {
                   <FaCircleCheck className="text-green-600 dark:text-green-400" />
                 </div>
               )}
-
-              {/* <div className="ml-6 text-xs text-red-500">not saved</div> */}
             </div>
-            {makerzFormStep === 1 && (
+            {state.makerzFormStep === 1 && (
               <div className="flex flex-col justify-center px-4">
                 <div className="my-4 mr-2">
                   <label className="text-sm text-zinc-600 dark:text-zinc-400">
@@ -268,18 +203,25 @@ const CreateMakerzTaskForm = () => {
 
                 <div
                   className="w-24 rounded border bg-blue-500 px-4 py-1 text-center text-zinc-100"
-                  onClick={() => setMakerzFormStep(2)}
+                  onClick={() =>
+                    dispatch({
+                      type: "SET_FIELD",
+                      field: "makerzFormStep",
+                      value: 2,
+                    })
+                  }
                 >
                   Next
                 </div>
                 <div className="mt-4">
-                  <h3 className="font-medium text-md">Onboarding</h3>
+                  <h3 className="text-md font-medium">Onboarding</h3>
                   <p className="font-light">
-                    Create a task incentivizes users to learn more when joining your app and community.
+                    Create a task incentivizes users to learn more when joining
+                    your app and community.
                   </p>
                 </div>
                 <div className="mt-4">
-                  <h3 className="font-medium text-md">Ownership</h3>
+                  <h3 className="text-md font-medium">Ownership</h3>
                   <p className="font-light">
                     Create a task that rewards users with ownership tokens.
                   </p>
@@ -287,7 +229,7 @@ const CreateMakerzTaskForm = () => {
               </div>
             )}
 
-            {makerzFormStep == 2 && (
+            {state.makerzFormStep == 2 && (
               <>
                 <div className="flex flex-row items-center">
                   <div className="mr-2">
@@ -295,7 +237,7 @@ const CreateMakerzTaskForm = () => {
                       Task ID
                     </label>
                     <Input
-                      defaultValue={taskIdNameShort}
+                      defaultValue={state.taskIdNameShort}
                       className="w-[100px]"
                       {...register("taskIdName", {
                         onChange: (e) => handleFormChange(e),
@@ -329,39 +271,14 @@ const CreateMakerzTaskForm = () => {
                       </SelectContent>
                     </Select>
                   </div>
-                  {/* <div className="my-4">
-                <label className="text-sm text-zinc-600 dark:text-zinc-400">
-                  Draft
-                </label>
-                <Select
-                  defaultValue="true"
-                  {...register("draft", {})}
-                  onValueChange={(value) =>
-                    handleFormChange({
-                      target: { name: "draft", value },
-                    } as any)
-                  }
-                >
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select draft status" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    <SelectGroup>
-                      <SelectItem value="true">True</SelectItem>
-                      <SelectItem value="false">False</SelectItem>
-                    </SelectGroup>
-                  </SelectContent>
-                </Select>
-              </div> */}
                 </div>
                 <div className="flex flex-col items-center">
                   {getErrorMessage(errors, "taskIdNameShort")}
-                  {/* {getErrorMessage(errors, "label")} */}
                   {getErrorMessage(errors, "draft")}
                   {getErrorMessage(errors, "taskType")}
                 </div>
 
-                {taskType === "ownership" && (
+                {state.taskType === "ownership" && (
                   <div className="">
                     <div className="flex flex-row">
                       <div className="mt-0 ">
@@ -426,7 +343,6 @@ const CreateMakerzTaskForm = () => {
                     className="h-12"
                     minHeight={40}
                     onChange={(e) => handleFormChange(e)}
-
                   />
                   {errors.description && (
                     <p>{errors.description.message as string}</p>
@@ -493,35 +409,8 @@ const CreateMakerzTaskForm = () => {
                     )}
                   </div>
                 </div>
-                {/* <div className="mb-4">
-                  <label className="text-sm text-zinc-600 dark:text-zinc-400">
-                    DOERZ Reward
-                  </label>
-                  <Input
-                    className="w-28"
-                    type="number"
-                    {...register("rewardInDOERZ", {
-                      valueAsNumber: true,
-                      onChange: (e) => setRewardInDOERZ(e.target.valueAsNumber),
-                    })}
-                  />
-                  {errors.rewardInDOERZ && (
-                    <p>{errors.rewardInDOERZ.message as string}</p>
-                  )}
-                </div> */}
-                {/* <div className="my-4">
-              <label className="text-sm text-zinc-600 dark:text-zinc-400">
-                Image URL
-              </label>
-              <Input
-                {...register("image", {
-                  onChange: (e) => handleFormChange(e),
-                })}
-              />
-              {errors.image && <p>{errors.image.message as string}</p>}
-            </div> */}
                 <Button
-                  className="border-blue-500 bg-blue-500 text-white"
+                  className="border-blue-500 bg-blue-500 hover:bg-blue-600 text-white"
                   type="submit"
                 >
                   Save Task
@@ -531,19 +420,21 @@ const CreateMakerzTaskForm = () => {
           </div>
         </form>
       </div>
-      <PreviewMakerzTaskForm
-        data={{
-          taskIdNameShort,
-          taskType,
-          draft,
-          title,
-          description,
-          rewardInDOERZ,
-          ownerGroup,
-          ownerAdmin,
-          image,
-        }}
-      />
+
+        <PreviewMakerzTaskForm
+          data={{
+            taskIdNameShort: state.taskIdNameShort,
+            taskType: state.taskType,
+            draft: state.draft,
+            title: state.title,
+            description: state.description,
+            rewardInDOERZ: state.rewardInDOERZ,
+            ownerGroup: state.ownerGroup,
+            ownerAdmin: state.ownerAdmin,
+            image: state.image,
+          }}
+        />
+
     </div>
   );
 };

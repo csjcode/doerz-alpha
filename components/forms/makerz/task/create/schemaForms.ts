@@ -5,7 +5,7 @@ const baseSchema = z.object({
   taskIdNameShort: z.string().nonempty("Task ID Name is required"),
   title: z.string().nonempty("Title is required"),
   taskType: z.string().nonempty("Task Type is required"),
-  draft: z.enum(["true", "false"]),
+  draft: z.boolean().default(true), // Changed to boolean
   description: z.string().nonempty("Description is required"),
   // rewardInDOERZ: z
   //   .number()
