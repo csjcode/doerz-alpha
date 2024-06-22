@@ -7,10 +7,10 @@ const baseSchema = z.object({
   taskType: z.string().nonempty("Task Type is required"),
   draft: z.enum(["true", "false"]),
   description: z.string().nonempty("Description is required"),
-  rewardInDOERZ: z
-    .number()
-    .multipleOf(1)
-    .nonnegative("Reward in DOERZ is required"),
+  // rewardInDOERZ: z
+  //   .number()
+  //   .multipleOf(1)
+  //   .nonnegative("Reward in DOERZ is required"),
 });
 
 const additionalSchemas: { [key: string]: z.ZodObject<any> } = {
