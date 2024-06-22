@@ -13,10 +13,11 @@ const PreviewMakerzTaskForm = ({data}: PreviewMakerzTaskFormProps) => {
     <div className="flex w-2/3 flex-col">
     <div className="flex flex-row items-center justify-center">
       <div className="flex flex-row text-center">
-        <VscOpenPreview />
+        <VscOpenPreview size={18} className="text-zinc-500" />
       </div>
 
-      <div className="ml-2">Task Preview</div>
+      <div className="ml-1 font-medium">Task Preview</div>
+      <div className="ml-2 text-xs text-red-500/70">not saved</div>
     </div>
     <div className="mt-4 flex flex-col">
       {title && (

@@ -19,6 +19,7 @@ export interface Task {
   ownerGroup: string,
   ownerAdmin: string,
   ownerProject: string,
+  ownerOrg: string,
   userInstructions: string[];
 }
 
