@@ -3,7 +3,6 @@ import React, { ChangeEvent, useEffect, useReducer } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { taskSchemaMakerzForm } from "./schemaForms";
-import { v4 as uuidv4 } from "uuid";
 import {
   Select,
   SelectContent,
@@ -26,15 +25,10 @@ import {
   PiNumberCircleThree,
   PiNumberCircleFour,
 } from "react-icons/pi";
-import {
-  OWNER_USER,
-  OWNER_GROUP,
-  OWNER_ADMIN,
-  OWNER_ORG,
-} from "@/config/testing";
+
 import { State, initialState, reducer } from "./reducerMakerzTaskFor";
-import { getRewardSize } from "./utils";
 import { onSubmit } from "./onSubmit";
+import { OWNER_ORG, getInitialValues } from "./initialConfig";
 
 const CreateMakerzTaskForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
@@ -53,15 +47,9 @@ const CreateMakerzTaskForm = () => {
   }, []);
 
   const setInitialValues = () => {
-    const initialValues = {
-      draft: true,
-      taskType: "ownership",
-      taskIdNameShort: state.taskIdNameShort,
-      ownerGroup: OWNER_USER,
-      ownerAdmin: OWNER_USER,
-    };
+    const initialValues = getInitialValues(state);
 
-    Object.entries(initialValues).forEach(([key, value]) => {
+    Object.entries(getInitialValues(state)).forEach(([key, value]) => {
       setValue(key as keyof typeof initialValues, value);
     });
 
@@ -84,7 +72,6 @@ const CreateMakerzTaskForm = () => {
   const handleSubmitForm = (data: any) => {
     onSubmit(data, state);
   };
-
 
   const getErrorMessage = (errors: any, fieldName: string) => {
     if (errors[fieldName]) {
@@ -410,7 +397,7 @@ const CreateMakerzTaskForm = () => {
                   </div>
                 </div>
                 <Button
-                  className="border-blue-500 bg-blue-500 hover:bg-blue-600 text-white"
+                  className="border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
                   type="submit"
                 >
                   Save Task
@@ -421,20 +408,19 @@ const CreateMakerzTaskForm = () => {
         </form>
       </div>
 
-        <PreviewMakerzTaskForm
-          data={{
-            taskIdNameShort: state.taskIdNameShort,
-            taskType: state.taskType,
-            draft: state.draft,
-            title: state.title,
-            description: state.description,
-            rewardInDOERZ: state.rewardInDOERZ,
-            ownerGroup: state.ownerGroup,
-            ownerAdmin: state.ownerAdmin,
-            image: state.image,
-          }}
-        />
-
+      <PreviewMakerzTaskForm
+        data={{
+          taskIdNameShort: state.taskIdNameShort,
+          taskType: state.taskType,
+          draft: state.draft,
+          title: state.title,
+          description: state.description,
+          rewardInDOERZ: state.rewardInDOERZ,
+          ownerGroup: state.ownerGroup,
+          ownerAdmin: state.ownerAdmin,
+          image: state.image,
+        }}
+      />
     </div>
   );
 };

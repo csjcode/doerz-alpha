@@ -1,6 +1,12 @@
 import { v4 as uuidv4 } from "uuid";
 import { getRewardSize } from "./utils";
-import { OWNER_ORG, OWNER_USER } from "@/config/testing";
+import {
+  OWNER_USER,
+  OWNER_GROUP,
+  OWNER_ADMIN,
+  OWNER_ORG,
+  getInitialValues,
+} from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
 
 export const onSubmit = async (data: any, state: State) => {
