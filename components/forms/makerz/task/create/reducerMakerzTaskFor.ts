@@ -22,7 +22,7 @@ export const initialState = {
 
 export type State = typeof initialState;
 
-type Action =
+export type Action =
   | { type: "SET_FIELD"; field: keyof State; value: any }
   | { type: "SET_INITIAL_VALUES"; payload: Partial<State> };
 

@@ -1,0 +1,89 @@
+"use client";
+import React, { ChangeEvent, Dispatch, useEffect, useReducer } from "react";
+
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+
+import { taskTypes } from "@/components/Tables/data/data";
+
+import { Action, State } from "./reducerMakerzTaskFor";
+import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
+
+
+type MakerzTaskCreateStep1Props = {
+  state: State;
+  setValue: UseFormSetValue<FieldValues>;
+  dispatch: Dispatch<Action>;
+  handleFormChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  errors: FieldErrors<FieldValues>;
+  register:UseFormRegister<FieldValues>;
+};
+
+const MakerzTaskCreateStep1 = ({dispatch,handleFormChange,register}: MakerzTaskCreateStep1Props) => {
+
+  return (
+    <div className="flex flex-col justify-center px-4">
+      <div className="my-4 mr-2">
+        <label className="text-sm text-zinc-600 dark:text-zinc-400">
+          Task type
+        </label>
+        <Select
+          defaultValue="ownership"
+          {...register("taskType")}
+          onValueChange={(value) =>
+            handleFormChange({
+              target: { name: "taskType", value },
+            } as any)
+          }
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectGroup>
+              {taskTypes.map((taskType) => (
+                <SelectItem key={taskType.value} value={taskType.value}>
+                  {taskType.label}
+                </SelectItem>
+              ))}
+            </SelectGroup>
+          </SelectContent>
+        </Select>
+      </div>
+
+      <div
+        className="w-24 rounded border bg-blue-500 px-4 py-1 text-center text-zinc-100"
+        onClick={() =>
+          dispatch({
+            type: "SET_FIELD",
+            field: "makerzFormStep",
+            value: 2,
+          })
+        }
+      >
+        Next
+      </div>
+      <div className="mt-4">
+        <h3 className="text-md font-medium">Onboarding</h3>
+        <p className="font-light">
+          Create a task incentivizes users to learn more when joining your app
+          and community.
+        </p>
+      </div>
+      <div className="mt-4">
+        <h3 className="text-md font-medium">Ownership</h3>
+        <p className="font-light">
+          Create a task that rewards users with ownership tokens.
+        </p>
+      </div>
+    </div>
+  );
+};
+
+export default MakerzTaskCreateStep1;

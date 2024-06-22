@@ -2,7 +2,7 @@
 
 import { ColumnDef } from "@tanstack/react-table"
 import Image from "next/image";
-import { labels, rewardSizes, statuses } from "./data/data"
+import { taskTypes, rewardSizes, statuses } from "./data/data"
 import { Task, MakerzTask } from "./data/schema"
 import { DataTableColumnHeader } from "./data-table-column-header"
 import { DataTableRowActions } from "./data-table-row-actions"
@@ -79,10 +79,10 @@ export const columns: ColumnDef<Task>[] = [
       <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const taskType = taskTypes.find((taskType) => taskType.value === row.original.label)
 
       return (
-        <DisplayColumnTitle row={row} label={label} />
+        <DisplayColumnTitle row={row} label={taskType} />
       )
     },
   },
@@ -221,10 +221,10 @@ export const columnsMakerz: ColumnDef<MakerzTask>[] = [
       <DataTableColumnHeader column={column} title="Title" />
     ),
     cell: ({ row }) => {
-      const label = labels.find((label) => label.value === row.original.label)
+      const taskType = taskTypes.find((taskType) => taskType.value === row.original.label)
 
       return (
-        <DisplayColumnTitle row={row} label={label} />
+        <DisplayColumnTitle row={row} label={taskType} />
       )
     },
   },

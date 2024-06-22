@@ -9,7 +9,7 @@ import {
   RxStopwatch,
 } from "react-icons/rx"
 
-export const labels = [
+export const taskTypes = [
   {
     value: "ownership",
     label: "Ownership",

@@ -4,7 +4,7 @@ import { RxDotsHorizontal } from "react-icons/rx"
 import { Row } from "@tanstack/react-table"
 
 
-import { labels } from "./data/data"
+import { taskTypes } from "./data/data"
 import { taskSchema } from "./data/schema"
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubContent, DropdownMenuSubTrigger, DropdownMenuTrigger } from "../ui/dropdown-menu"
 import { Button } from "../ui/button"
@@ -38,9 +38,9 @@ export function DataTableRowActions<TData>({
           <DropdownMenuSubTrigger>Labels</DropdownMenuSubTrigger>
           <DropdownMenuSubContent>
             <DropdownMenuRadioGroup value={task.label}>
-              {labels.map((label) => (
-                <DropdownMenuRadioItem key={label.value} value={label.value}>
-                  {label.label}
+              {taskTypes.map((taskType) => (
+                <DropdownMenuRadioItem key={taskType.value} value={taskType.value}>
+                  {taskType.label}
                 </DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>
