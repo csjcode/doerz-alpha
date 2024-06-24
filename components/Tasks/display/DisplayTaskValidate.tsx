@@ -13,6 +13,7 @@ import { formatDateTaskDetail } from "@/utils/dates";
 import Countdown from "../../Dates/Countdown";
 import TaskReward from "./TaskReward";
 import TestingReminder from "@/components/messages/TestingReminder";
+import DisplayRawData from "@/components/rawdata/DisplayRawData";
 
 type DisplayTaskDetailProps = {
   data: Task | null;
@@ -180,22 +181,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
         <span className="mr-2">started: {dateStarted}</span>
         <span className="mr-2">expires: {dateExpired}</span>
       </div>
-
-      <hr className="mt-4" />
-
-      <h3 className="my-4 text-lg">Raw Data</h3>
-
-      <hr className="mt-4" />
-
-      <div className="mt-4">
-        {data &&
-          Object.entries(data).map(([key, value]) => (
-            <div className="p-1" key={key}>
-              <strong>{key}: </strong>
-              {Array.isArray(value) ? value.join(", ") : value?.toString()}
-            </div>
-          ))}
-      </div>
+      <DisplayRawData data={data} />
     </div>
   );
 };

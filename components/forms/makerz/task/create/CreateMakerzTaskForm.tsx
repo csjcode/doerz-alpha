@@ -3,35 +3,15 @@ import React, { ChangeEvent, useEffect, useReducer } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { taskSchemaMakerzForm } from "./schemaForms";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { Button } from "@/components/ui/button";
-import { labels } from "@/components/Tables/data/data";
-import { MdFormatListBulletedAdd } from "react-icons/md";
-import { FaCircleCheck } from "react-icons/fa6";
-import PreviewMakerzTaskForm from "./PreviewMakerzTaskForm";
-import { generateShortDateTime } from "@/utils/dates";
-import {
-  PiNumberCircleOne,
-  PiNumberCircleTwo,
-  PiNumberCircleThree,
-  PiNumberCircleFour,
-} from "react-icons/pi";
 
 import { State, initialState, reducer } from "./reducerMakerzTaskFor";
 import { onSubmit } from "./onSubmit";
-import { OWNER_ORG, getInitialValues } from "./initialConfig";
+import { getInitialValues } from "./initialConfig";
 import MakerzTaskCreateStep1 from "./MakerzTaskCreateStep1";
 import MakerzTaskCreateHeader from "./MakerzTaskCreateHeader";
 import MakerzTaskCreateStep2 from "./MakerzTaskCreateStep2";
+import MakerzTaskCreateStep3 from "./MakerzTaskCreateStep3";
+import MakerzTaskCreatePreview from "./MakerzTaskCreatePreview";
 
 export const getErrorMessage = (errors: any, fieldName: string) => {
   if (errors[fieldName]) {
@@ -97,7 +77,7 @@ const CreateMakerzTaskForm = () => {
 
         <form onSubmit={handleSubmit(handleSubmitForm)}>
           <div className="flex flex-col justify-start">
-            <MakerzTaskCreateHeader state={state} />
+            <MakerzTaskCreateHeader dispatch={dispatch} state={state} />
 
             {state.makerzFormStep === 1 && (
               <MakerzTaskCreateStep1
@@ -120,11 +100,22 @@ const CreateMakerzTaskForm = () => {
                 errors={errors}
               />
             )}
+
+            {state.makerzFormStep == 3 && (
+              <MakerzTaskCreateStep3
+                state={state}
+                setValue={setValue}
+                dispatch={dispatch}
+                register={register}
+                handleFormChange={handleFormChange}
+                errors={errors}
+              />
+            )}
           </div>
         </form>
       </div>
 
-      <PreviewMakerzTaskForm
+      <MakerzTaskCreatePreview
         data={{
           taskIdNameShort: state.taskIdNameShort,
           taskType: state.taskType,

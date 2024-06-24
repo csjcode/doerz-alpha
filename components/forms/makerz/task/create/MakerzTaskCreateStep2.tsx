@@ -31,6 +31,7 @@ type MakerzTaskCreateStep2Props = {
 
 const MakerzTaskCreateStep2 = ({
   state,
+  dispatch,
   handleFormChange,
   errors,
   register,
@@ -210,12 +211,27 @@ const MakerzTaskCreateStep2 = ({
           {errors.ownerAdmin && <p>{errors.ownerAdmin.message as string}</p>}
         </div>
       </div>
-      <Button
+      <div className="flex flex-col w-full mt-2 items-center justify-center">
+        <div
+          className="w-36 rounded border bg-blue-500 text-zinc-100 px-4 py-1 text-center cursor-pointer"
+          onClick={() =>
+            dispatch({
+              type: "SET_FIELD",
+              field: "makerzFormStep",
+              value: 3,
+            })
+          }
+        >
+          Add Content
+        </div>
+      </div>
+
+      {/* <Button
         className="border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
         type="submit"
       >
         Save Task
-      </Button>
+      </Button> */}
     </>
   );
 };

@@ -8,6 +8,7 @@ import TaskImages from "./TaskImages";
 import TaskDetailActionBar from "./TaskDetailActionBar";
 import TestingReminder from "@/components/messages/TestingReminder";
 import { useGetFavorites } from "@/hooks/useGetFavorites";
+import DisplayRawData from "@/components/rawdata/DisplayRawData";
 
 const username = "csjcodetest";
 
@@ -27,11 +28,11 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
   console.log(`checking dataFavorites`);
   dataFavorites && console.log(dataFavorites);
 
-  const isFavorite = Boolean(data?.taskIdName && dataFavorites?.favoritesTaskIdName?.includes(data?.taskIdName));
+  const isFavorite = Boolean(
+    data?.taskIdName &&
+      dataFavorites?.favoritesTaskIdName?.includes(data?.taskIdName),
+  );
   console.log(`isFavorite: ${isFavorite}`);
-
-
-
 
   const handleToggleDateFormat = () => {
     setToggleDateFormat(!toggleDateFormat);
@@ -83,7 +84,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
 
       <div className="mt-4 flex flex-col">
         <div className="text-lg font-bold">Reward Instructions</div>
-        <ol className="mt-1 flex ml-4 list-outside flex-col">
+        <ol className="ml-4 mt-1 flex list-outside flex-col">
           {data?.userInstructions &&
             data?.userInstructions.map((instruction: string) => (
               <li
@@ -132,22 +133,7 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
         <span className="mr-2">started: {dateStarted}</span>
         <span className="mr-2">expires: {dateExpired}</span>
       </div>
-
-      <hr className="mt-4" />
-
-      <h3 className="my-4 text-lg">Raw Data</h3>
-
-      <hr className="mt-4" />
-
-      <div className="mt-4">
-        {data &&
-          Object.entries(data).map(([key, value]) => (
-            <div className="p-1" key={key}>
-              <strong>{key}: </strong>
-              {Array.isArray(value) ? value.join(", ") : value?.toString()}
-            </div>
-          ))}
-      </div>
+      <DisplayRawData data={data} />
     </div>
   );
 };

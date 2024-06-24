@@ -1,12 +1,14 @@
-import React from 'react'
+import React, { useReducer } from 'react'
 import { VscOpenPreview } from 'react-icons/vsc'
+import { initialState, reducer } from './reducerMakerzTaskFor'
+import DisplayRawData from '@/components/rawdata/DisplayRawData'
 
-type PreviewMakerzTaskFormProps = {
+type MakerzTaskCreateFormPreviewProps = {
   data: any
 }
 
-const PreviewMakerzTaskForm = ({data}: PreviewMakerzTaskFormProps) => {
-
+const MakerzTaskCreateFormPreview = ({data}: MakerzTaskCreateFormPreviewProps) => {
+  const [state] = useReducer(reducer, initialState);
   const { title, taskIdName, taskType, description, rewardInDOERZ, draft, ownerGroup, ownerAdmin } = data;
 
   return (
@@ -62,8 +64,13 @@ const PreviewMakerzTaskForm = ({data}: PreviewMakerzTaskFormProps) => {
         </div>
       )}
     </div>
+
+
+    <DisplayRawData data={state} />
+
+
   </div>
   )
 }
 
-export default PreviewMakerzTaskForm
+export default MakerzTaskCreateFormPreview
