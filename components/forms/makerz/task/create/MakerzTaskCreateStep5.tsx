@@ -77,7 +77,7 @@ const MakerzTaskCreateStep5 = ({
         className="my-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
         type="submit"
       >
-        Fund Task
+        Schedule/Publish
       </Button>
     </>
   );

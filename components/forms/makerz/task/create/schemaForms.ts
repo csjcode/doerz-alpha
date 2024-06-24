@@ -19,6 +19,7 @@ const additionalSchemas: { [key: string]: z.ZodObject<any> } = {
     ownershipTokenName: z.string().min(1,"Ownership Token Name is required"),
     ownershipTokenSymbol: z.string().min(1,"Ownership Token Symbol is required"),
     ownershipTokenAddress: z.string().min(1,"Token Address is required"),
+    ownershipTokenAmount: z.number().min(1,"Token Amount is required"),
   }),
   // nftOwnership: z.object({
   //   nftAddress: z.string().nonempty("NFT Address is required"),

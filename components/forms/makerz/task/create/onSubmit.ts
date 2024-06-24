@@ -32,6 +32,7 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
     ownershipTokenAddress: state.ownershipTokenAddress,
     ownershipTokenName: state.ownershipTokenName,
     ownershipTokenSymbol: state.ownershipTokenSymbol,
+    ownershipTokenAmount: state.ownershipTokenAmount,
     title: state.title,
     description: state.description,
     ownerGroup: state.ownerGroup,

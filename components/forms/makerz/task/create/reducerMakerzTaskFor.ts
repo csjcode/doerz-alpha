@@ -15,6 +15,7 @@ export const initialState = {
   ownershipTokenAddress: "",
   ownershipTokenName: "",
   ownershipTokenSymbol: "",
+  ownershipTokenAmount: 1,
   title: "",
   description: "",
   ownerGroup: OWNER_GROUP,

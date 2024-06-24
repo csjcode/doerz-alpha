@@ -48,6 +48,9 @@ const MakerzTaskCreateStep3 = ({
         />
         <div className="flex flex-col items-center justify-center">
           {" "}
+
+
+
           <MakerzTaskCreateInstructions
             state={state}
             // setValue={setValue}
@@ -57,12 +60,15 @@ const MakerzTaskCreateStep3 = ({
             errors={errors}
           />
         </div>
+
       </div>
 
-      <div className="flex flex-col items-center p-4">
-        We recommend adding instructions and images to your task to help
-        participants understand how to complete the task.
-      </div>
+      {/* {state.instructions.length < 1 && (
+        <div className="flex flex-col items-center p-4">
+          We recommend adding instructions and images to your task to help
+          participants understand how to complete the task.
+        </div>
+      )} */}
 
       {/* <div className="mt-2 flex w-full flex-col items-center justify-center">
         <div
@@ -78,14 +84,28 @@ const MakerzTaskCreateStep3 = ({
           Save Content
         </div>
       </div> */}
+
       <div className="items-content flex w-full flex-row justify-center">
         <Button
-          className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600"
+          // className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600"
+          className="mt-2 px-8 rounded border border-blue-600 dark:border-blue-400 text-zinc-800 dark:text-zinc-200"
+          variant="outline"
           type="submit"
         >
-          Add Content
+          {state.instructions.length > 0 ? "Finished" : "No"} Instructions
         </Button>
       </div>
+      {/* {state.instructions.length < 1 && ( */}
+        <div className="flex flex-col text-sm items-center py-2 px-4">
+          <p>
+            <span className="font-bold">We recommend adding instructions and images</span> to your task to help
+            participants understand how to complete the task.
+          </p>
+          <p className="mt-2">
+            This will be a numbered step-by-step list of what to do,
+          </p>
+        </div>
+      {/* )} */}
     </>
   );
 };

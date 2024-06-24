@@ -72,6 +72,7 @@ const MakerzTaskCreateInstructions = ({
             placeholder={`Instruction ${index + 1}`}
             className="flex-grow border w-42"
           />
+
           <Button
             type="button"
             variant={"ghost"}
@@ -85,13 +86,18 @@ const MakerzTaskCreateInstructions = ({
       {state.instructions.length < 10 && (
         <Button
           type="button"
-          variant={"outline"}
+          // variant={"outline"}
           onClick={addInstruction}
-          className="mt-2 px-8 rounded border border-blue-600 dark:border-blue-400 text-zinc-800 dark:text-zinc-200"
+             className="my-2 border-blue-500 bg-blue-500 px-8 text-white hover:bg-blue-600"
+          // className="mt-2 px-8 rounded border border-blue-600 dark:border-blue-400 text-zinc-800 dark:text-zinc-200"
         >
-          <MdAdd className="mr-1 text-md"/> Add Instructions
+
+          <MdAdd className="mr-1 text-md"/> Insert Instructions
+
         </Button>
+
       )}
+        {/* <p>*Make instructons clear </p> */}
     </div>
   );
 };

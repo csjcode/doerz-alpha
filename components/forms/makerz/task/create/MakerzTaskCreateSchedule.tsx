@@ -33,7 +33,7 @@ const MakerzTaskCreateSchedule = ({
       </div>
       <div className="flex flex-col justify-center">
           <hr className="my-2 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-          <div className="mt-2 text-center text-sm">Funding Pools</div>
+          <div className="mt-2 text-center text-sm">Schedule to Publish LIVE</div>
           <div className=""></div>
           <div className=""></div>
         </div>

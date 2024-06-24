@@ -105,15 +105,31 @@ const MakerzTaskCreateStep2 = ({
                 {...register("ownershipTokenAddress")}
                 onChange={(e) => handleFormChange(e)}
               />
-              {errors.title && <p>{errors.title.message as string}</p>}
+              {/* {errors.title && <p>{errors.ownershipTokenAddress.message as string}</p>} */}
               <div className="mt-2 truncate text-xs text-zinc-400 dark:text-zinc-600">
                 Ex: DezXAZ8z7PnrnRJjz3wXBoR..
               </div>
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-600">
                 {" "}
-                Enter the program address of the token user must prove ownership
+                Program address of the token user must prove ownership
                 for.
               </p>
+            </div>
+
+            <div className="mb-2 flex flex-col items-start justify-start">
+              <FormLabel
+                labelTitle="Amount to Prove Ownership"
+                required={true}
+                ready={!!state.ownershipTokenAmount}
+              />
+              <Input
+                className="w-28 my-1 focus-visible:ring-1"
+                defaultValue={1}
+                {...register("ownershipTokenAmount")}
+                onChange={(e) => handleFormChange(e)}
+              />
+              {/* {errors.title && <p>{errors.ownershipTokenAmount.message as string}</p>} */}
+
             </div>
             {state.ownershipTokenAddress && (
               <>
