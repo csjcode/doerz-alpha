@@ -7,6 +7,7 @@ const baseSchema = z.object({
   taskType: z.string().nonempty("Task Type is required"),
   draft: z.boolean().default(true), // Changed to boolean
   description: z.string().nonempty("Description is required"),
+  // ownershipTokenAddress: z.string().nonempty("Token Address is required"),
   // rewardInDOERZ: z
   //   .number()
   //   .multipleOf(1)

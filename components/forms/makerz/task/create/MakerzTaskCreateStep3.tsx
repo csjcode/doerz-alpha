@@ -18,6 +18,7 @@ import { OWNER_ORG } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
 import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
 import { Button } from "@/components/ui/button";
+import FormLabel from "./FormLabel";
 
 type MakerzTaskCreateStep3Props = {
   state: State;
@@ -40,9 +41,11 @@ const MakerzTaskCreateStep3 = ({
   return (
     <>
       <div className="flex flex-col items-center">
-        <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Task Instructions/Content
-        </label>
+        <FormLabel
+          labelTitle="Task Instructions/Content"
+          required={false}
+          ready={!!state.instructions}
+        />
         <div className="flex flex-col items-center justify-center">
           {" "}
           <MakerzTaskCreateInstructions
@@ -56,7 +59,12 @@ const MakerzTaskCreateStep3 = ({
         </div>
       </div>
 
-      <div className="mt-2 flex w-full flex-col items-center justify-center">
+      <div className="flex flex-col items-center p-4">
+        We recommend adding instructions and images to your task to help
+        participants understand how to complete the task.
+      </div>
+
+      {/* <div className="mt-2 flex w-full flex-col items-center justify-center">
         <div
           className="w-36 cursor-pointer rounded border bg-blue-500 px-4 py-2 text-center text-sm font-medium text-zinc-100"
           onClick={() =>
@@ -69,14 +77,15 @@ const MakerzTaskCreateStep3 = ({
         >
           Save Content
         </div>
+      </div> */}
+      <div className="items-content flex w-full flex-row justify-center">
+        <Button
+          className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600"
+          type="submit"
+        >
+          Add Content
+        </Button>
       </div>
-
-      <Button
-        className="border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
-        type="submit"
-      >
-        Save Task
-      </Button>
     </>
   );
 };

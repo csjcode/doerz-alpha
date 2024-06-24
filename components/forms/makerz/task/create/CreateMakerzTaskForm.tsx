@@ -13,6 +13,7 @@ import MakerzTaskCreateStep2 from "./MakerzTaskCreateStep2";
 import MakerzTaskCreateStep3 from "./MakerzTaskCreateStep3";
 import MakerzTaskCreatePreview from "./MakerzTaskCreatePreview";
 import MakerzTaskCreateStep4 from "./MakerzTaskCreateStep4";
+import MakerzTaskCreateStep5 from "./MakerzTaskCreateStep5";
 
 export const getErrorMessage = (errors: any, fieldName: string) => {
   if (errors[fieldName]) {
@@ -65,7 +66,7 @@ const CreateMakerzTaskForm = () => {
   };
 
   const handleSubmitForm = (data: any) => {
-    onSubmit(data, state);
+    onSubmit(data, state, dispatch);
   };
 
   console.log("state", state);
@@ -117,6 +118,17 @@ const CreateMakerzTaskForm = () => {
 
             {state.makerzFormStep == 4 && (
               <MakerzTaskCreateStep4
+                state={state}
+                setValue={setValue}
+                dispatch={dispatch}
+                register={register}
+                handleFormChange={handleFormChange}
+                errors={errors}
+              />
+            )}
+
+            {state.makerzFormStep == 5 && (
+              <MakerzTaskCreateStep5
                 state={state}
                 setValue={setValue}
                 dispatch={dispatch}

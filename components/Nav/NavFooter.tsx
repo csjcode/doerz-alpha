@@ -1,9 +1,9 @@
 import React from "react";
 import TestingReminder from "../messages/TestingReminder";
 
-type Props = {};
+type FooterProps = {};
 
-const NavFooter = (props: Props) => {
+const NavFooter = (props: FooterProps) => {
   return (
     <div>
       <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />

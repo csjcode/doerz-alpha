@@ -70,13 +70,13 @@ const MakerzTaskCreateInstructions = ({
               handleInstructionChange(index, e.target.value)
             }
             placeholder={`Instruction ${index + 1}`}
-            className="flex-grow border"
+            className="flex-grow border w-42"
           />
           <Button
             type="button"
             variant={"ghost"}
             onClick={() => removeInstruction(index)}
-            className="hover:bg-none"
+            className="hover:bg-none p-0 ml-1"
           >
             <span className="rounded-xl border bg-zinc-500 text-zinc-100"><MdRemove /></span>
           </Button>
@@ -87,9 +87,9 @@ const MakerzTaskCreateInstructions = ({
           type="button"
           variant={"outline"}
           onClick={addInstruction}
-          className="rounded border  p-2 text-zinc-800"
+          className="mt-2 px-8 rounded border border-blue-600 dark:border-blue-400 text-zinc-800 dark:text-zinc-200"
         >
-          <MdAdd className="mr-1 text-md"/> Add Instruction
+          <MdAdd className="mr-1 text-md"/> Add Instructions
         </Button>
       )}
     </div>

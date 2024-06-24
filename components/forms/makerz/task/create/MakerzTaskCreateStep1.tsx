@@ -13,20 +13,30 @@ import {
 import { taskTypes } from "@/components/Tables/data/data";
 
 import { Action, State } from "./reducerMakerzTaskFor";
-import { FieldErrors, FieldValues, UseFormRegister, UseFormSetValue } from "react-hook-form";
-
+import {
+  FieldErrors,
+  FieldValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
+import { Button } from "@/components/ui/button";
 
 type MakerzTaskCreateStep1Props = {
   state: State;
   setValue: UseFormSetValue<FieldValues>;
   dispatch: Dispatch<Action>;
-  handleFormChange: (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => void;
+  handleFormChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => void;
   errors: FieldErrors<FieldValues>;
-  register:UseFormRegister<FieldValues>;
+  register: UseFormRegister<FieldValues>;
 };
 
-const MakerzTaskCreateStep1 = ({dispatch,handleFormChange,register}: MakerzTaskCreateStep1Props) => {
-
+const MakerzTaskCreateStep1 = ({
+  dispatch,
+  handleFormChange,
+  register,
+}: MakerzTaskCreateStep1Props) => {
   return (
     <div className="flex flex-col justify-center px-4">
       <div className="my-4 mr-2">
@@ -56,30 +66,32 @@ const MakerzTaskCreateStep1 = ({dispatch,handleFormChange,register}: MakerzTaskC
           </SelectContent>
         </Select>
       </div>
+      <div className="items-content flex w-full flex-row justify-center">
+        <Button
+          className="w-40 rounded border bg-blue-500 px-4 py-1 text-center text-zinc-100 hover:bg-blue-600"
+          onClick={() =>
+            dispatch({
+              type: "SET_FIELD",
+              field: "makerzFormStep",
+              value: 2,
+            })
+          }
+        >
+          Task Type
+        </Button>
+      </div>
 
-      <div
-        className="w-24 rounded border bg-blue-500 px-4 py-1 text-center text-zinc-100"
-        onClick={() =>
-          dispatch({
-            type: "SET_FIELD",
-            field: "makerzFormStep",
-            value: 2,
-          })
-        }
-      >
-        Next
-      </div>
-      <div className="mt-4">
-        <h3 className="text-md font-medium">Onboarding</h3>
-        <p className="font-light">
-          Create a task incentivizes users to learn more when joining your app
-          and community.
-        </p>
-      </div>
       <div className="mt-4">
         <h3 className="text-md font-medium">Ownership</h3>
         <p className="font-light">
           Create a task that rewards users with ownership tokens.
+        </p>
+      </div>
+      <div className="mt-4 text-zinc-500">
+        <h3 className="text-md font-medium">Onboarding</h3>
+        <p className="font-light">
+          Create a task incentivizes users to learn more when joining your app
+          and community.
         </p>
       </div>
     </div>

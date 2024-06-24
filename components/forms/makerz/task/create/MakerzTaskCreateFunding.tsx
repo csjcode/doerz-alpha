@@ -25,34 +25,41 @@ const MakerzTaskCreateFunding = ({
     <div>
       <div className="flex flex-col items-center">
         <div className="">Reward to Complete Task</div>
-        <div className="flex flex-col my-4">
-          <label className="flex flex-col text-sm text-zinc-600 dark:text-zinc-400 justify-center items-center">
+        <div className="my-4 flex flex-col">
+          <label className="flex flex-col items-center justify-center text-sm text-zinc-600 dark:text-zinc-400">
             <div className="">DOERZ Reward</div>
             <div className="">for Task Completion</div>
           </label>
-          <div className="flex flex-col justify-center items-center">
-          <Input
-            className="w-20"
-            type="number"
-            {...register("rewardInDOERZ", {
-              valueAsNumber: true,
-              required: "Reward in DOERZ is required",
-              onChange: (
-                e: React.ChangeEvent<
-                  HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
-                >,
-              ) => handleFormChange(e),
-            })}
-          />
+          <div className="flex flex-col items-center justify-center">
+            <Input
+              className="w-20 my-2"
+              defaultValue="100"
+              type="number"
+              {...register("rewardInDOERZ", {
+                valueAsNumber: true,
+                required: "Reward in DOERZ is required",
+                onChange: (
+                  e: React.ChangeEvent<
+                    HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement
+                  >,
+                ) => handleFormChange(e),
+              })}
+            />{" "}
+            <span className="mt-.5 text-sm">DOERZ</span>
           </div>
           {errors.rewardInDOERZ && (
             <p>{errors.rewardInDOERZ.message as string}</p>
           )}
         </div>
-        <div className="">Funding Pools</div>
-        <div className=""></div>
-        <div className=""></div>
+
+
       </div>
+      <div className="flex flex-col justify-center">
+          <hr className="my-2 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+          <div className="mt-2 text-center text-sm">Funding Pools</div>
+          <div className=""></div>
+          <div className=""></div>
+        </div>
     </div>
   );
 };

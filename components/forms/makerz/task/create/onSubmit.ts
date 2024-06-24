@@ -9,12 +9,12 @@ import {
 } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
 
-export const onSubmit = async (data: any, state: State) => {
+export const onSubmit = async (data: any, state: State, dispatch: any) => {
   const rewardSize = getRewardSize(data.rewardInDOERZ);
 
   console.log(`Submitted`);
 
-  const taskIdName = `${OWNER_ORG}-TASK-${state.taskIdNameShort}`;
+  const taskIdName = `${OWNER_ORG}-tk${state.taskIdNameShort}`;
 
   const newTask = {
     ...data,
@@ -29,6 +29,9 @@ export const onSubmit = async (data: any, state: State) => {
     taskIdName,
     draft: state.draft,
     taskType: state.taskType,
+    ownershipTokenAddress: state.ownershipTokenAddress,
+    ownershipTokenName: state.ownershipTokenName,
+    ownershipTokenSymbol: state.ownershipTokenSymbol,
     title: state.title,
     description: state.description,
     ownerGroup: state.ownerGroup,
@@ -36,26 +39,38 @@ export const onSubmit = async (data: any, state: State) => {
     ownerOrg: OWNER_USER,
     rewardInDOERZ: state.rewardInDOERZ,
     image: state.image,
-    instructions: state.instructions
+    instructions: state.instructions,
   };
+
+  dispatch({
+    type: "SET_FIELD",
+    field: "makerzFormStep",
+    value: state.makerzFormStep + 1,
+  });
 
   console.log(newTask);
 
-  alert(JSON.stringify(newTask));
+
+  console.log(JSON.stringify(newTask));
+
   console.log("Task created successfully!");
 
-  // Mock API call to JSON server
-  // const response = await fetch("http://localhost:3000/tasks", {
-  //   method: "POST",
-  //   headers: {
-  //     "Content-Type": "application/json",
-  //   },
-  //   body: JSON.stringify(newTask),
-  // });
+  if (state.makerzFormStep === 5) {
 
-  // if (response.ok) {
-  //   console.log("Task created successfully!");
-  // } else {
-  //   console.error("Failed to create task.");
-  // }
+      alert(JSON.stringify(newTask));
+
+    // Mock API call to JSON server
+    // const response = await fetch("http://localhost:3000/tasks", {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(newTask),
+    // });
+    // if (response.ok) {
+    //   console.log("Task created successfully!");
+    // } else {
+    //   console.error("Failed to create task.");
+    // }
+  }
 };

@@ -19,8 +19,9 @@ import { State } from "./reducerMakerzTaskFor";
 import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
 import { Button } from "@/components/ui/button";
 import MakerzTaskCreateFunding from "./MakerzTaskCreateFunding";
+import MakerzTaskCreateSchedule from "./MakerzTaskCreateSchedule";
 
-type MakerzTaskCreateStep4Props = {
+type MakerzTaskCreateStep5Props = {
   state: State;
   setValue: any;
   dispatch: any;
@@ -30,23 +31,23 @@ type MakerzTaskCreateStep4Props = {
   errors: any;
   register: any;
 };4
-const MakerzTaskCreateStep4 = ({
+const MakerzTaskCreateStep5 = ({
   state,
   dispatch,
   handleFormChange,
   errors,
   register,
-}: MakerzTaskCreateStep4Props) => {
+}: MakerzTaskCreateStep5Props) => {
   return (
     <>
       <div className="flex flex-col items-center">
         <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Task Funding/Bounty
+          Review / Schedule
         </label>
 
         <div className="flex flex-col items-center justify-center">
           {" "}
-          <MakerzTaskCreateFunding
+          <MakerzTaskCreateSchedule
             state={state}
             // // setValue={setValue}
             dispatch={dispatch}
@@ -57,16 +58,29 @@ const MakerzTaskCreateStep4 = ({
         </div>
       </div>
 
-      <div className="flex flex-row w-full justify-center items-content">
+      {/* <div className="mt-2 flex w-full flex-col items-center justify-center">
+        <div
+          className="w-36 cursor-pointer rounded border bg-blue-500 px-4 py-2 text-center text-sm font-medium text-zinc-100"
+          onClick={() =>
+            dispatch({
+              type: "SET_FIELD",
+              field: "makerzFormStep",
+              value: 4,
+            })
+          }
+        >
+          Fund Task
+        </div>
+      </div> */}
+
       <Button
-        className="px-16 my-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
+        className="my-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
         type="submit"
       >
         Fund Task
       </Button>
-      </div>
     </>
   );
 };
 
-export default MakerzTaskCreateStep4;
+export default MakerzTaskCreateStep5;

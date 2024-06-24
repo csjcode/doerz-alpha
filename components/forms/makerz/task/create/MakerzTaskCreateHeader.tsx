@@ -2,6 +2,7 @@ import React, { Dispatch } from "react";
 import { Action, State } from "./reducerMakerzTaskFor";
 import { MdFormatListBulletedAdd } from "react-icons/md";
 import {
+  PiNumberCircleFive,
   PiNumberCircleFour,
   PiNumberCircleOne,
   PiNumberCircleThree,
@@ -15,12 +16,17 @@ type MakerzTaskCreateHeaderProps = {
   dispatch: Dispatch<Action>;
 };
 
-const MakerzTaskCreateHeader = ({ state, dispatch }: MakerzTaskCreateHeaderProps) => {
+const MakerzTaskCreateHeader = ({
+  state,
+  dispatch,
+}: MakerzTaskCreateHeaderProps) => {
   return (
     <div>
-      <div className="flex flex-row items-center justify-start pl-4">
-        <MdFormatListBulletedAdd className="text-zinc-500" />
-        <div className="ml-2 mr-2 font-medium">Create Task</div>
+      <div className="flex flex-row items-center justify-center pl-4">
+        {/* <MdFormatListBulletedAdd className="text-zinc-500" /> */}
+        <div className="mr-2 font-medium">Create Task</div>
+      </div>
+      <div className="my-1 flex flex-row justify-center">
         {state.makerzFormStep < 2 ? (
           <div className="mr-1">
             <PiNumberCircleOne
@@ -81,11 +87,27 @@ const MakerzTaskCreateHeader = ({ state, dispatch }: MakerzTaskCreateHeaderProps
             <FaCircleCheck className="text-green-600 dark:text-green-400" />
           </div>
         )}
+
+        {state.makerzFormStep < 6 ? (
+          <div className="">
+            <PiNumberCircleFive
+              className={`${
+                state.makerzFormStep === 5
+                  ? "text-green-700 dark:text-green-300"
+                  : "dark:zinc-600 text-zinc-400"
+              }`}
+            />
+          </div>
+        ) : (
+          <div className="mr-1">
+            <FaCircleCheck className="text-green-600 dark:text-green-400" />
+          </div>
+        )}
       </div>
       {state.makerzFormStep > 1 && (
         <div className="mt-2 flex w-full items-center justify-center text-xs">
           <div
-            className="flex flex-row items-center cursor-pointer"
+            className="flex cursor-pointer flex-row items-center"
             onClick={() =>
               dispatch({
                 type: "SET_FIELD",
