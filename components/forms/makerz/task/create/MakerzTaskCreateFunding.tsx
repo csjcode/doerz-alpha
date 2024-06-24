@@ -11,7 +11,8 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ui/select";
-import { OWNER_ORG } from "./initialConfig";
+import { FUNDING_POOL, OWNER_ORG } from "./initialConfig";
+import { Button } from "@/components/ui/button";
 
 type MakerzTaskCreateFundingProps = {
   state: State;
@@ -34,7 +35,12 @@ const MakerzTaskCreateFunding = ({
   return (
     <div>
       <div className="flex flex-col items-center">
-        <div className="">Reward to Complete Task</div>
+        <div className="mt-4">
+          <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+          <p className="text-center font-bold">Reward to Complete Task</p>
+          <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+        </div>
+
         <div className="my-4 flex flex-col">
           <FormLabel
             labelTitle="DOERZ Reward"
@@ -64,36 +70,62 @@ const MakerzTaskCreateFunding = ({
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        <hr className="my-2 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-        <div className="mt-2 text-center text-sm">Funding Pools</div>
+        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+        <p className="text-center font-bold">Funding Pools</p>
+        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
         <div className="">
           <div className="my-4 mr-2">
             <label className="text-sm text-zinc-600 dark:text-zinc-400">
-              Group Owner
+              Select Funding Pool
             </label>
             <Select
-              defaultValue={OWNER_ORG}
-              {...register("ownerGroup")}
+              defaultValue={FUNDING_POOL[0].id}
+              value={state.fundingPool}
+              {...register("fundingPool")}
               onValueChange={(value) =>
                 handleFormChange({
-                  target: { name: "ownerGroup", value },
+                  target: { name: "fundingPool", value },
                 } as any)
               }
             >
               <SelectTrigger className="w-full">
-                <SelectValue placeholder="Select group owner" />
+                <SelectValue placeholder="Select fundingPool" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value={OWNER_ORG}>{OWNER_ORG}</SelectItem>
+                  {FUNDING_POOL.map((fundingPool) => (
+                    <SelectItem key={fundingPool.id} value={fundingPool.id}>
+                      {fundingPool.label}
+                    </SelectItem>
+                  ))}
+                  <SelectItem
+                    key={"fundingPoolCreate"}
+                    value={"fundingPoolCreate"}
+                  >
+                    Create New
+                  </SelectItem>
+                  {/* <SelectItem value={OWNER_ORG}>{OWNER_ORG}</SelectItem>
                   <SelectItem value="doerzsitepromos">
                     Doerz.fun Site Rewards
                   </SelectItem>
+                   */}
                 </SelectGroup>
               </SelectContent>
             </Select>
             {errors.ownerGroup && <p>{errors.ownerGroup.message as string}</p>}
           </div>
+          {state.fundingPool === "fundingPoolCreate" && (
+            <div className="">Create Pool</div>
+          )}
+          {/* <div className="items-content flex flex-row justify-center">
+            <Button
+              className="my-2 border-blue-500 "
+              variant="outline"
+              // type="submit"
+            >
+              Create new Funding Pool
+            </Button>
+          </div> */}
         </div>
         <div className=""></div>
       </div>

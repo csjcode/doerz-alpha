@@ -63,6 +63,29 @@ const CreateMakerzTaskForm = () => {
       field: name as keyof State,
       value: parsedValue,
     });
+
+
+    if (name === "fundingPool") {
+      console.log(`IN Funding pool selected ${name} ${value}`);
+      if (
+        value !== "" &&
+        value !== "fundingPoolCreate"
+      ) {
+        console.log(`Funding pool selected ${value}`);
+
+        dispatch({
+          type: "SET_FIELD",
+          field: "fundingStatus",
+          value: true,
+        });
+      } else {
+        dispatch({
+          type: "SET_FIELD",
+          field: "fundingStatus",
+          value: false,
+        });
+      }
+    }
   };
 
   const handleSubmitForm = (data: any) => {

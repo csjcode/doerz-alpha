@@ -4,6 +4,7 @@ import {
   OWNER_ADMIN,
   OWNER_ORG,
   getInitialValues,
+  FUNDING_POOL,
 } from "./initialConfig";
 import { generateShortDateTime } from "@/utils/dates";
 
@@ -23,6 +24,8 @@ export const initialState = {
   rewardInDOERZ: "",
   image: "",
   instructions: [] as string[],  // Add instructions to the state
+  fundingStatus: !!FUNDING_POOL[0].id,
+  fundingPool: FUNDING_POOL[0].id,
 };
 
 export type State = typeof initialState;

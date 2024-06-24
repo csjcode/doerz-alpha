@@ -29,7 +29,8 @@ type MakerzTaskCreateStep4Props = {
   ) => void;
   errors: any;
   register: any;
-};4
+};
+4;
 const MakerzTaskCreateStep4 = ({
   state,
   dispatch,
@@ -57,14 +58,14 @@ const MakerzTaskCreateStep4 = ({
         </div>
       </div>
 
-      <div className="flex flex-row w-full justify-center items-content">
-      <Button
-        className="px-16 my-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
-        type="submit"
-      >
-        Fund Task
-      </Button>
-      </div>
+     { state.fundingStatus===true && <div className="items-content flex w-full flex-row justify-center">
+        <Button
+          className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600"
+          type="submit"
+        >
+          Fund Task
+        </Button>
+      </div>}
     </>
   );
 };

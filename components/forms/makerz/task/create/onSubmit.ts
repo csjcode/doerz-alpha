@@ -28,6 +28,8 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
     ownerUser: OWNER_USER,
     taskIdName,
     draft: state.draft,
+    fundingStatus: state.fundingStatus,
+    fundingPool: state.fundingPool,
     taskType: state.taskType,
     ownershipTokenAddress: state.ownershipTokenAddress,
     ownershipTokenName: state.ownershipTokenName,
@@ -51,14 +53,12 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
 
   console.log(newTask);
 
-
   console.log(JSON.stringify(newTask));
 
   console.log("Task created successfully!");
 
   if (state.makerzFormStep === 5) {
-
-      alert(JSON.stringify(newTask));
+    alert(JSON.stringify(newTask));
 
     // Mock API call to JSON server
     // const response = await fetch("http://localhost:3000/tasks", {
