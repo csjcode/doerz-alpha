@@ -1,15 +1,26 @@
-import React, { useReducer } from 'react'
+"use client"
+import React, { useEffect, useReducer } from 'react'
 import { VscOpenPreview } from 'react-icons/vsc'
 import { initialState, reducer } from './reducerMakerzTaskFor'
 import DisplayRawData from '@/components/rawdata/DisplayRawData'
 
 type MakerzTaskCreateFormPreviewProps = {
   data: any
+  state: any
 }
 
-const MakerzTaskCreateFormPreview = ({data}: MakerzTaskCreateFormPreviewProps) => {
-  const [state] = useReducer(reducer, initialState);
+const MakerzTaskCreateFormPreview = ({data, state}: MakerzTaskCreateFormPreviewProps) => {
+  // const [state] = useReducer(reducer, initialState);
+
+
   const { title, taskIdName, taskType, description, rewardInDOERZ, draft, ownerGroup, ownerAdmin } = data;
+
+  useEffect(() => {
+
+    console.log("state", state);
+
+  }, [state])
+
 
   return (
     <div className="flex flex-col w-2/3 px-2">

@@ -5,6 +5,8 @@ type DisplayRawDataProps = {
 };
 
 const DisplayRawData = ({ data }: DisplayRawDataProps) => {
+  console.log("data", data);
+
   return (
     <div>
       {" "}
@@ -16,6 +18,14 @@ const DisplayRawData = ({ data }: DisplayRawDataProps) => {
           Object.entries(data).map(([key, value]) => (
             <div className="p-1" key={key}>
               <strong>{key}: </strong>
+              {/* {Array.isArray(value) &&
+                key === "instructions" &&
+                value.map((instruction: string, index: number) => (
+                  <div key={index} className="p-1">
+                    <strong>Instructions {index + 1}: </strong>
+                    {instruction}
+                  </div>
+                ))} */}
               {Array.isArray(value) ? value.join(", ") : value?.toString()}
             </div>
           ))}

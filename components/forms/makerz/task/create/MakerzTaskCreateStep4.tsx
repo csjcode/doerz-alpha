@@ -18,8 +18,9 @@ import { OWNER_ORG } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
 import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
 import { Button } from "@/components/ui/button";
+import MakerzTaskCreateFunding from "./MakerzTaskCreateFunding";
 
-type MakerzTaskCreateStep3Props = {
+type MakerzTaskCreateStep4Props = {
   state: State;
   setValue: any;
   dispatch: any;
@@ -28,26 +29,26 @@ type MakerzTaskCreateStep3Props = {
   ) => void;
   errors: any;
   register: any;
-};
-
-const MakerzTaskCreateStep3 = ({
+};4
+const MakerzTaskCreateStep4 = ({
   state,
   dispatch,
   handleFormChange,
   errors,
   register,
-}: MakerzTaskCreateStep3Props) => {
+}: MakerzTaskCreateStep4Props) => {
   return (
     <>
       <div className="flex flex-col items-center">
         <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Task Instructions/Content
+          Task Funding/Bounty
         </label>
+
         <div className="flex flex-col items-center justify-center">
           {" "}
-          <MakerzTaskCreateInstructions
+          <MakerzTaskCreateFunding
             state={state}
-            // setValue={setValue}
+            // // setValue={setValue}
             dispatch={dispatch}
             register={register}
             handleFormChange={handleFormChange}
@@ -67,7 +68,7 @@ const MakerzTaskCreateStep3 = ({
             })
           }
         >
-          Save Content
+          Fund Task
         </div>
       </div>
 
@@ -81,4 +82,4 @@ const MakerzTaskCreateStep3 = ({
   );
 };
 
-export default MakerzTaskCreateStep3;
+export default MakerzTaskCreateStep4;

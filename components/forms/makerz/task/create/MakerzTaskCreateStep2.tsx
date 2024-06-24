@@ -211,9 +211,9 @@ const MakerzTaskCreateStep2 = ({
           {errors.ownerAdmin && <p>{errors.ownerAdmin.message as string}</p>}
         </div>
       </div>
-      <div className="flex flex-col w-full mt-2 items-center justify-center">
+      <div className="mt-2 flex w-full flex-col items-center justify-center">
         <div
-          className="w-36 rounded border bg-blue-500 text-zinc-100 px-4 py-1 text-center cursor-pointer"
+          className="w-36 cursor-pointer rounded border bg-blue-500 px-4 py-2 text-center text-sm font-medium text-zinc-100"
           onClick={() =>
             dispatch({
               type: "SET_FIELD",
@@ -222,16 +222,16 @@ const MakerzTaskCreateStep2 = ({
             })
           }
         >
-          Add Content
+          Save Task Type
         </div>
       </div>
 
-      {/* <Button
-        className="border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
+      <Button
+        className="border-blue-500 bg-blue-500 text-white hover:bg-blue-600 "
         type="submit"
       >
         Save Task
-      </Button> */}
+      </Button>
     </>
   );
 };

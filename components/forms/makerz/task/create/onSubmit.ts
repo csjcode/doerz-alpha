@@ -36,6 +36,7 @@ export const onSubmit = async (data: any, state: State) => {
     ownerOrg: OWNER_USER,
     rewardInDOERZ: state.rewardInDOERZ,
     image: state.image,
+    instructions: state.instructions
   };
 
   console.log(newTask);

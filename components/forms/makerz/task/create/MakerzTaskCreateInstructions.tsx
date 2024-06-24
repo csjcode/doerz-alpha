@@ -1,17 +1,42 @@
 "use client";
 
-import React, { ChangeEvent, useReducer } from "react";
+import React, { ChangeEvent, useEffect, useReducer } from "react";
 import { Button } from "@/components/ui/button";
 import { Textarea } from "@/components/ui/textarea";
 import { MdAdd, MdRemove } from "react-icons/md";
 import { State, initialState, reducer } from "./reducerMakerzTaskFor";
 
-const MakerzTaskCreateInstructions = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+type MakerzTaskCreateInstructionsProps = {
+  state: State;
+  setValue?: any;
+  dispatch: any;
+  handleFormChange: (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => void;
+  errors: any;
+  register: any;
+};
+
+const MakerzTaskCreateInstructions = ({
+  state,
+  dispatch,
+  handleFormChange,
+  errors,
+  register,
+}: MakerzTaskCreateInstructionsProps) => {
 
   const handleInstructionChange = (index: number, value: string) => {
+    // console.log("index", index);
+    // console.log("value", value);
+
+
     const updatedInstructions = [...state.instructions];
     updatedInstructions[index] = value;
+
+    console.log("updatedInstructions", updatedInstructions);
+
+    console.log("state.instructions", state.instructions);
+
     dispatch({
       type: "SET_FIELD",
       field: "instructions",
@@ -60,10 +85,11 @@ const MakerzTaskCreateInstructions = () => {
       {state.instructions.length < 10 && (
         <Button
           type="button"
+          variant={"outline"}
           onClick={addInstruction}
-          className="rounded border bg-blue-500 p-2 text-zinc-100"
+          className="rounded border  p-2 text-zinc-800"
         >
-          <MdAdd className="mr-1"/> Add Instruction
+          <MdAdd className="mr-1 text-md"/> Add Instruction
         </Button>
       )}
     </div>

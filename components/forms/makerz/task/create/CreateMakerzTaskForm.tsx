@@ -12,6 +12,7 @@ import MakerzTaskCreateHeader from "./MakerzTaskCreateHeader";
 import MakerzTaskCreateStep2 from "./MakerzTaskCreateStep2";
 import MakerzTaskCreateStep3 from "./MakerzTaskCreateStep3";
 import MakerzTaskCreatePreview from "./MakerzTaskCreatePreview";
+import MakerzTaskCreateStep4 from "./MakerzTaskCreateStep4";
 
 export const getErrorMessage = (errors: any, fieldName: string) => {
   if (errors[fieldName]) {
@@ -67,6 +68,8 @@ const CreateMakerzTaskForm = () => {
     onSubmit(data, state);
   };
 
+  console.log("state", state);
+
   return (
     <div className="mb-4 flex flex-col sm:flex-row">
       {/* <div>Makerz List</div> */}
@@ -111,6 +114,17 @@ const CreateMakerzTaskForm = () => {
                 errors={errors}
               />
             )}
+
+            {state.makerzFormStep == 4 && (
+              <MakerzTaskCreateStep4
+                state={state}
+                setValue={setValue}
+                dispatch={dispatch}
+                register={register}
+                handleFormChange={handleFormChange}
+                errors={errors}
+              />
+            )}
           </div>
         </form>
       </div>
@@ -127,6 +141,7 @@ const CreateMakerzTaskForm = () => {
           ownerAdmin: state.ownerAdmin,
           image: state.image,
         }}
+        state={state}
       />
     </div>
   );
