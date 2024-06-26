@@ -3,6 +3,8 @@ import React, { useEffect, useReducer } from 'react'
 import { VscOpenPreview } from 'react-icons/vsc'
 import { initialState, reducer } from './reducerMakerzTaskFor'
 import DisplayRawData from '@/components/rawdata/DisplayRawData'
+// import { GiHolosphere } from "react-icons/gi";
+
 
 type MakerzTaskCreateFormPreviewProps = {
   data: any
@@ -78,6 +80,8 @@ const MakerzTaskCreateFormPreview = ({data, state}: MakerzTaskCreateFormPreviewP
 
 
     <DisplayRawData data={state} />
+
+    {/* <GiHolosphere size={100} className="text-emerald-400" /> */}
 
 
   </div>
