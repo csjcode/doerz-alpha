@@ -7,3 +7,7 @@ export function formatUSD(number: number) {
     // maximumFractionDigits: 2,
   }).format(number);
 }
+
+export function formatNumberWithCommas(number:number) {
+  return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
