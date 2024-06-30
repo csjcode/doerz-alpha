@@ -8,6 +8,7 @@ import { clusterApiUrl, Connection, PublicKey } from "@solana/web3.js";
 import { Token } from "@solana/spl-token";
 import FilterTokenByMint from "@/components/solana-tokens/FilterTokenByMint";
 import useSolBalance from "@/hooks/useSolBalance";
+import DisplayTaskDetail from "@/components/Tasks/display/DisplayTaskDetail";
 
 type MakerzTaskCreateFormPreviewProps = {
   data: any;
@@ -35,6 +36,9 @@ const MakerzTaskCreateFormPreview = ({
     console.log("state", state);
   }, [state]);
 
+  console.log("data", data);
+
+
   return (
     <div className="flex w-2/3 flex-col px-2">
       <div className="flex flex-row items-center justify-center">
@@ -54,6 +58,8 @@ const MakerzTaskCreateFormPreview = ({
           />
         </div>
         solBalance: {solBalance}
+
+        <DisplayTaskDetail data={state} preview={true} />
 
         {title && (
           <div className="flex flex-col text-xl font-bold">Title: {title}</div>

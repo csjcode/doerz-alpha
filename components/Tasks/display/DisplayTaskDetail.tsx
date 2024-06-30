@@ -14,9 +14,10 @@ const username = "csjcodetest";
 
 type DisplayTaskDetailProps = {
   data: Task | null;
+  preview?: boolean;
 };
 
-const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
+const DisplayTaskDetail = ({ data, preview = false }: DisplayTaskDetailProps) => {
   const [toggleDateFormat, setToggleDateFormat] = React.useState(false);
   const { favorites, error, getFavorites } = useGetFavorites("csjcodetest");
 
@@ -53,19 +54,21 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
         </span>
       </div>
       <div className="flex flex-col leading-4">
-        <div className="flex flex-col">
-          <div
-            onClick={handleToggleDateFormat}
-            className="mr-2 mt-2 text-red-600"
-          >
-            <span className="font-bold">Expires:</span>{" "}
-            {toggleDateFormat ? (
-              dateExpired
-            ) : (
-              <Countdown expires={dateExpired} />
-            )}{" "}
+        {!preview && (
+          <div className="flex flex-col">
+            <div
+              onClick={handleToggleDateFormat}
+              className="mr-2 mt-2 text-red-600"
+            >
+              <span className="font-bold">Expires:</span>{" "}
+              {toggleDateFormat ? (
+                dateExpired
+              ) : (
+                <Countdown expires={dateExpired} />
+              )}{" "}
+            </div>
           </div>
-        </div>
+        )}
         <div className="mt-4 text-lg font-bold">Description</div>
         <p className="text-lg font-light">{data?.description}</p>
       </div>
@@ -110,22 +113,26 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
         <span className="mr-2">rewardSize: {data?.rewardSize}</span>
       </div>
 
-      <div>
-        <Countdown expires={dateExpired} />
-      </div>
+      {dateExpired && (
+        <div>
+          <Countdown expires={dateExpired} />
+        </div>
+      )}
 
-      <div className="flex flex-row">
-        <ul className="mt-4 flex flex-row">
-          {data?.tags.map((tag: string) => (
-            <li
-              className={`mr-2 rounded-xl border border-zinc-500 px-2 py-1 text-xs`}
-              key={tag}
-            >
-              {tag}
-            </li>
-          ))}
-        </ul>
-      </div>
+      {data?.tags && (
+        <div className="flex flex-row">
+          <ul className="mt-4 flex flex-row">
+            {data?.tags.map((tag: string) => (
+              <li
+                className={`mr-2 rounded-xl border border-zinc-500 px-2 py-1 text-xs`}
+                key={tag}
+              >
+                {tag}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
 
       <div className="mt-4 flex flex-col text-sm text-zinc-600 dark:text-zinc-400">
         <span className="mr-2">created: {dateCreated}</span>
