@@ -1,5 +1,10 @@
 # APIs
 
+* For local development
+* API Endpoints for Funding
+* API Endpoints for Rewards
+
+
 * For local development use the data in the doerz-jsonserver repo.
 * Just clone the repo csjcode/doerz-jsonserver
 * Then follow instructions below.
@@ -7,9 +12,6 @@
 ### doerz-jsonserver
 
 json-server --watch db.json --port 3003
-
-
-
 
 
 Here is a detailed example of a reward data object, including the fields you've mentioned and a few additional ones that might be useful. Additionally, I've included an example of a `RewardPool` as a parent to a reward, allowing multiple rewards to be funded from one pool.
@@ -86,3 +88,172 @@ Here is a detailed example of a reward data object, including the fields you've 
 - **Doerz** complete tasks and receive rewards funded by the `RewardPool`.
 
 This setup allows flexibility in managing and distributing rewards, ensuring that funds are allocated efficiently and transparently.
+
+
+
+-----------------------------
+
+
+### API Endpoints for Funding
+
+#### Create a New Funding Pool
+**POST** `/funding/pools/`
+- **Description**: Creates a new funding pool.
+- **URL**: `http://localhost:3003/funding/pools/`
+- **Body** (raw JSON):
+    ```json
+    {
+        "id": "1",
+        "idPool": "doerzalpha-sd2sd",
+        "poolDisplayName": "doerzalpha-csjcodetest",
+        "creator": "csjcodetest",
+        "dateAmountAdded": [{
+            "date": 1717446387,
+            "amount": 10000
+        }],
+        "amountCurrent": 10000,
+        "dateCreated": 1717446387,
+        "dateModified": 1717446387,
+        "dateExpired": 1717456387
+    }
+    ```
+- **Example Request**:
+    ```http
+    POST /funding/pools/ HTTP/1.1
+    Host: localhost:3003
+    Content-Type: application/json
+
+    {
+        "id": "1",
+        "idPool": "doerzalpha-sd2sd",
+        "poolDisplayName": "doerzalpha-csjcodetest",
+        "creator": "csjcodetest",
+        "dateAmountAdded": [{
+            "date": 1717446387,
+            "amount": 10000
+        }],
+        "amountCurrent": 10000,
+        "dateCreated": 1717446387,
+        "dateModified": 1717446387,
+        "dateExpired": 1717456387
+    }
+    ```
+- **Example Response**:
+    ```json
+    {
+        "message": "Funding pool created successfully.",
+        "idPool": "doerzalpha-sd2sd"
+    }
+    ```
+
+#### Add Funds to an Existing Pool
+**POST** `/funding/pools/:idPool/add`
+- **Description**: Adds funds to an existing funding pool.
+- **URL**: `http://localhost:3003/funding/pools/:idPool/add`
+- **Path Variables**:
+    - `idPool`: The ID of the funding pool
+- **Body** (raw JSON):
+    ```json
+    {
+        "date": 1718834850,
+        "amount": 5000,
+        "addedBy": "csjcodetest"
+    }
+    ```
+- **Example Request**:
+    ```http
+    POST /funding/pools/doerzalpha-sd2sd/add HTTP/1.1
+    Host: localhost:3003
+    Content-Type: application/json
+
+    {
+        "date": 1718834850,
+        "amount": 5000,
+        "addedBy": "csjcodetest"
+    }
+    ```
+- **Example Response**:
+    ```json
+    {
+        "message": "Funds added successfully.",
+        "newTotal": 15000
+    }
+    ```
+
+#### Retrieve All Funding Pools
+**GET** `/funding/pools/`
+- **Description**: Retrieves all funding pools.
+- **URL**: `http://localhost:3003/funding/pools/`
+- **Example Request**:
+    ```http
+    GET /funding/pools/ HTTP/1.1
+    Host: localhost:3003
+    ```
+- **Example Response**:
+    ```json
+    [
+        {
+            "id": "1",
+            "idPool": "doerzalpha-sd2sd",
+            "poolDisplayName": "doerzalpha-csjcodetest",
+            "creator": "csjcodetest",
+            "dateAmountAdded": [{
+                "date": 1717446387,
+                "amount": 10000
+            }],
+            "amountCurrent": 10000,
+            "dateCreated": 1717446387,
+            "dateModified": 1717446387,
+            "dateExpired": 1717456387
+        },
+        {
+            "id": "2",
+            "idPool": "doerzalpha-df3gh",
+            "poolDisplayName": "doerzalpha-anotheruser",
+            "creator": "anotheruser",
+            "dateAmountAdded": [{
+                "date": 1717446500,
+                "amount": 15000
+            }],
+            "amountCurrent": 15000,
+            "dateCreated": 1717446500,
+            "dateModified": 1717446500,
+            "dateExpired": 1717456500
+        }
+    ]
+    ```
+
+#### Retrieve Details of a Specific Funding Pool
+**GET** `/funding/pools/:idPool`
+- **Description**: Retrieves details of a specific funding pool.
+- **URL**: `http://localhost:3003/funding/pools/:idPool`
+- **Path Variables**:
+    - `idPool`: The ID of the funding pool
+- **Example Request**:
+    ```http
+    GET /funding/pools/doerzalpha-sd2sd HTTP/1.1
+    Host: localhost:3003
+    ```
+- **Example Response**:
+    ```json
+    {
+        "id": "1",
+        "idPool": "doerzalpha-sd2sd",
+        "poolDisplayName": "doerzalpha-csjcodetest",
+        "creator": "csjcodetest",
+        "dateAmountAdded": [
+            {
+                "date": 1717446387,
+                "amount": 10000
+            },
+            {
+                "date": 1718834850,
+                "amount": 5000
+            }
+        ],
+        "amountCurrent": 15000,
+        "dateCreated": 1717446387,
+        "dateModified": 1718834850,
+        "dateExpired": 1717456387
+    }
+    ```
