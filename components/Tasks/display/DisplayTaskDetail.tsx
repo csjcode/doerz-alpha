@@ -17,7 +17,10 @@ type DisplayTaskDetailProps = {
   preview?: boolean;
 };
 
-const DisplayTaskDetail = ({ data, preview = false }: DisplayTaskDetailProps) => {
+const DisplayTaskDetail = ({
+  data,
+  preview = false,
+}: DisplayTaskDetailProps) => {
   const [toggleDateFormat, setToggleDateFormat] = React.useState(false);
   const { favorites, error, getFavorites } = useGetFavorites("csjcodetest");
 
@@ -99,10 +102,13 @@ const DisplayTaskDetail = ({ data, preview = false }: DisplayTaskDetailProps) =>
             ))}
         </ol>
       </div>
-
-      <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-      <TestingReminder />
-      <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+      {!preview && (
+        <>
+          <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+          <TestingReminder />
+          <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+        </>
+      )}
 
       <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
         <span className="mr-2">Status: {data?.status}</span>
