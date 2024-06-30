@@ -18,7 +18,7 @@ export const createTaskIdNameShort = () => {
 };
 
 export const initialState = {
-  makerzFormStep: 2,
+  makerzFormStep: 1,
   ...createTaskIdNameShort(),
   draft: true,
   taskType: "ownership",
@@ -30,11 +30,12 @@ export const initialState = {
   description: "",
   ownerGroup: OWNER_GROUP,
   ownerAdmin: OWNER_ADMIN,
-  rewardInDOERZ: "",
+  rewardInDOERZ: "100",
   image: "",
   userInstructions: [] as string[], // Add instructions to the state
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
+  errors: {}
 };
 
 export type State = typeof initialState;
@@ -42,6 +43,7 @@ export type State = typeof initialState;
 export type Action =
   | { type: "SET_FIELD"; field: keyof State; value: any }
   | { type: "SET_INITIAL_VALUES"; payload: Partial<State> }
+  | { type: "SET_ERRORS"; payload: Partial<State> }
   | { type: "ADD_INSTRUCTION"; instruction: string }
   | { type: "REMOVE_INSTRUCTION"; index: number };
 
@@ -56,6 +58,11 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         ...action.payload,
+      };
+    case "SET_ERRORS":
+      return {
+        ...state,
+        errors: action.payload,
       };
     case "ADD_INSTRUCTION":
       if (state.userInstructions.length < 10) {

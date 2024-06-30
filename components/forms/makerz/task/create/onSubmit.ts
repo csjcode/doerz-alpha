@@ -51,6 +51,7 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
     value: state.makerzFormStep + 1,
   });
 
+  console.log(`In onSubmit`);
   console.log(newTask);
 
   console.log(JSON.stringify(newTask));

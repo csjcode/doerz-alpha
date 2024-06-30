@@ -38,6 +38,33 @@ const MakerzTaskCreateStep2 = ({
   errors,
   register,
 }: MakerzTaskCreateStep2Props) => {
+
+  const handleNextStep = () => {
+    alert(`handleNextStep`);
+    const errors: { [key: string]: string } = {};
+
+    if (!state.ownershipTokenName) errors.ownershipTokenName = "Token name is required";
+    if (!state.ownershipTokenSymbol) errors.ownershipTokenSymbol = "Token symbol is required";
+    if (!state.ownershipTokenAddress) errors.ownershipTokenAddress = "Token address is required";
+    if (!state.ownershipTokenAmount) errors.ownershipTokenAmount = "Token amount is required";
+    if (!state.title) errors.title = "Title is required";
+    if (!state.description) errors.description = "Description is required";
+    if (!state.taskType) errors.taskType = "Task type is required";
+
+    if (Object.keys(errors).length > 0) {
+      dispatch({ type: "SET_ERRORS", payload: errors });
+      return;
+    } else {
+      dispatch({
+        type: "SET_FIELD",
+        field: "makerzFormStep",
+        value: 3,
+      });
+    }
+
+
+  }
+
   return (
     <>
       <div className="flex flex-col px-4">
@@ -101,7 +128,7 @@ const MakerzTaskCreateStep2 = ({
                 ready={!!state.ownershipTokenAddress}
               />
               <Input
-                className="my-1 focus-visible:ring-1"
+                className="w-[250px] my-1 focus-visible:ring-1"
                 {...register("ownershipTokenAddress")}
                 onChange={(e) => handleFormChange(e)}
               />
@@ -278,7 +305,9 @@ const MakerzTaskCreateStep2 = ({
         <div className="items-content flex w-full flex-row justify-center">
           <Button
             className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600 "
-            type="submit"
+            // type="submit"
+            onClick={handleNextStep}
+            type="button"
           >
             Save Task
           </Button>

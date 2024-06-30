@@ -35,13 +35,13 @@ const MakerzTaskCreateFunding = ({
   return (
     <div>
       <div className="flex flex-col items-center">
-        <div className="mt-4">
+        {/* <div className="mt-4">
           <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
           <p className="text-center font-bold">Reward to Complete Task</p>
           <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-        </div>
+        </div> */}
 
-        <div className="my-4 flex flex-col">
+        <div className="flex flex-col my-4 flex flex-col">
           <FormLabel
             labelTitle="DOERZ Reward"
             required={true}
@@ -70,12 +70,12 @@ const MakerzTaskCreateFunding = ({
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+        {/* <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
         <p className="text-center font-bold">Funding Pools</p>
-        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
+        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" /> */}
         <div className="">
-          <div className="my-4 mr-2">
-            <label className="text-sm text-zinc-600 dark:text-zinc-400">
+          <div className="flex flex-col my-4 mr-2">
+            <label className="mb-1 text-sm text-zinc-600 dark:text-zinc-400">
               Select Funding Pool
             </label>
             <Select

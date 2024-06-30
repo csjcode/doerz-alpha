@@ -91,6 +91,13 @@ const MakerzTaskCreateStep3 = ({
           className="mt-2 px-8 rounded border border-blue-600 dark:border-blue-400 text-zinc-800 dark:text-zinc-200"
           variant="outline"
           type="submit"
+          // onClick={() =>
+          //   dispatch({
+          //     type: "SET_FIELD",
+          //     field: "makerzFormStep",
+          //     value: 4,
+          //   })
+          // }
         >
           {state.userInstructions.length > 0 ? "Finished" : "No"} Instructions
         </Button>

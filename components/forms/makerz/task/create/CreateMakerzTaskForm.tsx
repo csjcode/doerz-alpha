@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useEffect, useReducer } from "react";
+import React, { ChangeEvent, useEffect, useReducer, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { taskSchemaMakerzForm } from "./schemaForms";
@@ -15,10 +15,19 @@ import MakerzTaskCreatePreview from "./MakerzTaskCreatePreview";
 import MakerzTaskCreateStep4 from "./MakerzTaskCreateStep4";
 import MakerzTaskCreateStep5 from "./MakerzTaskCreateStep5";
 
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordionMakerzForm";
+import { PiNumberCircleFour, PiNumberCircleOne, PiNumberCircleThree, PiNumberCircleTwo } from "react-icons/pi";
+import { FaCircleCheck } from "react-icons/fa6";
+
 export const getErrorMessage = (errors: any, fieldName: string) => {
   if (errors[fieldName]) {
     return (
-      <p className="text=sm text-red-600">
+      <p className="text-sm text-red-600">
         {errors[fieldName].message as string}
       </p>
     );
@@ -28,6 +37,8 @@ export const getErrorMessage = (errors: any, fieldName: string) => {
 
 const CreateMakerzTaskForm = () => {
   const [state, dispatch] = useReducer(reducer, initialState);
+  const [accordionOpenDefaultValue, setAccordionOpenDefaultValue] =
+    useState<string>("item-1");
 
   const {
     register,
@@ -45,7 +56,7 @@ const CreateMakerzTaskForm = () => {
   const setInitialValues = () => {
     const initialValues = getInitialValues(state);
 
-    Object.entries(getInitialValues(state)).forEach(([key, value]) => {
+    Object.entries(initialValues).forEach(([key, value]) => {
       setValue(key as keyof typeof initialValues, value);
     });
 
@@ -64,13 +75,9 @@ const CreateMakerzTaskForm = () => {
       value: parsedValue,
     });
 
-
     if (name === "fundingPool") {
       console.log(`IN Funding pool selected ${name} ${value}`);
-      if (
-        value !== "" &&
-        value !== "fundingPoolCreate"
-      ) {
+      if (value !== "" && value !== "fundingPoolCreate") {
         console.log(`Funding pool selected ${value}`);
 
         dispatch({
@@ -89,45 +96,202 @@ const CreateMakerzTaskForm = () => {
   };
 
   const handleSubmitForm = (data: any) => {
+    console.log(`Submitted handleSubmitForm`);
+
     onSubmit(data, state, dispatch);
   };
 
+  useEffect(() => {
+    setAccordionOpenDefaultValue(`item-${state.makerzFormStep}`);
+  }, [state.makerzFormStep]);
+
   console.log("state", state);
+
 
   return (
     <div className="mb-4 flex flex-col sm:flex-row">
-      {/* <div>Makerz List</div> */}
       <div className="mr-4 flex w-[300px] flex-col items-center border-r border-r-zinc-200 dark:border-r-zinc-800">
         <div className="visible w-full text-center sm:hidden">
           View Task Preview
         </div>
 
         <form onSubmit={handleSubmit(handleSubmitForm)}>
-          <div className="flex flex-col justify-start">
+          <div className="flex w-[300px] flex-col justify-start">
             <MakerzTaskCreateHeader dispatch={dispatch} state={state} />
 
-            {state.makerzFormStep === 1 && (
-              <MakerzTaskCreateStep1
-                state={state}
-                setValue={setValue}
-                dispatch={dispatch}
-                register={register}
-                handleFormChange={handleFormChange}
-                errors={errors}
-              />
-            )}
+            <div className="ml-2 items-center justify-start">
+              <Accordion
+                value={accordionOpenDefaultValue}
+                type="single"
+                collapsible
+                className="justify-start"
+              >
+                <AccordionItem value="item-1" className="border-b-0">
+                  <AccordionTrigger
+                    className={`flex flex-1 justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                  >
+                    {state.makerzFormStep < 2 ? (
+                      <div className="mr-2">
+                        <PiNumberCircleOne
+                          className={`${
+                            state.makerzFormStep === 1
+                              ? "text-green-700 dark:text-green-300"
+                              : "dark:zinc-600 text-zinc-400"
+                          }`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-1">
+                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      </div>
+                    )}
+                    Create Task Type
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <MakerzTaskCreateStep1
+                      state={state}
+                      setValue={setValue}
+                      dispatch={dispatch}
+                      register={register}
+                      handleFormChange={handleFormChange}
+                      errors={errors}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-2" className="border-b-0">
+                  <AccordionTrigger
+                    className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                  >
+                    {state.makerzFormStep < 3 ? (
+                      <div className="mr-2">
+                        <PiNumberCircleTwo
+                          className={`${
+                            state.makerzFormStep === 2
+                              ? "text-green-700 dark:text-green-300"
+                              : "dark:zinc-600 text-zinc-400"
+                          }`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-1">
+                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      </div>
+                    )}
+                    Add Task Details
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <MakerzTaskCreateStep2
+                      state={state}
+                      setValue={setValue}
+                      dispatch={dispatch}
+                      register={register}
+                      handleFormChange={handleFormChange}
+                      errors={errors}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-3" className="border-b-0">
+                  <AccordionTrigger
+                    className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                  >
+                    {state.makerzFormStep < 4 ? (
+                      <div className="mr-2">
+                        <PiNumberCircleThree
+                          className={`${
+                            state.makerzFormStep === 3
+                              ? "text-green-700 dark:text-green-300"
+                              : "dark:zinc-600 text-zinc-400"
+                          }`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-1">
+                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      </div>
+                    )}
+                    Instructions, Images
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <MakerzTaskCreateStep3
+                      state={state}
+                      setValue={setValue}
+                      dispatch={dispatch}
+                      register={register}
+                      handleFormChange={handleFormChange}
+                      errors={errors}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-4" className="border-b-0">
+                  <AccordionTrigger
+                    className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                  >
+                    {state.makerzFormStep < 5 ? (
+                      <div className="mr-2">
+                        <PiNumberCircleFour
+                          className={`${
+                            state.makerzFormStep === 4
+                              ? "text-green-700 dark:text-green-300"
+                              : "dark:zinc-600 text-zinc-400"
+                          }`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-1">
+                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      </div>
+                    )}
+                    Task Funding/Bounty
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <MakerzTaskCreateStep4
+                      state={state}
+                      setValue={setValue}
+                      dispatch={dispatch}
+                      register={register}
+                      handleFormChange={handleFormChange}
+                      errors={errors}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
+                <AccordionItem value="item-5" className="border-b-0">
+                  <AccordionTrigger
+                    className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                  >
+                    {state.makerzFormStep < 5 ? (
+                      <div className="mr-2">
+                        <PiNumberCircleFour
+                          className={`${
+                            state.makerzFormStep === 4
+                              ? "text-green-700 dark:text-green-300"
+                              : "dark:zinc-600 text-zinc-400"
+                          }`}
+                        />
+                      </div>
+                    ) : (
+                      <div className="mr-1">
+                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      </div>
+                    )}
+                    Schedule Start/End
+                  </AccordionTrigger>
+                  <AccordionContent>
+                    <MakerzTaskCreateStep5
+                      state={state}
+                      setValue={setValue}
+                      dispatch={dispatch}
+                      register={register}
+                      handleFormChange={handleFormChange}
+                      errors={errors}
+                    />
+                  </AccordionContent>
+                </AccordionItem>
 
-            {state.makerzFormStep == 2 && (
-              <MakerzTaskCreateStep2
-                state={state}
-                setValue={setValue}
-                dispatch={dispatch}
-                register={register}
-                handleFormChange={handleFormChange}
-                errors={errors}
-              />
-            )}
 
+                {/* Add more AccordionItem components for other steps as needed */}
+              </Accordion>
+            </div>
+{/*
             {state.makerzFormStep == 3 && (
               <MakerzTaskCreateStep3
                 state={state}
@@ -137,9 +301,9 @@ const CreateMakerzTaskForm = () => {
                 handleFormChange={handleFormChange}
                 errors={errors}
               />
-            )}
+            )} */}
 
-            {state.makerzFormStep == 4 && (
+            {/* {state.makerzFormStep < 4 && (
               <MakerzTaskCreateStep4
                 state={state}
                 setValue={setValue}
@@ -148,9 +312,9 @@ const CreateMakerzTaskForm = () => {
                 handleFormChange={handleFormChange}
                 errors={errors}
               />
-            )}
+            )} */}
 
-            {state.makerzFormStep == 5 && (
+            {/* {state.makerzFormStep === 5 && (
               <MakerzTaskCreateStep5
                 state={state}
                 setValue={setValue}
@@ -159,25 +323,10 @@ const CreateMakerzTaskForm = () => {
                 handleFormChange={handleFormChange}
                 errors={errors}
               />
-            )}
+            )} */}
           </div>
         </form>
       </div>
-
-      <MakerzTaskCreatePreview
-        data={{
-          taskIdNameShort: state.taskIdNameShort,
-          taskType: state.taskType,
-          draft: state.draft,
-          title: state.title,
-          description: state.description,
-          rewardInDOERZ: state.rewardInDOERZ,
-          ownerGroup: state.ownerGroup,
-          ownerAdmin: state.ownerAdmin,
-          image: state.image,
-        }}
-        state={state}
-      />
     </div>
   );
 };

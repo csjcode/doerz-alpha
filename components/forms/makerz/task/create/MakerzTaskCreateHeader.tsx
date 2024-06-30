@@ -22,9 +22,9 @@ const MakerzTaskCreateHeader = ({
 }: MakerzTaskCreateHeaderProps) => {
   return (
     <div>
-      <div className="flex flex-row items-center justify-center pl-4">
+      <div className="flex flex-row w-full items-center justify-center pl-4">
         {/* <MdFormatListBulletedAdd className="text-zinc-500" /> */}
-        <div className="mr-2 font-medium">Create Task</div>
+        {/* <div className="mr-2 font-medium">Create Task</div> */}
       </div>
       <div className="my-1 flex flex-row justify-center">
         {state.makerzFormStep < 2 ? (

@@ -24,17 +24,18 @@ const MakerzTaskCreateSchedule = ({
   return (
     <div>
       <div className="flex flex-col items-center">
-        <div className="">Schedule Publishing</div>
+        {/* <div className="">Schedule Publishing</div>
         <div className="my-4 flex flex-col">
 
-        </div>
+        </div> */}
 
 
       </div>
       <div className="flex flex-col justify-center">
-          <hr className="my-2 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-          <div className="mt-2 text-center text-sm">Schedule to Publish LIVE</div>
+          {/* <hr className="my-2 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" /> */}
+          <div className="mt-2 text-center text-sm">Publish Live on:</div>
           <div className=""></div>
+          <div className="mt-2 text-center text-sm">Expires on:</div>
           <div className=""></div>
         </div>
     </div>
