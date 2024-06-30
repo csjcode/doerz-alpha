@@ -76,7 +76,7 @@ const DisplayTaskDetail = ({ data, preview = false }: DisplayTaskDetailProps) =>
       <div className="mt-4">
         {data?.rewardSize && <TaskReward rewardSize={data?.rewardSize} />}
       </div>
-      {data?.taskIdName && (
+      {data?.taskIdName && !preview && (
         <div>
           <TaskDetailActionBar data={data} favorite={isFavorite} />
         </div>

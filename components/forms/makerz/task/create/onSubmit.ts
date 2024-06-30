@@ -42,7 +42,7 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
     ownerOrg: OWNER_USER,
     rewardInDOERZ: state.rewardInDOERZ,
     image: state.image,
-    instructions: state.instructions,
+    userInstructions: state.userInstructions,
   };
 
   dispatch({

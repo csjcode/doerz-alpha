@@ -32,7 +32,7 @@ export const initialState = {
   ownerAdmin: OWNER_ADMIN,
   rewardInDOERZ: "",
   image: "",
-  instructions: [] as string[], // Add instructions to the state
+  userInstructions: [] as string[], // Add instructions to the state
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
 };
@@ -58,17 +58,17 @@ export const reducer = (state: State, action: Action): State => {
         ...action.payload,
       };
     case "ADD_INSTRUCTION":
-      if (state.instructions.length < 10) {
+      if (state.userInstructions.length < 10) {
         return {
           ...state,
-          instructions: [...state.instructions, action.instruction],
+          userInstructions: [...state.userInstructions, action.userInstructions],
         };
       }
       return state;
     case "REMOVE_INSTRUCTION":
       return {
         ...state,
-        instructions: state.instructions.filter(
+        userInstructions: state.userInstructions.filter(
           (_, index) => index !== action.index,
         ),
       };

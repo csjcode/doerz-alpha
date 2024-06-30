@@ -30,22 +30,22 @@ const MakerzTaskCreateInstructions = ({
     // console.log("value", value);
 
 
-    const updatedInstructions = [...state.instructions];
+    const updatedInstructions = [...state.userInstructions];
     updatedInstructions[index] = value;
 
     console.log("updatedInstructions", updatedInstructions);
 
-    console.log("state.instructions", state.instructions);
+    console.log("state.userInstructions", state.userInstructions);
 
     dispatch({
       type: "SET_FIELD",
-      field: "instructions",
+      field: "userInstructions",
       value: updatedInstructions,
     });
   };
 
   const addInstruction = () => {
-    if (state.instructions.length < 10) {
+    if (state.userInstructions.length < 10) {
       dispatch({
         type: "ADD_INSTRUCTION",
         instruction: "",
@@ -62,7 +62,7 @@ const MakerzTaskCreateInstructions = ({
 
   return (
     <div className="flex flex-col space-y-4">
-      {state.instructions.map((instruction, index) => (
+      {state.userInstructions.map((instruction, index) => (
         <div key={index} className="flex items-center mt-2 ">
           <Textarea
             value={instruction}
@@ -83,7 +83,7 @@ const MakerzTaskCreateInstructions = ({
           </Button>
         </div>
       ))}
-      {state.instructions.length < 10 && (
+      {state.userInstructions.length < 10 && (
         <Button
           type="button"
           // variant={"outline"}

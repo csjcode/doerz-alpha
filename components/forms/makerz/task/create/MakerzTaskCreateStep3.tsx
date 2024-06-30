@@ -44,7 +44,7 @@ const MakerzTaskCreateStep3 = ({
         <FormLabel
           labelTitle="Task Instructions/Content"
           required={false}
-          ready={!!state.instructions}
+          ready={!!state.userInstructions}
         />
         <div className="flex flex-col items-center justify-center">
           {" "}
@@ -63,7 +63,7 @@ const MakerzTaskCreateStep3 = ({
 
       </div>
 
-      {/* {state.instructions.length < 1 && (
+      {/* {state.userInstructions.length < 1 && (
         <div className="flex flex-col items-center p-4">
           We recommend adding instructions and images to your task to help
           participants understand how to complete the task.
@@ -92,10 +92,10 @@ const MakerzTaskCreateStep3 = ({
           variant="outline"
           type="submit"
         >
-          {state.instructions.length > 0 ? "Finished" : "No"} Instructions
+          {state.userInstructions.length > 0 ? "Finished" : "No"} Instructions
         </Button>
       </div>
-      {/* {state.instructions.length < 1 && ( */}
+      {/* {state.userInstructions.length < 1 && ( */}
         <div className="flex flex-col text-sm items-center py-2 px-4">
           <p>
             <span className="font-bold">We recommend adding instructions and images</span> to your task to help
