@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent } from "react";
+import React, { ChangeEvent, useEffect } from "react";
 
 import { taskTypes } from "@/components/Tables/data/data";
 import { Button } from "@/components/ui/button";
@@ -38,21 +38,33 @@ const MakerzTaskCreateStep2 = ({
   errors,
   register,
 }: MakerzTaskCreateStep2Props) => {
+  const [hasMissingFields, setHasMissingFields] = React.useState(false);
+
+  useEffect(() => {
+    const requiredFields: Array<keyof State> = [
+      "ownershipTokenName",
+      "ownershipTokenSymbol",
+      "ownershipTokenAddress",
+      "ownershipTokenAmount",
+      "title",
+      "description",
+      "taskType",
+    ];
+
+    for (const field of requiredFields) {
+      if (!state[field]) {
+        setHasMissingFields(true);
+        return;
+      }
+    }
+
+    setHasMissingFields(false);
+  }, [state]);
 
   const handleNextStep = () => {
-    alert(`handleNextStep`);
-    const errors: { [key: string]: string } = {};
+    // alert(`handleNextStep`);
 
-    if (!state.ownershipTokenName) errors.ownershipTokenName = "Token name is required";
-    if (!state.ownershipTokenSymbol) errors.ownershipTokenSymbol = "Token symbol is required";
-    if (!state.ownershipTokenAddress) errors.ownershipTokenAddress = "Token address is required";
-    if (!state.ownershipTokenAmount) errors.ownershipTokenAmount = "Token amount is required";
-    if (!state.title) errors.title = "Title is required";
-    if (!state.description) errors.description = "Description is required";
-    if (!state.taskType) errors.taskType = "Task type is required";
-
-    if (Object.keys(errors).length > 0) {
-      dispatch({ type: "SET_ERRORS", payload: errors });
+    if (hasMissingFields) {
       return;
     } else {
       dispatch({
@@ -61,9 +73,7 @@ const MakerzTaskCreateStep2 = ({
         value: 3,
       });
     }
-
-
-  }
+  };
 
   return (
     <>
@@ -128,7 +138,7 @@ const MakerzTaskCreateStep2 = ({
                 ready={!!state.ownershipTokenAddress}
               />
               <Input
-                className="w-[250px] my-1 focus-visible:ring-1"
+                className="my-1 w-[250px] focus-visible:ring-1"
                 {...register("ownershipTokenAddress")}
                 onChange={(e) => handleFormChange(e)}
               />
@@ -138,8 +148,7 @@ const MakerzTaskCreateStep2 = ({
               </div>
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-600">
                 {" "}
-                Program address of the token user must prove ownership
-                for.
+                Program address of the token user must prove ownership for.
               </p>
             </div>
 
@@ -150,13 +159,12 @@ const MakerzTaskCreateStep2 = ({
                 ready={!!state.ownershipTokenAmount}
               />
               <Input
-                className="w-28 my-1 focus-visible:ring-1"
+                className="my-1 w-28 focus-visible:ring-1"
                 defaultValue={1}
                 {...register("ownershipTokenAmount")}
                 onChange={(e) => handleFormChange(e)}
               />
               {/* {errors.title && <p>{errors.ownershipTokenAmount.message as string}</p>} */}
-
             </div>
             {state.ownershipTokenAddress && (
               <>
@@ -302,12 +310,19 @@ const MakerzTaskCreateStep2 = ({
           Save Task Type
         </div>
       </div> */}
+        {/* if (Object.keys(state.errors).length > 0) { */}
+        {hasMissingFields && (
+          <div className="flex flex-col items-center">
+            <div className="text-red-500">Missing required fields</div>
+          </div>
+        )}
+
         <div className="items-content flex w-full flex-row justify-center">
           <Button
-            className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600 "
+            className={`${hasMissingFields && "disabled"} my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
             // type="submit"
             onClick={handleNextStep}
-            type="button"
+            type={`button`}
           >
             Save Task
           </Button>
