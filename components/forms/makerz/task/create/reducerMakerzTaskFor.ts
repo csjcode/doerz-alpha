@@ -8,9 +8,18 @@ import {
 } from "./initialConfig";
 import { generateShortDateTime } from "@/utils/dates";
 
+export const createTaskIdNameShort = () => {
+  const taskIdNameShort = generateShortDateTime();
+  const taskIdName = `${OWNER_GROUP}-${taskIdNameShort}`;
+  return {
+    taskIdNameShort: taskIdNameShort,
+    taskIdName: taskIdName,
+  };
+};
+
 export const initialState = {
   makerzFormStep: 2,
-  taskIdNameShort: generateShortDateTime(),
+  ...createTaskIdNameShort(),
   draft: true,
   taskType: "ownership",
   ownershipTokenAddress: "",
@@ -23,7 +32,7 @@ export const initialState = {
   ownerAdmin: OWNER_ADMIN,
   rewardInDOERZ: "",
   image: "",
-  instructions: [] as string[],  // Add instructions to the state
+  instructions: [] as string[], // Add instructions to the state
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
 };
@@ -60,7 +69,7 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         instructions: state.instructions.filter(
-          (_, index) => index !== action.index
+          (_, index) => index !== action.index,
         ),
       };
     default:
