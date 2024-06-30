@@ -61,7 +61,7 @@ export const reducer = (state: State, action: Action): State => {
       if (state.userInstructions.length < 10) {
         return {
           ...state,
-          userInstructions: [...state.userInstructions, action.userInstructions],
+          userInstructions: [...state.userInstructions, action.instruction],
         };
       }
       return state;
