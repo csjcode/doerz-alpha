@@ -1,17 +1,6 @@
 "use client";
 import React, { ChangeEvent } from "react";
 
-import { taskTypes } from "@/components/Tables/data/data";
-import { Input } from "@/components/ui/input";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 
 import { getErrorMessage } from "./CreateMakerzTaskForm";
 import { OWNER_ORG } from "./initialConfig";
@@ -41,9 +30,9 @@ const MakerzTaskCreateStep4 = ({
   return (
     <>
       <div className="flex flex-col items-center">
-        <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        {/* <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           Task Funding/Bounty
-        </label>
+        </label> */}
 
         <div className="flex flex-col items-center justify-center">
           {" "}

@@ -1,6 +1,5 @@
 "use client";
-import React, { ChangeEvent } from "react";
-
+import React, { ChangeEvent, useEffect } from "react";
 import { taskTypes } from "@/components/Tables/data/data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -13,11 +12,9 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
-
 import { getErrorMessage } from "./CreateMakerzTaskForm";
 import { OWNER_ORG } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
-import { FaSquare } from "react-icons/fa";
 import FormLabel from "./FormLabel";
 
 type MakerzTaskCreateStep2Props = {
@@ -38,6 +35,56 @@ const MakerzTaskCreateStep2 = ({
   errors,
   register,
 }: MakerzTaskCreateStep2Props) => {
+  useEffect(() => {
+    const requiredFields: Array<keyof State> = [
+      "ownershipTokenName",
+      "ownershipTokenSymbol",
+      "ownershipTokenAddress",
+      "ownershipTokenAmount",
+      "title",
+      "description",
+      "taskType",
+    ];
+
+    let hasMissingFields = false;
+
+    for (const field of requiredFields) {
+      if (!state[field]) {
+        hasMissingFields = true;
+        break;
+      }
+    }
+
+    if (state.hasMissingFields !== hasMissingFields) {
+      dispatch({
+        type: "SET_HAS_MISSING_FIELDS",
+        payload: hasMissingFields,
+      });
+    }
+  }, [
+    state.ownershipTokenName,
+    state.ownershipTokenSymbol,
+    state.ownershipTokenAddress,
+    state.ownershipTokenAmount,
+    state.title,
+    state.description,
+    state.taskType,
+    state.hasMissingFields,
+    dispatch,
+  ]);
+
+  const handleNextStep = () => {
+    if (state.hasMissingFields) {
+      return;
+    } else {
+      dispatch({
+        type: "SET_FIELD",
+        field: "makerzFormStep",
+        value: 3,
+      });
+    }
+  };
+
   return (
     <>
       <div className="flex flex-col px-4">
@@ -93,7 +140,7 @@ const MakerzTaskCreateStep2 = ({
         </div>
 
         {state.taskType === "ownership" && (
-          <div className="">
+          <div>
             <div className="mb-2 flex flex-col items-start justify-start">
               <FormLabel
                 labelTitle="Token/Program Address"
@@ -101,18 +148,15 @@ const MakerzTaskCreateStep2 = ({
                 ready={!!state.ownershipTokenAddress}
               />
               <Input
-                className="my-1 focus-visible:ring-1"
+                className="my-1 w-[250px] focus-visible:ring-1"
                 {...register("ownershipTokenAddress")}
                 onChange={(e) => handleFormChange(e)}
               />
-              {/* {errors.title && <p>{errors.ownershipTokenAddress.message as string}</p>} */}
               <div className="mt-2 truncate text-xs text-zinc-400 dark:text-zinc-600">
                 Ex: DezXAZ8z7PnrnRJjz3wXBoR..
               </div>
               <p className="mt-2 text-xs text-zinc-400 dark:text-zinc-600">
-                {" "}
-                Program address of the token user must prove ownership
-                for.
+                Program address of the token user must prove ownership for.
               </p>
             </div>
 
@@ -123,19 +167,16 @@ const MakerzTaskCreateStep2 = ({
                 ready={!!state.ownershipTokenAmount}
               />
               <Input
-                className="w-28 my-1 focus-visible:ring-1"
+                className="my-1 w-28 focus-visible:ring-1"
                 defaultValue={1}
                 {...register("ownershipTokenAmount")}
                 onChange={(e) => handleFormChange(e)}
               />
-              {/* {errors.title && <p>{errors.ownershipTokenAmount.message as string}</p>} */}
-
             </div>
             {state.ownershipTokenAddress && (
               <>
                 <div className="flex flex-row">
                   <div className="mt-0 flex flex-col items-start">
-                    <label className="text-sm text-zinc-600 dark:text-zinc-400"></label>
                     <FormLabel
                       labelTitle="Token Name"
                       required={true}
@@ -146,9 +187,6 @@ const MakerzTaskCreateStep2 = ({
                       className="my-1 w-32 focus-visible:ring-1"
                       onChange={(e) => handleFormChange(e)}
                     />
-                    {errors.ownershipTokenName && (
-                      <p>{errors.ownershipTokenName.message as string}</p>
-                    )}
                   </div>
                   <div className="ml-4 mt-0 flex flex-col items-start">
                     <FormLabel
@@ -161,9 +199,6 @@ const MakerzTaskCreateStep2 = ({
                       className="my-1 w-20 focus-visible:ring-1"
                       onChange={(e) => handleFormChange(e)}
                     />
-                    {errors.ownershipTokenSymbol && (
-                      <p>{errors.ownershipTokenSymbol.message as string}</p>
-                    )}
                   </div>
                 </div>
                 <div className="mt-2 flex flex-col items-start">
@@ -177,7 +212,6 @@ const MakerzTaskCreateStep2 = ({
                     {...register("title")}
                     onChange={(e) => handleFormChange(e)}
                   />
-                  {errors.title && <p>{errors.title.message as string}</p>}
                 </div>
                 <div className="mt-2 flex flex-col items-start">
                   <FormLabel
@@ -191,9 +225,6 @@ const MakerzTaskCreateStep2 = ({
                     minHeight={40}
                     onChange={(e) => handleFormChange(e)}
                   />
-                  {errors.description && (
-                    <p>{errors.description.message as string}</p>
-                  )}
                 </div>
                 <div className="flex w-56 flex-row">
                   <div className="my-4 mr-2">
@@ -221,9 +252,6 @@ const MakerzTaskCreateStep2 = ({
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    {errors.ownerGroup && (
-                      <p>{errors.ownerGroup.message as string}</p>
-                    )}
                   </div>
 
                   <div className="my-4 ">
@@ -251,9 +279,6 @@ const MakerzTaskCreateStep2 = ({
                         </SelectGroup>
                       </SelectContent>
                     </Select>
-                    {errors.ownerAdmin && (
-                      <p>{errors.ownerAdmin.message as string}</p>
-                    )}
                   </div>
                 </div>
               </>
@@ -261,24 +286,17 @@ const MakerzTaskCreateStep2 = ({
           </div>
         )}
 
-        {/* <div className="mt-2 flex w-full flex-col items-center justify-center">
-        <div
-          className="w-36 cursor-pointer rounded border bg-blue-500 px-4 py-2 text-center text-sm font-medium text-zinc-100"
-          onClick={() =>
-            dispatch({
-              type: "SET_FIELD",
-              field: "makerzFormStep",
-              value: 3,
-            })
-          }
-        >
-          Save Task Type
-        </div>
-      </div> */}
+        {state.hasMissingFields && (
+          <div className="flex flex-col items-center">
+            <div className="text-red-500">Missing required fields</div>
+          </div>
+        )}
+
         <div className="items-content flex w-full flex-row justify-center">
           <Button
-            className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600 "
-            type="submit"
+            className={`my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
+            onClick={handleNextStep}
+            type="button"
           >
             Save Task
           </Button>

@@ -30,7 +30,8 @@ type MakerzTaskCreateStep5Props = {
   ) => void;
   errors: any;
   register: any;
-};4
+};
+4;
 const MakerzTaskCreateStep5 = ({
   state,
   dispatch,
@@ -73,12 +74,19 @@ const MakerzTaskCreateStep5 = ({
         </div>
       </div> */}
 
-      <Button
-        className="my-2 border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
+      {state.hasMissingFields && (
+        <div className="flex flex-col items-center mt-4">
+          <div className="text-red-500">Missing required fields</div>
+          <div className="text-red-500">Fill in required fields before submitting</div>
+        </div>
+      )}
+
+      {!state.hasMissingFields && <Button
+        className="my-2  border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
         type="submit"
       >
         Schedule/Publish
-      </Button>
+      </Button>}
     </>
   );
 };

@@ -7,6 +7,14 @@ export const metadata: Metadata = {
   description: "MakerzFund for Doerz.fun",
 };
 const MakerzFundPage = (props: MakerzFundPageProps) => {
+  const handleGetByProgramId = () => {
+    console.log("Get By Program Id");
+  };
+
+  const handleGetBySymbol = () => {
+    console.log("Get By Symbol");
+  };
+
   return <div>MakerzFund</div>;
 };
 

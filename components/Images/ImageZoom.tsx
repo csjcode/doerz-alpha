@@ -35,7 +35,7 @@ const ImageZoom = ({ src, alt, zSrc, zWidth, zHeight }: ImageZoomProps) => {
               height="100"
             />
           </HoverCardTrigger>
-          <HoverCardContent className="w-[600px] h-[400px]">
+          <HoverCardContent className="w-[580px] h-[380px]">
             <Image
               alt=""
               className="py-2 pr-2"

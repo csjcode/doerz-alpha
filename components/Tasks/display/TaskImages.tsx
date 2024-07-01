@@ -11,9 +11,9 @@ const TaskImages = ({ images }: TaskImagesProps) => {
       {images.map((image,i) => (
         <ImageZoom
           key={i}
-          src={"/images/ph/150x100.png"}
+          src={image ? image : "/images/ph/600x400.png"}
           alt="Small Image"
-          zSrc={"/images/ph/600x400.png"}
+          zSrc={image ? image : "/images/ph/600x400.png"}
           zWidth={600}
           zHeight={400}
         />

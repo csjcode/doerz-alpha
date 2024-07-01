@@ -29,7 +29,7 @@ const Portal = () => {
             </div>
           </div>
           <Link href="/login/">
-            <Button className="h-20 w-40 bg-blue-500 text-xl hover:bg-blue-600">
+            <Button className="h-20 w-40 bg-blue-500 text-white text-xl hover:bg-blue-600">
               Doerz
             </Button>
           </Link>
@@ -45,8 +45,7 @@ const Portal = () => {
         </div>
         <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
-            <div>
-              {" "}
+            <div className="">
               Promote{" "}
               <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600">
                 something
@@ -54,7 +53,7 @@ const Portal = () => {
             </div>
           </div>
           <Link href="/makerz/">
-            <Button className="h-20 w-40 bg-green-600 text-xl hover:bg-green-700">
+            <Button className="h-20 w-40 bg-green-600 text-xl text-white hover:bg-green-700">
               Makerz
             </Button>
           </Link>
