@@ -1,9 +1,7 @@
+// reducerMakerzTaskForm.ts
 import {
-  OWNER_USER,
   OWNER_GROUP,
   OWNER_ADMIN,
-  OWNER_ORG,
-  getInitialValues,
   FUNDING_POOL,
 } from "./initialConfig";
 import { generateShortDateTime } from "@/utils/dates";
@@ -31,8 +29,8 @@ export const initialState = {
   ownerGroup: OWNER_GROUP,
   ownerAdmin: OWNER_ADMIN,
   rewardInDOERZ: "100",
-  image: "",
-  userInstructions: [] as string[], // Add instructions to the state
+  images: [] as string[], // Change from single image to array of images
+  userInstructions: [] as string[],
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
   errors: {},
@@ -47,7 +45,9 @@ export type Action =
   | { type: "SET_ERRORS"; payload: Partial<State> }
   | { type: "SET_HAS_MISSING_FIELDS"; payload: boolean }
   | { type: "ADD_INSTRUCTION"; instruction: string }
-  | { type: "REMOVE_INSTRUCTION"; index: number };
+  | { type: "REMOVE_INSTRUCTION"; index: number }
+  | { type: "ADD_IMAGE"; payload: string } // New action type for adding images
+  | { type: "RESET_IMAGES" }; // New action type for resetting images
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -85,6 +85,17 @@ export const reducer = (state: State, action: Action): State => {
         userInstructions: state.userInstructions.filter(
           (_, index) => index !== action.index,
         ),
+      };
+    case "ADD_IMAGE":
+      console.log("Adding image to state:", action.payload); // Debugging line
+      return {
+        ...state,
+        images: [...state.images, action.payload],
+      };
+    case "RESET_IMAGES":
+      return {
+        ...state,
+        images: [],
       };
     default:
       return state;

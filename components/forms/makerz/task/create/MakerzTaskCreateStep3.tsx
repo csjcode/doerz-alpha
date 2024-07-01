@@ -19,6 +19,8 @@ import { State } from "./reducerMakerzTaskFor";
 import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
 import { Button } from "@/components/ui/button";
 import FormLabel from "./FormLabel";
+import DragAndDropImageUpload from "./DragAndDropImageUpload";
+import ImageUpload from "./ImageUpload";
 
 type MakerzTaskCreateStep3Props = {
   state: State;
@@ -84,6 +86,10 @@ const MakerzTaskCreateStep3 = ({
           Save Content
         </div>
       </div> */}
+      <div className="">
+        <ImageUpload dispatch={dispatch} state={state} />
+      </div>
+
 
       <div className="items-content flex w-full flex-row justify-center">
         <Button
