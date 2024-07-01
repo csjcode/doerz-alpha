@@ -13,7 +13,7 @@ export interface Task {
   rewardSize: "small" | "medium" | "large";
   brand: string;
   description: string;
-  image: string;
+  images: string[];
   draft: "true" | "false"
   ownerUser: string,
   ownerGroup: string,

@@ -85,7 +85,11 @@ const DisplayTaskDetail = ({
         </div>
       )}
       <div className="mt-4">
-        <TaskImages images={["", "", "", "", ""]} />
+        {data?.images && data?.images?.length > 0 ? (
+          <TaskImages images={data?.images} />
+        ) : (
+          <TaskImages images={["", "", "", "", ""]} />
+        )}
       </div>
 
       <div className="mt-4 flex flex-col">
