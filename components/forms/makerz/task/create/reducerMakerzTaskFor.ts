@@ -35,7 +35,8 @@ export const initialState = {
   userInstructions: [] as string[], // Add instructions to the state
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
-  errors: {}
+  errors: {},
+  hasMissingFields: true
 };
 
 export type State = typeof initialState;
@@ -44,6 +45,7 @@ export type Action =
   | { type: "SET_FIELD"; field: keyof State; value: any }
   | { type: "SET_INITIAL_VALUES"; payload: Partial<State> }
   | { type: "SET_ERRORS"; payload: Partial<State> }
+  | { type: "SET_HAS_MISSING_FIELDS"; payload: boolean }
   | { type: "ADD_INSTRUCTION"; instruction: string }
   | { type: "REMOVE_INSTRUCTION"; index: number };
 
@@ -58,6 +60,11 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         ...action.payload,
+      };
+    case "SET_HAS_MISSING_FIELDS":
+      return {
+        ...state,
+        hasMissingFields: action.payload,
       };
     case "SET_ERRORS":
       return {

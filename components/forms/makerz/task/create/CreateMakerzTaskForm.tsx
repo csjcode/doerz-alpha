@@ -21,8 +21,14 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordionMakerzForm";
-import { PiNumberCircleFour, PiNumberCircleOne, PiNumberCircleThree, PiNumberCircleTwo } from "react-icons/pi";
-import { FaCircleCheck } from "react-icons/fa6";
+import {
+  PiNumberCircleFive,
+  PiNumberCircleFour,
+  PiNumberCircleOne,
+  PiNumberCircleThree,
+  PiNumberCircleTwo,
+} from "react-icons/pi";
+import { FaCircleCheck, FaCircleXmark } from "react-icons/fa6";
 
 export const getErrorMessage = (errors: any, fieldName: string) => {
   if (errors[fieldName]) {
@@ -101,12 +107,21 @@ const CreateMakerzTaskForm = () => {
     onSubmit(data, state, dispatch);
   };
 
+  const handleStepChange = (step: number) => {
+    dispatch({
+      type: "SET_FIELD",
+      field: "makerzFormStep",
+      value: step,
+    });
+  };
+
   useEffect(() => {
     setAccordionOpenDefaultValue(`item-${state.makerzFormStep}`);
   }, [state.makerzFormStep]);
 
   console.log("state", state);
 
+  const accordionItemClassName = `mb-2 pb-2 border-b-[1px] border-b-zinc-200 dark:border-b-zinc-800`;
 
   return (
     <div className="mb-4 flex flex-col sm:flex-row">
@@ -126,9 +141,13 @@ const CreateMakerzTaskForm = () => {
                 collapsible
                 className="justify-start"
               >
-                <AccordionItem value="item-1" className="border-b-0">
+                <AccordionItem
+                  value="item-1"
+                  className={accordionItemClassName}
+                >
                   <AccordionTrigger
                     className={`flex flex-1 justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                    onClick={() => handleStepChange(1)}
                   >
                     {state.makerzFormStep < 2 ? (
                       <div className="mr-2">
@@ -141,8 +160,10 @@ const CreateMakerzTaskForm = () => {
                         />
                       </div>
                     ) : (
-                      <div className="mr-1">
-                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      <div className="mr-2">
+                        {
+                          <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                        }
                       </div>
                     )}
                     Create Task Type
@@ -158,9 +179,13 @@ const CreateMakerzTaskForm = () => {
                     />
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-2" className="border-b-0">
+                <AccordionItem
+                  value="item-2"
+                  className={accordionItemClassName}
+                >
                   <AccordionTrigger
                     className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                    onClick={() => handleStepChange(2)}
                   >
                     {state.makerzFormStep < 3 ? (
                       <div className="mr-2">
@@ -173,8 +198,12 @@ const CreateMakerzTaskForm = () => {
                         />
                       </div>
                     ) : (
-                      <div className="mr-1">
-                        <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                      <div className="mr-2">
+                        {state.hasMissingFields ? (
+                          <FaCircleXmark className="text-red-600 dark:text-red-400" />
+                        ) : (
+                          <FaCircleCheck className="text-green-600 dark:text-green-400" />
+                        )}
                       </div>
                     )}
                     Add Task Details
@@ -190,9 +219,13 @@ const CreateMakerzTaskForm = () => {
                     />
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-3" className="border-b-0">
+                <AccordionItem
+                  value="item-3"
+                  className={accordionItemClassName}
+                >
                   <AccordionTrigger
                     className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                    onClick={() => handleStepChange(3)}
                   >
                     {state.makerzFormStep < 4 ? (
                       <div className="mr-2">
@@ -205,7 +238,7 @@ const CreateMakerzTaskForm = () => {
                         />
                       </div>
                     ) : (
-                      <div className="mr-1">
+                      <div className="mr-2">
                         <FaCircleCheck className="text-green-600 dark:text-green-400" />
                       </div>
                     )}
@@ -222,9 +255,13 @@ const CreateMakerzTaskForm = () => {
                     />
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-4" className="border-b-0">
+                <AccordionItem
+                  value="item-4"
+                  className={accordionItemClassName}
+                >
                   <AccordionTrigger
                     className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                    onClick={() => handleStepChange(4)}
                   >
                     {state.makerzFormStep < 5 ? (
                       <div className="mr-2">
@@ -237,7 +274,7 @@ const CreateMakerzTaskForm = () => {
                         />
                       </div>
                     ) : (
-                      <div className="mr-1">
+                      <div className="mr-2">
                         <FaCircleCheck className="text-green-600 dark:text-green-400" />
                       </div>
                     )}
@@ -254,22 +291,26 @@ const CreateMakerzTaskForm = () => {
                     />
                   </AccordionContent>
                 </AccordionItem>
-                <AccordionItem value="item-5" className="border-b-0">
+                <AccordionItem
+                  value="item-5"
+                  className={accordionItemClassName}
+                >
                   <AccordionTrigger
                     className={`flex justify-start py-0 font-normal transition-all hover:no-underline [&[data-state=open]>svg]:rotate-180`}
+                    onClick={() => handleStepChange(5)}
                   >
-                    {state.makerzFormStep < 5 ? (
+                    {state.makerzFormStep < 6 ? (
                       <div className="mr-2">
-                        <PiNumberCircleFour
+                        <PiNumberCircleFive
                           className={`${
-                            state.makerzFormStep === 4
+                            state.makerzFormStep === 5
                               ? "text-green-700 dark:text-green-300"
                               : "dark:zinc-600 text-zinc-400"
                           }`}
                         />
                       </div>
                     ) : (
-                      <div className="mr-1">
+                      <div className="mr-2">
                         <FaCircleCheck className="text-green-600 dark:text-green-400" />
                       </div>
                     )}
@@ -287,11 +328,10 @@ const CreateMakerzTaskForm = () => {
                   </AccordionContent>
                 </AccordionItem>
 
-
                 {/* Add more AccordionItem components for other steps as needed */}
               </Accordion>
             </div>
-{/*
+            {/*
             {state.makerzFormStep == 3 && (
               <MakerzTaskCreateStep3
                 state={state}
@@ -327,6 +367,7 @@ const CreateMakerzTaskForm = () => {
           </div>
         </form>
       </div>
+      <MakerzTaskCreatePreview data={state} state={state} />
     </div>
   );
 };

@@ -26,7 +26,7 @@ const MakerzTaskCreateHeader = ({
         {/* <MdFormatListBulletedAdd className="text-zinc-500" /> */}
         {/* <div className="mr-2 font-medium">Create Task</div> */}
       </div>
-      <div className="my-1 flex flex-row justify-center">
+      {/* <div className="my-1 flex flex-row justify-center">
         {state.makerzFormStep < 2 ? (
           <div className="mr-1">
             <PiNumberCircleOne
@@ -103,8 +103,8 @@ const MakerzTaskCreateHeader = ({
             <FaCircleCheck className="text-green-600 dark:text-green-400" />
           </div>
         )}
-      </div>
-      {state.makerzFormStep > 1 && (
+      </div> */}
+      {/* {state.makerzFormStep > 1 && (
         <div className="mt-2 flex w-full items-center justify-center text-xs">
           <div
             className="flex cursor-pointer flex-row items-center"
@@ -119,7 +119,7 @@ const MakerzTaskCreateHeader = ({
             <RxCaretLeft size={22} /> Return to Step {state.makerzFormStep - 1}
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };
