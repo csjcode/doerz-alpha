@@ -16,9 +16,8 @@ const ImageDragSource: React.FC<ImageDragSourceProps> = ({ file }) => {
   });
 
   return (
-    <div ref={drag} style={{ margin: '10px', padding: '10px', border: '1px solid black' }}>
-      {/* {file.name} */}
-      <img src={URL.createObjectURL(file)} alt={file.name} style={{ maxWidth: '100px' }} />
+    <div ref={drag} className="m-2.5 p-2.5 border border-black dark:bg-zinc-800">
+      <img src={URL.createObjectURL(file)} alt={file.name} className="max-w-[100px]" />
     </div>
   );
 };

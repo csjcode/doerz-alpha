@@ -13,7 +13,7 @@ const TaskImages = ({ images }: TaskImagesProps) => {
           key={i}
           src={image ? image : "/images/ph/600x400.png"}
           alt="Small Image"
-          zSrc={"/images/ph/600x400.png"}
+          zSrc={image ? image : "/images/ph/600x400.png"}
           zWidth={600}
           zHeight={400}
         />

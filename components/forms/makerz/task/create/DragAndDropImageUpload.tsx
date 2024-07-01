@@ -32,18 +32,12 @@ const DragAndDropImageUpload: React.FC<DragAndDropImageUploadProps> = ({ dispatc
     <div
       onDrop={handleDrop}
       onDragOver={handleDragOver}
-      style={{
-        border: '2px dashed gray',
-        padding: '20px',
-        textAlign: 'center',
-        cursor: 'pointer',
-        background: 'white',
-      }}
+      className="mr-2 border border-dashed border-gray-400 p-2 font-extralight text-center cursor-pointer bg-white dark:bg-zinc-800"
     >
-      Drag & drop an image here
-      <div style={{ display: 'flex', flexWrap: 'wrap', marginTop: '10px' }}>
+      Drag & drop images here
+      <div className="flex flex-wrap mt-2.5">
         {images.map((image, index) => (
-          <img key={index} src={image} alt={`Uploaded ${index}`} style={{ maxWidth: '100px', margin: '10px' }} />
+          <img key={index} src={image} alt={`Uploaded ${index}`} className="max-w-[100px] m-2.5" />
         ))}
       </div>
     </div>
