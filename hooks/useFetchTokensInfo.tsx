@@ -1,5 +1,5 @@
 // useFetchTokensInfo.ts
-import { TokenInfo } from "@/components/TokensInfo/types";
+import { TokenInfo } from "@/components/tokens-info/types";
 import { useState, useEffect } from "react";
 
 // interface TokenInfo {
