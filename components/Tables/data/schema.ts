@@ -10,7 +10,7 @@ export const taskSchema = z.object({
   rewardSize: z.string(),
   brand: z.string(),
   description: z.string(),
-  image: z.string(),
+  images: z.array(z.string()).optional(),
 })
 
 const taskSchemaMakerzForm = z.object({
@@ -21,7 +21,7 @@ const taskSchemaMakerzForm = z.object({
   rewardSize: z.enum(["small", "medium", "large"]),
   brand: z.string().nonempty("Brand is required"),
   description: z.string().nonempty("Description is required"),
-  image: z.string().url().optional(),
+  images: z.array(z.string()).optional(),
   draft: z.enum(["true", "false"]),
   ownerUser: z.string().nonempty("Owner User is required"),
   ownerGroup: z.string().optional(),

@@ -41,7 +41,7 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
     ownerAdmin: state.ownerAdmin,
     ownerOrg: OWNER_USER,
     rewardInDOERZ: state.rewardInDOERZ,
-    image: state.image,
+    images: state.images,
     userInstructions: state.userInstructions,
   };
 

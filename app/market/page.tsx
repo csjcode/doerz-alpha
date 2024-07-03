@@ -1,5 +1,5 @@
 import React from "react";
-import TokenPrice from "@/components/TokenPrice";
+// import TokenPrice from "@/components/TokenPrice";
 import { Metadata } from "next";
 
 type MarketPageProps = {};
@@ -12,7 +12,7 @@ const MarketPage = (props: MarketPageProps) => {
     <div>
       <div className="text-xl">Market Dashboard</div>
       <div className="text-lg">Coming soon...</div>
-      <TokenPrice />
+      {/* <TokenPrice /> */}
     </div>
   );
 };

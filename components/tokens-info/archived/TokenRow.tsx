@@ -10,8 +10,8 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import Image from "next/image";
-import { formatUSD } from "../../utils/formatNumbers";
-import { TOTAL_ASSETS_INDEX } from "./config";
+import { formatUSD } from "@/utils/formatNumbers";
+// import { TOTAL_ASSETS_INDEX } from "./config";
 import { TokenInfo } from "./types";
 
 type TokenRowProps = {
@@ -56,11 +56,11 @@ const TokenRow = ({
       {displayAllocation && (
         <TableCell className="flex w-[150px] flex-col items-center justify-center">
           <p className="text-xl">
-            {
+            {/* {
               formatUSD(
                 TOTAL_ASSETS_INDEX * (allocationPercentageIndex / 100)
               ).split(".")[0]
-            }
+            } */}
           </p>
         </TableCell>
       )}

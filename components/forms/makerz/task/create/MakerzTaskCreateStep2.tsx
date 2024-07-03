@@ -1,5 +1,5 @@
 "use client";
-import React, { ChangeEvent, useEffect } from "react";
+import React, { ChangeEvent, useEffect, useState } from "react";
 import { taskTypes } from "@/components/Tables/data/data";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -16,6 +16,7 @@ import { getErrorMessage } from "./CreateMakerzTaskForm";
 import { OWNER_ORG } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
 import FormLabel from "./FormLabel";
+import { useGetTokenInfoByProgramId } from "@/hooks/useGetTokenInfoByProgramId";
 
 type MakerzTaskCreateStep2Props = {
   state: State;
@@ -30,11 +31,47 @@ type MakerzTaskCreateStep2Props = {
 
 const MakerzTaskCreateStep2 = ({
   state,
+  setValue,
   dispatch,
   handleFormChange,
   errors,
   register,
 }: MakerzTaskCreateStep2Props) => {
+  const [loading, setLoading] = useState(false);
+  const { tokenInfo, isLoading, error, fetchTokenInfo } = useGetTokenInfoByProgramId(state.ownershipTokenAddress || "");
+
+  useEffect(() => {
+    if (isLoading) {
+      setLoading(true);
+    } else {
+      setLoading(false);
+      if (tokenInfo) {
+        console.log(tokenInfo);
+
+        const name = tokenInfo.pairs[0].baseToken.name;
+        const symbol = tokenInfo.pairs[0].baseToken.symbol;
+
+        dispatch({
+          type: "SET_FIELD",
+          field: "ownershipTokenName",
+          value: name,
+        });
+
+        dispatch({
+          type: "SET_FIELD",
+          field: "ownershipTokenSymbol",
+          value: symbol,
+        });
+
+        setValue("ownershipTokenName", name);
+        setValue("ownershipTokenSymbol", symbol);
+      }
+      if (error) {
+        console.error(error);
+      }
+    }
+  }, [isLoading, tokenInfo, error, dispatch, setValue]);
+
   useEffect(() => {
     const requiredFields: Array<keyof State> = [
       "ownershipTokenName",
@@ -72,6 +109,20 @@ const MakerzTaskCreateStep2 = ({
     state.hasMissingFields,
     dispatch,
   ]);
+
+  const handleOwnershipTokenAddressChange = async (
+    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
+  ) => {
+    handleFormChange(e);
+  };
+
+  const handleAutoFill = async () => {
+    if (!state.ownershipTokenAddress) {
+      alert('Please enter a Program ID.');
+      return;
+    }
+    fetchTokenInfo(state.ownershipTokenAddress);
+  }
 
   const handleNextStep = () => {
     if (state.hasMissingFields) {
@@ -142,15 +193,18 @@ const MakerzTaskCreateStep2 = ({
         {state.taskType === "ownership" && (
           <div>
             <div className="mb-2 flex flex-col items-start justify-start">
-              <FormLabel
-                labelTitle="Token/Program Address"
-                required={true}
-                ready={!!state.ownershipTokenAddress}
-              />
+              <div className="flex flex-row items-center justify-normal">
+                <FormLabel
+                  labelTitle="Token/Program Address"
+                  required={true}
+                  ready={!!state.ownershipTokenAddress}
+                />
+                <Button type="button" variant="outline" className="ml-2 text-xs px-3 py-1" onClick={handleAutoFill}>Autofill</Button>
+              </div>
               <Input
                 className="my-1 w-[250px] focus-visible:ring-1"
                 {...register("ownershipTokenAddress")}
-                onChange={(e) => handleFormChange(e)}
+                onChange={(e) => handleOwnershipTokenAddressChange(e)}
               />
               <div className="mt-2 truncate text-xs text-zinc-400 dark:text-zinc-600">
                 Ex: DezXAZ8z7PnrnRJjz3wXBoR..
@@ -173,7 +227,12 @@ const MakerzTaskCreateStep2 = ({
                 onChange={(e) => handleFormChange(e)}
               />
             </div>
-            {state.ownershipTokenAddress && (
+            {loading && (
+              <div className="flex flex-col items-center">
+                <div className="text-blue-500">Loading...</div>
+              </div>
+            )}
+            {state.ownershipTokenAddress && !loading && (
               <>
                 <div className="flex flex-row">
                   <div className="mt-0 flex flex-col items-start">
@@ -184,6 +243,7 @@ const MakerzTaskCreateStep2 = ({
                     />
                     <Input
                       {...register("ownershipTokenName")}
+                      value={state.ownershipTokenName}
                       className="my-1 w-32 focus-visible:ring-1"
                       onChange={(e) => handleFormChange(e)}
                     />
@@ -196,6 +256,7 @@ const MakerzTaskCreateStep2 = ({
                     />
                     <Input
                       {...register("ownershipTokenSymbol")}
+                      value={state.ownershipTokenSymbol}
                       className="my-1 w-20 focus-visible:ring-1"
                       onChange={(e) => handleFormChange(e)}
                     />

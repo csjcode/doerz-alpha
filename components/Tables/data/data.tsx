@@ -8,16 +8,7 @@ import {
   RxQuestionMarkCircled,
   RxStopwatch,
 } from "react-icons/rx"
-
 export const taskTypes = [
-  {
-    value: "ownership",
-    label: "Ownership",
-  },
-  {
-    value: "finance",
-    label: "Finance",
-  },
   {
     value: "activity",
     label: "Activity",
@@ -27,32 +18,39 @@ export const taskTypes = [
     label: "Achievements",
   },
   {
-    value: "onboarding",
-    label: "Onboarding",
+    value: "bug",
+    label: "Bug",
   },
   {
     value: "developer",
     label: "Developer",
   },
   {
-    value: "social",
-    label: "Social",
-  },
-
-
-  {
-    value: "bug",
-    label: "Bug",
+    value: "documentation",
+    label: "Documentation",
   },
   {
     value: "feature",
     label: "Feature",
   },
   {
-    value: "documentation",
-    label: "Documentation",
+    value: "finance",
+    label: "Finance",
   },
-]
+  {
+    value: "onboarding",
+    label: "Onboarding",
+  },
+  {
+    value: "ownership",
+    label: "Ownership",
+  },
+  {
+    value: "social",
+    label: "Social",
+  },
+];
+
 
 export const statuses = [
   {

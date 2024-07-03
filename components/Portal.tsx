@@ -19,13 +19,13 @@ const Portal = () => {
         <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
             <div>
-              <u className="decoration-slate-400 decoration-dashed underline-offset-8">
-                Do stuff
-              </u>{" "}
-              and get{" "}
-              <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600">
-                rewards
-              </u>
+              {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8"> */}
+                Do stuff for rewards
+              {/* </u>{" "} */}
+              {/* and get{" "} */}
+              {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600"> */}
+
+              {/* </u> */}
             </div>
           </div>
           <Link href="/login/">
@@ -47,9 +47,9 @@ const Portal = () => {
           <div className="pb-6 text-center text-2xl">
             <div className="">
               Promote{" "}
-              <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600">
-                something
-              </u>
+              {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600"> */}
+                {/* something */}
+              {/* </u> */}
             </div>
           </div>
           <Link href="/makerz/">

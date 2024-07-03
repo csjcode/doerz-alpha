@@ -2,24 +2,17 @@ import { NextRequest, NextResponse } from "next/server";
 import { fetchWithRetry } from "@/utils/fetchWithRetry";
 import { FetchOptions } from "@/app/api/types";
 
-export async function handler(req: NextRequest, { params }: { params: { username: string } }) {
-  const { method } = req;
+export async function GET(req: NextRequest, { params }: { params: { username: string } }) {
   const { username } = params;
+  return handleGet(username);
+}
 
-  if (method === "GET") {
-    return handleGet(username);
-  } else if (method === "POST") {
-    return handlePost(req);
-  } else if (method === "PUT") {
-    return handlePut(req);
-  } else {
-    return NextResponse.json({ error: "Method not allowed" }, {
-      status: 405,
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
-  }
+export async function POST(req: NextRequest, { params }: { params: { username: string } }) {
+  return handlePost(req);
+}
+
+export async function PUT(req: NextRequest, { params }: { params: { username: string } }) {
+  return handlePut(req);
 }
 
 async function handleGet(username: string) {
@@ -126,5 +119,3 @@ async function handlePut(req: NextRequest) {
     });
   }
 }
-
-export { handler as GET, handler as POST, handler as PUT };

@@ -1,11 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 
 interface TokenInfo {
-  // Define the structure of the token information based on your API response
-  name: string;
-  symbol: string;
-  decimals: number;
-  totalSupply: number;
+  pairs: any;
 }
 
 interface FetchResult {
@@ -14,21 +10,30 @@ interface FetchResult {
   error: string | null;
 }
 
-export const useGetTokenInfoByProgramId = (programId: string) => {
+//  const { tokenInfo , error, fetchTokenInfo } = useGetTokenInfoByProgramId(programId);
+
+export const useGetTokenInfoByProgramId = (programId: string | null) => {
   const [result, setResult] = useState<FetchResult>({
     tokenInfo: null,
     isLoading: false,
     error: null,
   });
 
+  if (programId === null) {
+    throw new Error("programId is required!");
+  }
+
   const fetchTokenInfo = useCallback(async (programId: string) => {
     console.log(`https://api.dexscreener.com/latest/dex/tokens/${programId}`);
 
     setResult((prev) => ({ ...prev, isLoading: true }));
     try {
-      const response = await fetch(`https://api.dexscreener.com/latest/dex/tokens/${programId}`, {
-        method: "GET",
-      });
+      const response = await fetch(
+        `https://api.dexscreener.com/latest/dex/tokens/${programId}`,
+        {
+          method: "GET",
+        },
+      );
 
       if (!response.ok) {
         throw new Error(`HTTP error! Status: ${response.status}`);

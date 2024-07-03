@@ -6,6 +6,7 @@ import DisplayTokenInfoByProgramId from "../display/DisplayTokenInfoByProgramId"
 
 type GetTokenInfoByProgramIdProps = {
   programId: string;
+  displayType?: string;
 };
 
 const GetTokenInfoByProgramId = ({ programId }: GetTokenInfoByProgramIdProps) => {

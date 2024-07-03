@@ -19,7 +19,7 @@ const FetchMakerzTasks = ({username}: FetchMakerzTasksProps) => {
   const data = tasks || [];
 
   return (
-    <DataTable tableType="makerz" data={data} columns={columnsMakerz} />
+    <DataTable tableType="makerz" data={data as any} columns={columnsMakerz} />
   )
 }
 
