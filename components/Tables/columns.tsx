@@ -58,9 +58,19 @@ export const columns: ColumnDef<Task>[] = [
     header: ({ table }) => (
       <MdOutlineImage className="text-zinc-500" />
     ),
-    cell: ({ row }) => (
-      <div className=""><Image src="/images/ph/75x50.png" alt="project image" width={75} height={50}/></div>
-    ),
+    cell: ({ row }) => {
+      const imagesExist = Array.isArray(row?.original?.images) && row.original.images.length > 0;
+      return (
+        <div className="">
+          <Image
+        src={imagesExist ? `/images/details/${(row.original.images as string[])[0]}` : "/images/ph/75x50.png"}
+            alt="project image"
+            width={75}
+            height={50}
+          />
+        </div>
+      );
+    },
     enableSorting: false,
     enableHiding: true,
   },

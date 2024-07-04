@@ -1,4 +1,4 @@
-import LoginStepper from "@/components/LoginStepper";
+import LoginStepper from "@/components/login/LoginStepper";
 import { Metadata } from "next";
 import React from "react";
 

@@ -5,7 +5,8 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { GoGear } from 'react-icons/go';
 import { useUserProfileStore, useUserTasksStore } from "@/store/store";
-
+// import styles from "./nav-wallet.module.css"
+// require("./nav-wallet.module.css");
 
 // import DropdownNetwork from "./DropdownNetwork";
 // import NetworkSwitcher from "./NetworkSwitcher";
@@ -50,7 +51,7 @@ export default function Home() {
             <Link href="/">DOERZ.fun</Link>
           </section>
 
-          <ul className="nav-links flex  items-center gap-8">
+          {/* <ul className="nav-links flex  items-center gap-8">
             <Link href="/">
               <li>Home</li>
             </Link>
@@ -60,7 +61,7 @@ export default function Home() {
             <Link href="/contacts">
               <li>Contacts</li>
             </Link>
-          </ul>
+          </ul> */}
           <div className="flex flex-row items-end">
             <div className="ml-4 rounded-lg border border-zinc-300 dark:border-zinc-900">
               <WalletAdapter />

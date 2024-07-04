@@ -88,7 +88,7 @@ const DisplayTaskDetail = ({
         {data?.images && data?.images?.length > 0 ? (
           <TaskImages images={data?.images} />
         ) : (
-          <TaskImages images={["", "", "", "", ""]} />
+          <TaskImages images={["01.png", "02.png", "03.png", "04.png", "05.png"]} />
         )}
       </div>
 

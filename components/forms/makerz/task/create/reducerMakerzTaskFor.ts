@@ -34,7 +34,7 @@ export const initialState = {
   fundingStatus: !!FUNDING_POOL[0].id,
   fundingPool: FUNDING_POOL[0].id,
   errors: {},
-  hasMissingFields: true
+  hasMissingFields: true,
 };
 
 export type State = typeof initialState;

@@ -17,6 +17,10 @@ interface ImageZoomProps {
 const ImageZoom = ({ src, alt, zSrc, zWidth, zHeight }: ImageZoomProps) => {
   const [isHovered, setIsHovered] = useState(false);
 
+  const srcPath = `${src}`;
+  console.log(`srcPath: ${srcPath}`);
+
+
   return (
     <div className="flex flex-col">
       <div
@@ -29,7 +33,7 @@ const ImageZoom = ({ src, alt, zSrc, zWidth, zHeight }: ImageZoomProps) => {
             {" "}
             <Image
               className="py-2 pr-2"
-              src={src}
+              src={srcPath}
               alt={alt}
               width="150"
               height="100"
@@ -39,18 +43,12 @@ const ImageZoom = ({ src, alt, zSrc, zWidth, zHeight }: ImageZoomProps) => {
             <Image
               alt=""
               className="py-2 pr-2"
-              src={zSrc}
+              src={srcPath}
               width={zWidth}
               height={zHeight}
             />
           </HoverCardContent>
         </HoverCard>
-
-        {/* <Image alt="" className="pr-2 py-2" src={zSrc} width={zWidth} height={zHeight}/> */}
-        {/* {isHovered && (
-
-
-      )} */}
       </div>
       {/* {isHovered && <div className="border border-zinc-700">isHovered</div>} */}
     </div>
