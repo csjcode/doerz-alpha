@@ -26,6 +26,7 @@ const config = {
         sans: ["var(--font-inter)"],
         mono: ["var(--font-roboto-mono)"],
         outfit: ["var(--font-outfit)"],
+        barlow: ["var(--font-barlow)"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -76,10 +77,15 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+        pulseColor: {
+          '10%, 100%': { color: '#1a202c' }, // dark color (e.g., dark gray)
+          '50%': { color: '#f7fafc' }, // light color (e.g., almost white)
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        pulseColor: 'pulseColor 3s infinite',
       },
     },
   },

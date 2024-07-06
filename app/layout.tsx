@@ -4,14 +4,22 @@ import "./globals.css";
 import NavBar from "@/components/Nav/NavBar";
 import NavbarContext from "@/components/Nav/NavbarContext";
 import NavbarDemos from "@/components/Nav/NavbarDemos";
-import { Outfit } from "next/font/google";
+import { Outfit, Barlow } from "next/font/google";
 import NavFooter from "@/components/Nav/NavFooter";
+import Image from "next/image";
 
 const outfit = Outfit({
   display: "swap",
   weight: "400",
   subsets: ["latin"],
   variable: "--font-outfit",
+});
+
+const barlow = Barlow({
+  display: "swap",
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-barlow",
 });
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
@@ -32,6 +40,15 @@ export default function RootLayout({
         <NavbarContext>
           <NavBar />
           {/* <NavbarDemos /> */}
+          {/* <div className="h-10 w-full relative dark:bg-black bg-white">
+            <Image
+              src="/images/logos/DOERZ.fun-bar-dark.png"
+              alt="logo"
+              layout="fill"
+              objectFit="contain"
+              // className="opacity-10"
+            />
+          </div> */}
           <div className="flex w-full flex-col items-center justify-center">
             {children}
           </div>

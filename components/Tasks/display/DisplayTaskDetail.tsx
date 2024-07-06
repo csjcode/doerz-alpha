@@ -61,7 +61,7 @@ const DisplayTaskDetail = ({
           <div className="flex flex-col">
             <div
               onClick={handleToggleDateFormat}
-              className="mr-2 mt-2 text-red-600"
+              className="mr-2 mt-2 text-red-700 dark:text-red-300"
             >
               <span className="font-bold">Expires:</span>{" "}
               {toggleDateFormat ? (
@@ -72,7 +72,7 @@ const DisplayTaskDetail = ({
             </div>
           </div>
         )}
-        <div className="mt-4 text-lg font-bold">Description</div>
+        <div className="mt-4 text-xl font-bold">Description</div>
         <p className="text-lg font-light">{data?.description}</p>
       </div>
 
@@ -88,17 +88,19 @@ const DisplayTaskDetail = ({
         {data?.images && data?.images?.length > 0 ? (
           <TaskImages images={data?.images} />
         ) : (
-          <TaskImages images={["01.png", "02.png", "03.png", "04.png", "05.png"]} />
+          <TaskImages
+            images={["01.png", "02.png", "03.png", "04.png", "05.png"]}
+          />
         )}
       </div>
 
       <div className="mt-4 flex flex-col">
-        <div className="text-lg font-bold">Reward Instructions</div>
-        <ol className="ml-4 mt-1 flex list-outside flex-col">
+        <div className="text-2xl font-bold">Reward Instructions</div>
+        <ol className="ml-4 mt-1 flex list-outside flex-col text-lg">
           {data?.userInstructions &&
             data?.userInstructions.map((instruction: string) => (
               <li
-                className={`mr-2  list-decimal rounded-xl px-2 py-1`}
+                className={`mr-2 list-decimal rounded-xl px-2 py-1`}
                 key={instruction}
               >
                 {instruction}

@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { RxCross2 } from "react-icons/rx"
-import { Table } from "@tanstack/react-table"
+import { RxCross2 } from "react-icons/rx";
+import { Table } from "@tanstack/react-table";
 
-import { DataTableViewOptions } from "./data-table-view-options"
+import { DataTableViewOptions } from "./data-table-view-options";
 
-import { rewardSizes, statuses } from "./data/data"
-import { DataTableFacetedFilter } from "./data-table-faceted-filter"
-import { Input } from "../ui/input"
-import { Button } from "../ui/button"
+import { rewardSizes, statuses } from "./data/data";
+import { DataTableFacetedFilter } from "./data-table-faceted-filter";
+import { Input } from "../ui/input";
+import { Button } from "../ui/button";
 
 interface DataTableToolbarProps<TData> {
-  table: Table<TData>
+  table: Table<TData>;
 }
 
 export function DataTableToolbar<TData>({
   table,
 }: DataTableToolbarProps<TData>) {
-  const isFiltered = table.getState().columnFilters.length > 0
+  const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
     <div className="flex items-center justify-between">
@@ -55,7 +55,15 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
+      <div className="mr-1 flex flex-row">
+        <div className="mr-1 mr-2 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-emerald-300">
+          Inbox
+        </div>
+        <div className="mr-1 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-zinc-600">
+          Cards
+        </div>
+      </div>
       <DataTableViewOptions table={table} />
     </div>
-  )
+  );
 }
