@@ -17,7 +17,7 @@ const TaskCard = ({ task }: TaskCardProps) => {
     <Card className="m-4 w-[350px]">
       <CardHeader>
         <img
-          src={task.images[0]}
+          src={`/images/details/${task.images[0]}`}
           alt={task.title}
           className="h-48 w-full object-cover"
         />

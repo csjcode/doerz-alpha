@@ -9,6 +9,7 @@ import { rewardSizes, statuses } from "./data/data";
 import { DataTableFacetedFilter } from "./data-table-faceted-filter";
 import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import Link from "next/link";
 
 interface DataTableToolbarProps<TData> {
   table: Table<TData>;
@@ -55,15 +56,18 @@ export function DataTableToolbar<TData>({
           </Button>
         )}
       </div>
-      <div className="mr-1 flex flex-row">
+
+      <DataTableViewOptions table={table} />
+      <Link href="/doerz/inbox">
         <div className="mr-1 mr-2 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-emerald-300">
           Inbox
         </div>
+      </Link>
+      <Link href="/doerz/cards">
         <div className="mr-1 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-zinc-600">
           Cards
         </div>
-      </div>
-      <DataTableViewOptions table={table} />
+      </Link>
     </div>
   );
 }
