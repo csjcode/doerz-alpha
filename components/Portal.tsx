@@ -7,6 +7,7 @@ import { GiCoins } from "react-icons/gi";
 import dynamic from "next/dynamic";
 import { Button } from "./ui/button";
 import Link from "next/link";
+import Image from "next/image";
 
 const DynamicThemeSwitcher = dynamic(() => import("@/components/ThemeToggle"), {
   ssr: false,
@@ -16,20 +17,19 @@ const Portal = () => {
   return (
     <div className="flex h-full w-full flex-col">
       <div className="flex w-full grow justify-center gap-4 pb-8 pl-4 pt-8">
-        <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
+        <div className="flex h-[50%] w-2/5 flex-col items-center justify-center rounded-xl border-2 border-zinc-200 p-8 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
             <div>
               {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8"> */}
-                Do stuff for rewards
+              Rewards
               {/* </u>{" "} */}
               {/* and get{" "} */}
               {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600"> */}
-
               {/* </u> */}
             </div>
           </div>
           <Link href="/login/">
-            <Button className="h-20 w-40 bg-blue-500 text-white text-xl hover:bg-blue-600">
+            <Button className="h-20 w-40 bg-blue-500 text-xl text-white hover:bg-blue-600">
               Doerz
             </Button>
           </Link>
@@ -43,12 +43,12 @@ const Portal = () => {
             </ul>
           </div>
         </div>
-        <div className="flex flex-col h-[50%] w-2/5 p-8 items-center justify-center rounded-xl border-2 border-zinc-200 dark:border-zinc-600">
+        <div className="flex h-[50%] w-2/5 flex-col items-center justify-center rounded-xl border-2 border-zinc-200 p-8 dark:border-zinc-600">
           <div className="pb-6 text-center text-2xl">
             <div className="">
               Promote{" "}
               {/* <u className="decoration-slate-400 decoration-dashed underline-offset-8 dark:decoration-slate-600"> */}
-                {/* something */}
+              {/* something */}
               {/* </u> */}
             </div>
           </div>
@@ -69,6 +69,17 @@ const Portal = () => {
         </div>
         {/* <div className=""></div> */}
       </div>
+      {/* <div className="flex flex-row justify-around">
+        <div className="w-1/2">This is a test</div>
+        <div className="w-1/2">
+          <Image
+            width={200}
+            height={160}
+            style={{ height: "100%", width: "100%" }}
+            src="/images/DOERZ.fun.png"
+          />
+        </div>
+      </div> */}
     </div>
   );
 };

@@ -5,11 +5,11 @@ import Image from "next/image";
 const AvatarUser = () => {
   return (
     <Avatar>
-      <AvatarImage asChild src="https://github.com/shadcn.png">
+      <AvatarImage asChild src="https://pbs.twimg.com/profile_images/1632362292326047744/z8NiZyBF_400x400.jpg">
         <Image
           width={40}
           height={40}
-          src="https://github.com/shadcn.png"
+          src="https://pbs.twimg.com/profile_images/1632362292326047744/z8NiZyBF_400x400.jpg"
           alt="@shadcn"
         />
       </AvatarImage>

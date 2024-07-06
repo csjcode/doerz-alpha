@@ -7,8 +7,6 @@ import { IoDocumentTextOutline } from "react-icons/io5";
 import { AiOutlineInbox } from "react-icons/ai";
 import FetchTaskValidateClient from "@/components/Tasks/fetch/FetchTaskValidateClient";
 
-
-
 type DoerzValidatePageProps = {
   params: {
     taskIdName: string;
@@ -30,7 +28,7 @@ const DoerzValidatePage = ({ params }: DoerzValidatePageProps) => {
           </Link>
         </div>
 
-        <div className="flex flex-row items-center ml-4">
+        <div className="ml-4 flex flex-row items-center">
           {" "}
           <AiOutlineInbox className="text-zinc-500" />
           <Link className="ml-1" href="/doerz/inbox/">
@@ -38,7 +36,9 @@ const DoerzValidatePage = ({ params }: DoerzValidatePageProps) => {
           </Link>
         </div>
       </div>
-      <FetchTaskValidateClient taskIdName={params.taskIdName} />
+      <FetchTaskValidateClient
+        taskIdName={params.taskIdName}
+      />
     </>
   );
 };

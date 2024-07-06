@@ -14,24 +14,54 @@ import Countdown from "../../Dates/Countdown";
 import TaskReward from "./TaskReward";
 import TestingReminder from "@/components/messages/TestingReminder";
 import DisplayRawData from "@/components/rawdata/DisplayRawData";
+import { useValidateTask } from "@/hooks/useFetchValidate";
+import delay from "@/utils/delay";
 
 type DisplayTaskDetailProps = {
   data: Task | null;
+  walletAddress: string;
+  mintAddress: string;
+  tokenAmount: string;
 };
 
 type ValidateResult = "none" | "loading" | "success" | "error";
 
-const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
+const DisplayTaskDetail = ({
+  data,
+  walletAddress,
+  mintAddress,
+  tokenAmount,
+}: DisplayTaskDetailProps) => {
   const [toggleDateFormat, setToggleDateFormat] = React.useState(false);
   const [validateResult, setValidateResult] =
     React.useState<ValidateResult>("none");
 
-  const handleValidateAction = () => {
-    console.log("handleValidateAction");
+  const {
+    validationResult,
+    isLoading: isLoadingValidation,
+    errorValidateTask: errorValidateTask,
+    fetchValidation,
+  } = useValidateTask(
+    data?.taskIdName ?? "",
+    walletAddress,
+    mintAddress,
+    tokenAmount,
+  );
+
+  const handleValidateAction = async () => {
     setValidateResult("loading");
-    setTimeout(() => {
-      setValidateResult("success");
-    }, 3000);
+    await delay(3000);
+    try {
+      await fetchValidation();
+
+      if (validationResult?.isValid) {
+        setValidateResult("success");
+      } else {
+        setValidateResult("error");
+      }
+    } catch (error) {
+      setValidateResult("error");
+    }
   };
 
   const handleToggleDateFormat = () => {
@@ -42,9 +72,9 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
   const dateModified = formatDateTaskDetail(data?.dateModified);
   const dateStarted = formatDateTaskDetail(data?.dateStarted);
   const dateExpired = formatDateTaskDetail(data?.dateExpired);
-  // const dateNow = DateTime.now().toFormat("LLL. d, yyyy (h:mm a)");
 
-  const styleValidateSuccess = "bg-green-500 hover:bg-green-500 disabled:bg-green-500 disabled:opacity-100 cursor-not-allowed";
+  const styleValidateSuccess =
+    "bg-green-500 hover:bg-green-500 disabled:bg-green-500 disabled:opacity-100 cursor-not-allowed";
   const styleValidateNone = "bg-blue-500 hover:bg-blue-600";
   const styleValidateLoading = "bg-zinc-500 hover:bg-zinc-600";
   const styleValidateError = "bg-red-500 hover:bg-red-600";
@@ -113,8 +143,8 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
 
       <div className="my-8 flex items-center justify-center">
         <div
-          className="my-4 flex w-[300px] flex-col rounded-xl border-2 border-zinc-800
-      bg-zinc-100 p-12 dark:bg-zinc-800 md:w-[600px] border-dashed"
+          className="my-4 flex w-[300px] flex-col rounded-xl border-2 border-dashed
+      border-zinc-800 bg-zinc-100 p-12 dark:bg-zinc-800 md:w-[600px]"
         >
           {data?.rewardSize && (
             <div className="flex flex-row items-center justify-center text-center">
@@ -126,15 +156,16 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
             <Button
               className={`${getStyleValidateResult(validateResult)}  dark:text-white} px-12 py-6 text-lg `}
               onClick={handleValidateAction}
-              disabled={validateResult === "success"}
+              disabled={validateResult === "success" || isLoadingValidation}
             >
               {getButtonIcon(validateResult)}
               {getButtonText(validateResult, "Check Wallet for Ownership")}
             </Button>
           </div>
           <div className="mt-2 p-2 text-center text-sm text-zinc-800 dark:text-zinc-200">
-            After initial user validation, there is a final system check, and if successful rewards will be deposited in your
-            wallet typically within 1-3 hours.
+            After initial user validation, there is a final system check, and if
+            successful rewards will be deposited in your wallet typically within
+            1-3 hours.
           </div>
 
           {validateResult === "success" && (
@@ -144,7 +175,13 @@ const DisplayTaskDetail = ({ data }: DisplayTaskDetailProps) => {
                 <hr className="flex h-1 border-t-0 bg-neutral-200 dark:bg-white/10" />
                 <div className="">
                   <div className="flex flex-row items-center">
-                    <AiOutlineCrown className="text-purple-800 dark:text-purple-400" size="28" /><div className="ml-1 items-center text-sm font-bold text-purple-800 dark:text-purple-400">REWARD PENDING</div>
+                    <AiOutlineCrown
+                      className="text-purple-800 dark:text-purple-400"
+                      size="28"
+                    />
+                    <div className="ml-1 items-center text-sm font-bold text-purple-800 dark:text-purple-400">
+                      REWARD PENDING
+                    </div>
                   </div>
                 </div>
                 <div className="text-center">

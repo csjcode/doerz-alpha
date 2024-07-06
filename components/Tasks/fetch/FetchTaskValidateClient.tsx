@@ -9,7 +9,9 @@ type FetchTaskValidateClientProps = {
   taskIdName: string;
 };
 
-const FetchTaskValidateClient = ({ taskIdName }: FetchTaskValidateClientProps) => {
+const FetchTaskValidateClient = ({
+  taskIdName,
+}: FetchTaskValidateClientProps) => {
   const { task, error, fetchTaskDetail } = useFetchTaskDetail(taskIdName);
 
   // console.log(`taskIdName is ${taskIdName}`);
@@ -39,7 +41,17 @@ const FetchTaskValidateClient = ({ taskIdName }: FetchTaskValidateClientProps) =
     );
   } else if (data) {
     // console.log(`taskIdName is ${taskIdName}`);
-    return <DisplayTaskValidate data={data} />;
+    const walletAddress = 'UeJ1WAZZAA7pdW1mT2kHwuJFdRe8oLf9uWgyjkh5L6C';
+    const mintAddress = 'Xxgwt97Pn5zZGMjrHhZRczgy2i3mSx5cwexE8UEwVjY';
+    const tokenAmount = '10000';
+    return (
+      <DisplayTaskValidate
+        data={data}
+        walletAddress={walletAddress}
+        mintAddress={mintAddress}
+        tokenAmount={tokenAmount}
+      />
+    );
   }
 };
 
