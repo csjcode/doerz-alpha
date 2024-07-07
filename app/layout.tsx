@@ -7,6 +7,7 @@ import NavbarDemos from "@/components/Nav/NavbarDemos";
 import { Outfit, Barlow } from "next/font/google";
 import NavFooter from "@/components/Nav/NavFooter";
 import Image from "next/image";
+import Head from "next/head";
 
 const outfit = Outfit({
   display: "swap",
@@ -24,11 +25,12 @@ const barlow = Barlow({
 
 const inter = Inter({ variable: "--font-inter", subsets: ["latin"] });
 
+
+
 export const metadata: Metadata = {
   title: "DOERZ.fun",
   description: "Rewards for doing things you love.",
 };
-
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -36,7 +38,15 @@ export default function RootLayout({
 }>) {
   return (
     <html className={`dark ${outfit.variable} ${inter.variable}`} lang="en">
+
+
+
       <body className={`{inter.className} dark:bg-zinc-900`}>
+      <link rel="apple-touch-icon" sizes="180x180" href="/images/favicons/apple-touch-icon.png" />
+        <link rel="icon" type="image/png" sizes="32x32" href="/images/favicons/favicon-32x32.png" />
+        <link rel="icon" type="image/png" sizes="16x16" href="/images/favicons/favicon-16x16.png" />
+      {/* <link rel="icon" href="/images/favicons/favicon.ico" sizes="any" /> */}
+      <link rel="manifest" href="/site.webmanifest" />
         <NavbarContext>
           <NavBar />
           {/* <NavbarDemos /> */}

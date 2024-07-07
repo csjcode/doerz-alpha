@@ -59,12 +59,12 @@ export function DataTableToolbar<TData>({
 
       <DataTableViewOptions table={table} />
       <Link href="/doerz/inbox">
-        <div className="mr-1 mr-2 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-emerald-300">
+        <div className="ml-1 cursor-pointer rounded-md border border-zinc-300 px-2 py-1 text-sm text-emerald-700 dark:border-zinc-800 dark:text-emerald-400">
           Inbox
         </div>
       </Link>
       <Link href="/doerz/cards">
-        <div className="mr-1 cursor-pointer rounded-md border border-zinc-800 px-2 py-1 text-sm text-zinc-600">
+        <div className="ml-1 cursor-pointer rounded-md border border-zinc-300 px-2 py-1 text-sm text-zinc-500 dark:hover:text-zinc-400 hover:text-zinc-700 dark:border-zinc-800">
           Cards
         </div>
       </Link>
