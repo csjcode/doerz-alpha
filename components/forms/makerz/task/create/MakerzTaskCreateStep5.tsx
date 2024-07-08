@@ -15,6 +15,7 @@ import { Textarea } from "@/components/ui/textarea";
 
 import { getErrorMessage } from "./CreateMakerzTaskForm";
 import { OWNER_ORG } from "./initialConfig";
+
 import { State } from "./reducerMakerzTaskFor";
 import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
 import { Button } from "@/components/ui/button";
@@ -39,12 +40,13 @@ const MakerzTaskCreateStep5 = ({
   errors,
   register,
 }: MakerzTaskCreateStep5Props) => {
+
   return (
     <>
       <div className="flex flex-col items-center">
-        <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
+        {/* <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
           Review / Schedule
-        </label>
+        </label> */}
 
         <div className="flex flex-col items-center justify-center">
           {" "}
@@ -54,6 +56,7 @@ const MakerzTaskCreateStep5 = ({
             dispatch={dispatch}
             register={register}
             handleFormChange={handleFormChange}
+
             errors={errors}
           />
         </div>
@@ -75,18 +78,22 @@ const MakerzTaskCreateStep5 = ({
       </div> */}
 
       {state.hasMissingFields && (
-        <div className="flex flex-col items-center mt-4">
+        <div className="mt-4 flex flex-col items-center">
           <div className="text-red-500">Missing required fields</div>
-          <div className="text-red-500">Fill in required fields before submitting</div>
+          <div className="text-red-500">
+            Fill in required fields before submitting
+          </div>
         </div>
       )}
 
-      {!state.hasMissingFields && <Button
-        className="my-2  border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
-        type="submit"
-      >
-        Schedule/Publish
-      </Button>}
+      {!state.hasMissingFields && (
+        <Button
+          className="my-2  border-blue-500 bg-blue-500 text-white hover:bg-blue-600"
+          type="submit"
+        >
+          Schedule/Publish
+        </Button>
+      )}
     </>
   );
 };

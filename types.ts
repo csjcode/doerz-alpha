@@ -21,6 +21,7 @@ export interface Task {
   ownerProject: string,
   ownerOrg: string,
   userInstructions: string[];
+  rewardInDOERZ: number;
 }
 
 export interface Favorite {

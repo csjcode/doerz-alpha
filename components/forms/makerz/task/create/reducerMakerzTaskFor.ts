@@ -29,6 +29,7 @@ export const initialState = {
   ownerGroup: OWNER_GROUP,
   ownerAdmin: OWNER_ADMIN,
   rewardInDOERZ: "100",
+  rewardInDOERZSuppliedTotal: 10000,
   images: [] as string[], // Change from single image to array of images
   userInstructions: [] as string[],
   fundingStatus: !!FUNDING_POOL[0].id,

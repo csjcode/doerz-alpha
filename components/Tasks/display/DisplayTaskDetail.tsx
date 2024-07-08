@@ -30,14 +30,14 @@ const DisplayTaskDetail = ({
   }, []);
 
   const dataFavorites = favorites || null;
-  console.log(`checking dataFavorites`);
-  dataFavorites && console.log(dataFavorites);
+  // console.log(`checking dataFavorites`);
+  // dataFavorites && console.log(dataFavorites);
 
   const isFavorite = Boolean(
     data?.taskIdName &&
       dataFavorites?.favoritesTaskIdName?.includes(data?.taskIdName),
   );
-  console.log(`isFavorite: ${isFavorite}`);
+  // console.log(`isFavorite: ${isFavorite}`);
 
   const handleToggleDateFormat = () => {
     setToggleDateFormat(!toggleDateFormat);
@@ -50,26 +50,38 @@ const DisplayTaskDetail = ({
   // const dateNow = DateTime.now().toFormat("LLL. d, yyyy (h:mm a)");
 
   return (
-    <div className="w- p-4 w-[80%] md:w-[60%] md:w-[50%]">
-      {data?.images && data?.images[0] && (
+    <div className="w-[80%] p-4 md:w-[50%] md:w-[60%]">
+      {data?.images && data?.images[0] && !preview && (
         <div className="my-4">
           <Image
             src={`/images/details/${data?.images[0]}`}
             alt={data?.title}
-            className="h-32 md:h-64 w-full rounded-2xl object-cover"
+            className="h-32 w-full rounded-2xl object-cover md:h-64"
             width={600}
             height={0}
           />
         </div>
       )}
-      <div className="flex flex-col items-start">
-        <h1 className="text-2xl font-bold">{data?.title ?? "n/a"}</h1>{" "}
-        <span className="border-0 border-zinc-100 py-1 text-xs text-zinc-500 dark:border-zinc-800">
-          {data?.taskIdName ?? "n/a"}
-        </span>
-      </div>
+      {!data?.title && preview && (
+        <div className="flex h-[300px] w-full flex-col border-2 border-dashed	">
+          <div className="flex h-full flex-col  items-center justify-center text-center font-bold ">
+            <div className="text-2xl">Preview</div>
+            <div className="text-md">
+              Enter info in the left column for editing.
+            </div>
+          </div>
+        </div>
+      )}
 
-      <div className="flex flex-col leading-4">
+      {data?.title && (
+        <div className="flex flex-col items-start">
+          <h1 className="text-2xl font-bold">{data?.title ?? "n/a"}</h1>{" "}
+          <span className="border-0 border-zinc-100 py-1 text-xs text-zinc-500 dark:border-zinc-800">
+            {data?.taskIdName ?? "n/a"}
+          </span>
+        </div>
+      )}
+      <div className="flex flex-col border-0 leading-4">
         {!preview && (
           <div className="flex flex-col">
             <div
@@ -86,8 +98,12 @@ const DisplayTaskDetail = ({
           </div>
         )}
 
-        <div className="mt-4 text-xl font-bold">Description</div>
-        <p className="text-lg font-light">{data?.description}</p>
+        {data?.description && (
+          <>
+            <div className="mt-4 text-xl font-bold">Description</div>
+            <p className="text-lg font-light">{data?.description}</p>
+          </>
+        )}
       </div>
 
       <div className="mt-4">
@@ -98,30 +114,60 @@ const DisplayTaskDetail = ({
           <TaskDetailActionBar data={data} favorite={isFavorite} />
         </div>
       )}
-      <div className="mt-4">
-        {data?.images && data?.images?.length > 0 ? (
+
+      {!preview && data?.images && data?.images.length > 0 ? (
+        <div className="mt-4 border-2">
           <TaskImages images={data?.images} />
-        ) : (
+        </div>
+      ) : !preview ? (
+        <div className="mt-4 border-2">
           <TaskImages
             images={["01.png", "02.png", "03.png", "04.png", "05.png"]}
           />
-        )}
-      </div>
-
-      <div className="mt-4 flex flex-col">
-        <div className="text-2xl font-bold">Reward Instructions</div>
-        <ol className="ml-4 mt-1 flex list-outside flex-col text-lg">
-          {data?.userInstructions &&
-            data?.userInstructions.map((instruction: string) => (
-              <li
-                className={`mr-2 list-decimal rounded-xl px-2 py-1`}
-                key={instruction}
-              >
-                {instruction}
-              </li>
+        </div>
+      ) : (
+        data &&
+        data.images &&
+        data.images.length > 0 && (
+          <div className="mt-4 border-2">
+            {data.images.map((image, index) => (
+              <img
+                key={index}
+                src={image}
+                alt={`preview-${index}`}
+                className="mt-2 h-32 w-full rounded-2xl object-cover md:h-64"
+                width={150}
+                height={0}
+              />
             ))}
-        </ol>
-      </div>
+          </div>
+        )
+      )}
+
+      {data?.userInstructions && data?.userInstructions?.length > 0 && (
+        <div className="mt-4 flex flex-col">
+          <div className="text-2xl font-bold">Reward Instructions</div>
+          <ol className="ml-4 mt-1 flex list-outside flex-col text-lg">
+            {data?.userInstructions &&
+              data?.userInstructions.map((instruction: string) => (
+                <li
+                  className={`mr-2 list-decimal rounded-xl px-2 py-1`}
+                  key={instruction}
+                >
+                  {instruction}
+                </li>
+              ))}
+          </ol>
+        </div>
+      )}
+
+      {data?.rewardInDOERZ && (
+        <div className="">
+          <div className="text-xl">Reward Amount</div>
+          <div className="text-lg bg-yellow-300 w-36 text-zinc-900 py-2 px-3 text-center">{data?.rewardInDOERZ} DOERZ</div>
+        </div>
+      )}
+
       {!preview && (
         <>
           <hr className="my-4 h-[2px] border-t-0 bg-neutral-200 dark:bg-white/10" />
@@ -130,16 +176,16 @@ const DisplayTaskDetail = ({
         </>
       )}
 
-      <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
+      {/* <div className="mt-4 flex flex-col text-zinc-600 dark:text-zinc-400">
         <span className="mr-2">Status: {data?.status}</span>
 
         <span className="mr-2">Brand: {data?.brand}</span>
         <span className="mr-2">Label: {data?.label}</span>
         <span className="mr-2">modified: {dateModified}</span>
         <span className="mr-2">rewardSize: {data?.rewardSize}</span>
-      </div>
+      </div> */}
 
-      {dateExpired && (
+      {!preview && dateExpired && (
         <div>
           <Countdown expires={dateExpired} />
         </div>
@@ -166,6 +212,7 @@ const DisplayTaskDetail = ({
         <span className="mr-2">started: {dateStarted}</span>
         <span className="mr-2">expires: {dateExpired}</span>
       </div>
+      {!preview && <DisplayRawData data={data} />}
       <DisplayRawData data={data} />
     </div>
   );

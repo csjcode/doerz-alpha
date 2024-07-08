@@ -1,7 +1,6 @@
 "use client";
 import React, { ChangeEvent } from "react";
 
-
 import { getErrorMessage } from "./CreateMakerzTaskForm";
 import { OWNER_ORG } from "./initialConfig";
 import { State } from "./reducerMakerzTaskFor";
@@ -27,6 +26,34 @@ const MakerzTaskCreateStep4 = ({
   errors,
   register,
 }: MakerzTaskCreateStep4Props) => {
+  const handleFundingStatus = (
+    rewardInDOERZSuppliedTotal: number,
+    rewardInDOERZ: number,
+    doerzAvailableWallet: number,
+  ) => {
+    let fundingStatus = false;
+
+    if (
+      rewardInDOERZSuppliedTotal > rewardInDOERZ &&
+      rewardInDOERZSuppliedTotal < doerzAvailableWallet
+    ) {
+      fundingStatus = true;
+    }
+
+    if (fundingStatus === true) {
+      dispatch({
+        type: "SET_FIELD",
+        field: "fundingStatus",
+        value: true,
+      });
+    } else {
+      dispatch({
+        type: "SET_FIELD",
+        field: "fundingStatus",
+        value: false,
+      });
+    }
+  };
   return (
     <>
       <div className="flex flex-col items-center">
@@ -43,18 +70,29 @@ const MakerzTaskCreateStep4 = ({
             register={register}
             handleFormChange={handleFormChange}
             errors={errors}
+            handleFundingStatus={handleFundingStatus}
           />
         </div>
       </div>
 
-     { state.fundingStatus===true && <div className="items-content flex w-full flex-row justify-center">
+      {state.fundingStatus === true ? (
+        <div className="items-content flex w-full flex-row justify-center">
+          <Button
+            className={`disabled my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
+            type="submit"
+          >
+            Fund Task
+          </Button>
+        </div>
+      ) : (
         <Button
-          className="my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600"
+          className={`disabled my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
+          disabled={true}
           type="submit"
         >
           Fund Task
         </Button>
-      </div>}
+      )}
     </>
   );
 };

@@ -50,14 +50,14 @@ const MakerzTaskCreateFormPreview = ({
         <div className="ml-2 text-xs text-red-500/70">not saved</div>
       </div>
       <div className="mt-4 flex flex-col">
-        <div className="my-4">
+        {/* <div className="my-4">
           <FilterTokenByMint
             tokenMintAddress={
               process.env.NEXT_PUBLIC_DOERZ_TOKEN_MINT_ACCOUNT || ""
             }
           />
         </div>
-        solBalance: {solBalance}
+        solBalance: {solBalance} */}
 
         <DisplayTaskDetail data={state} preview={true} />
 
