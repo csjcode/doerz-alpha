@@ -1,6 +1,6 @@
 "use client"
 import { Input } from "@/components/ui/input";
-import React, { ChangeEvent, useState } from "react";
+import React, { ChangeEvent, useState, useEffect } from "react";
 import { handleFormChange } from "./handleFormChange";
 import { State } from "./reducerMakerzTaskFor";
 import FormLabel from "./FormLabel";
@@ -12,14 +12,13 @@ import {
   SelectGroup,
   SelectItem,
 } from "@/components/ui/select";
-import { FUNDING_POOL, OWNER_ORG } from "./initialConfig";
+import { FUNDING_POOL } from "./initialConfig";
 import { Button } from "@/components/ui/button";
-
-
+import { useWallet } from "@solana/wallet-adapter-react";
+import useTokenAccountsByMint from "@/hooks/useTokenAccountsByMint"; // Ensure the correct path
 
 type MakerzTaskCreateFundingProps = {
   state: State;
-  // setValue: any;
   dispatch: any;
   handleFormChange: (
     e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>,
@@ -39,22 +38,29 @@ const MakerzTaskCreateFunding = ({
   handleFormChange,
   errors,
   register,
+  handleFundingStatus,
 }: MakerzTaskCreateFundingProps) => {
+  const { publicKey } = useWallet();
+  const tokenAccounts = useTokenAccountsByMint(process.env.NEXT_PUBLIC_DOERZ_TOKEN_MINT_ACCOUNT || "");
 
+  const [doerzAvailableWallet, setDoerzAvailableWallet] = useState(0);
 
-  const doerzAvailableWallet = 50000;
-  const doerzAvailableFunding =
-    Number(doerzAvailableWallet) - Number(state.rewardInDOERZSuppliedTotal);
+  useEffect(() => {
+    if (tokenAccounts.length > 0) {
+      const totalAmount = tokenAccounts.reduce((sum, account) => sum + account.amount, 0);
+      setDoerzAvailableWallet(totalAmount);
+    }
+  }, [tokenAccounts]);
+
+  const doerzAvailableFunding = Number(doerzAvailableWallet) - Number(state.rewardInDOERZSuppliedTotal);
+
+  useEffect(() => {
+    handleFundingStatus(Number(state.rewardInDOERZSuppliedTotal), Number(state.rewardInDOERZ), Number(doerzAvailableWallet));
+  }, [doerzAvailableFunding, state.rewardInDOERZSuppliedTotal, state.rewardInDOERZ, doerzAvailableWallet]);
 
   return (
     <div>
       <div className="flex flex-col items-center">
-        {/* <div className="mt-4">
-          <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-          <p className="text-center font-bold">Reward to Complete Task</p>
-          <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-        </div> */}
-
         <div className="mt-4 flex flex flex-col flex-col">
           <FormLabel
             labelTitle="DOERZ Reward"
@@ -76,17 +82,13 @@ const MakerzTaskCreateFunding = ({
                 ) => handleFormChange(e),
               })}
             />{" "}
-            {/* <span className="mt-.5 text-sm">DOERZ</span> */}
+            {errors.rewardInDOERZ && (
+              <p>{errors.rewardInDOERZ.message as string}</p>
+            )}
           </div>
-          {errors.rewardInDOERZ && (
-            <p>{errors.rewardInDOERZ.message as string}</p>
-          )}
         </div>
       </div>
       <div className="flex flex-col justify-center">
-        {/* <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" />
-        <p className="text-center font-bold">Funding Pools</p>
-        <hr className="my-2 h-[1px] border-t-0 bg-neutral-200 dark:bg-white/10" /> */}
         <div className="flex flex-col w-full justify-center items-center">
           <div className="flex flex-col my-2 mr-2 justify-center items-center border-0 w-44">
             <label className="mb-1 text-sm text-zinc-600 dark:text-zinc-400 ">
@@ -119,11 +121,6 @@ const MakerzTaskCreateFunding = ({
                   >
                     Create New
                   </SelectItem>
-                  {/* <SelectItem value={OWNER_ORG}>{OWNER_ORG}</SelectItem>
-                  <SelectItem value="doerzsitepromos">
-                    Doerz.fun Site Rewards
-                  </SelectItem>
-                   */}
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -132,15 +129,6 @@ const MakerzTaskCreateFunding = ({
           {state.fundingPool === "fundingPoolCreate" && (
             <div className="">Create Pool</div>
           )}
-          {/* <div className="items-content flex flex-row justify-center">
-            <Button
-              className="my-2 border-blue-500 "
-              variant="outline"
-              // type="submit"
-            >
-              Create new Funding Pool
-            </Button>
-          </div> */}
         </div>
 
         <div className=" flex flex-col">
@@ -164,14 +152,13 @@ const MakerzTaskCreateFunding = ({
                 ) => handleFormChange(e),
               })}
             />{" "}
-            {/* <span className="mt-.5 text-sm">DOERZ</span> */}
+            {errors.rewardInDOERZ && (
+              <p>{errors.rewardInDOERZ.message as string}</p>
+            )}
           </div>
-          {errors.rewardInDOERZ && (
-            <p>{errors.rewardInDOERZ.message as string}</p>
-          )}
         </div>
         <div className="mt-2 text-center">
-          You have <span className="font-bold"> {doerzAvailableFunding}</span>
+          You have <span className="font-bold">{doerzAvailableFunding}</span>
         </div>
         <div className="text-center">DOERZ Available</div>
         <hr className="my-2" />
@@ -180,7 +167,6 @@ const MakerzTaskCreateFunding = ({
           be claimed by users accomplishing tasks. &quot;DOERZ Reward&quot; is the
           amount of DOERZ given to each user for completing the task.
         </div>
-        {/* <div className="text-center">DOERZ Available</div> */}
         <hr className="my-2" />
       </div>
     </div>

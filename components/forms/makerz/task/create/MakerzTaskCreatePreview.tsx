@@ -9,6 +9,8 @@ import { Token } from "@solana/spl-token";
 import FilterTokenByMint from "@/components/solana-tokens/FilterTokenByMint";
 import useSolBalance from "@/hooks/useSolBalance";
 import DisplayTaskDetail from "@/components/Tasks/display/DisplayTaskDetail";
+import { MdAddTask } from "react-icons/md";
+import Link from "next/link";
 
 type MakerzTaskCreateFormPreviewProps = {
   data: any;
@@ -42,12 +44,17 @@ const MakerzTaskCreateFormPreview = ({
   return (
     <div className="flex w-2/3 flex-col px-2">
       <div className="flex flex-row items-center justify-center">
-        <div className="flex flex-row text-center">
+        <div className="flex flex-row text-center mr-1">
           <VscOpenPreview size={18} className="text-zinc-500" />
         </div>
 
-        <div className="ml-1 font-medium">Task Preview</div>
-        <div className="ml-2 text-xs text-red-500/70">not saved</div>
+        <div className="ml-1 font-medium">Task Preview (hot reload)</div>
+        <div className="flex flex-row text-center ml-2">
+          <MdAddTask size={18} className="text-zinc-500" />
+        </div>
+
+        <div className="ml-1 font-medium"><a href="/makerz/create/">Create New Task</a></div>
+        {/* <div className="ml-2 text-xs text-red-500/70">not saved</div> */}
       </div>
       <div className="mt-4 flex flex-col">
         {/* <div className="my-4">

@@ -39,7 +39,6 @@ export const initialState = {
 };
 
 export type State = typeof initialState;
-
 export type Action =
   | { type: "SET_FIELD"; field: keyof State; value: any }
   | { type: "SET_INITIAL_VALUES"; payload: Partial<State> }
@@ -48,7 +47,8 @@ export type Action =
   | { type: "ADD_INSTRUCTION"; instruction: string }
   | { type: "REMOVE_INSTRUCTION"; index: number }
   | { type: "ADD_IMAGE"; payload: string } // New action type for adding images
-  | { type: "RESET_IMAGES" }; // New action type for resetting images
+  | { type: "RESET_IMAGES" } // New action type for resetting images
+  | { type: "RESET_FORM" }; // New action type for resetting the form
 
 export const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -97,6 +97,10 @@ export const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         images: [],
+      };
+    case "RESET_FORM":
+      return {
+        ...initialState,
       };
     default:
       return state;

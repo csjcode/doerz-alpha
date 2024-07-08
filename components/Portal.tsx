@@ -48,12 +48,12 @@ const Portal = () => {
         </div>
         <div className="flex h-[50%] w-2/5 flex-col items-center justify-center rounded-xl border-2 border-zinc-200 p-8 dark:border-zinc-600">
           <div className="pb-4 text-center text-3xl">
-            <div className="">
-              Promote{" "}
-            </div>
+            <div className="">Promote </div>
           </div>
-          <Link href="/makerz/">
-            <Button className={`h-20 w-40 bg-purple-600 text-2xl text-white hover:bg-purple-700 ${barlow.className}`}>
+          <Link href="/makerz/list/">
+            <Button
+              className={`h-20 w-40 bg-purple-600 text-2xl text-white hover:bg-purple-700 ${barlow.className}`}
+            >
               Makerz
             </Button>
           </Link>

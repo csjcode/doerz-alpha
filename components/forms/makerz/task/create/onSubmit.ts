@@ -1,3 +1,4 @@
+"use client";
 import { v4 as uuidv4 } from "uuid";
 import { getRewardSize } from "./utils";
 import {
@@ -60,19 +61,6 @@ export const onSubmit = async (data: any, state: State, dispatch: any) => {
 
   if (state.makerzFormStep === 5) {
     alert(JSON.stringify(newTask));
-
-    // Mock API call to JSON server
-    // const response = await fetch("http://localhost:3000/tasks", {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json",
-    //   },
-    //   body: JSON.stringify(newTask),
-    // });
-    // if (response.ok) {
-    //   console.log("Task created successfully!");
-    // } else {
-    //   console.error("Failed to create task.");
-    // }
+    dispatch({ type: "RESET_FORM" });
   }
 };

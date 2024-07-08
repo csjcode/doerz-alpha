@@ -1,12 +1,8 @@
 "use client";
-import React, { ChangeEvent } from "react";
-
-import { getErrorMessage } from "./CreateMakerzTaskForm";
-import { OWNER_ORG } from "./initialConfig";
+import React, { ChangeEvent, useState } from "react";
 import { State } from "./reducerMakerzTaskFor";
-import MakerzTaskCreateInstructions from "./MakerzTaskCreateInstructions";
-import { Button } from "@/components/ui/button";
 import MakerzTaskCreateFunding from "./MakerzTaskCreateFunding";
+import { Button } from "@/components/ui/button";
 
 type MakerzTaskCreateStep4Props = {
   state: State;
@@ -18,7 +14,7 @@ type MakerzTaskCreateStep4Props = {
   errors: any;
   register: any;
 };
-4;
+
 const MakerzTaskCreateStep4 = ({
   state,
   dispatch,
@@ -26,46 +22,34 @@ const MakerzTaskCreateStep4 = ({
   errors,
   register,
 }: MakerzTaskCreateStep4Props) => {
+  const [doerzAvailableFunding, setDoerzAvailableFunding] = useState(0);
+
   const handleFundingStatus = (
     rewardInDOERZSuppliedTotal: number,
     rewardInDOERZ: number,
     doerzAvailableWallet: number,
   ) => {
-    let fundingStatus = false;
+    const fundingAvailable = Number(doerzAvailableWallet) - Number(rewardInDOERZSuppliedTotal);
+    setDoerzAvailableFunding(fundingAvailable);
 
-    if (
-      rewardInDOERZSuppliedTotal > rewardInDOERZ &&
-      rewardInDOERZSuppliedTotal < doerzAvailableWallet
-    ) {
+    let fundingStatus = false;
+    if (rewardInDOERZSuppliedTotal > rewardInDOERZ && fundingAvailable >= 0) {
       fundingStatus = true;
     }
 
-    if (fundingStatus === true) {
-      dispatch({
-        type: "SET_FIELD",
-        field: "fundingStatus",
-        value: true,
-      });
-    } else {
-      dispatch({
-        type: "SET_FIELD",
-        field: "fundingStatus",
-        value: false,
-      });
-    }
+    dispatch({
+      type: "SET_FIELD",
+      field: "fundingStatus",
+      value: fundingStatus,
+    });
   };
+
   return (
     <>
       <div className="flex flex-col items-center">
-        {/* <label className="mt-1 text-sm text-zinc-600 dark:text-zinc-400">
-          Task Funding/Bounty
-        </label> */}
-
         <div className="flex flex-col items-center justify-center">
-          {" "}
           <MakerzTaskCreateFunding
             state={state}
-            // // setValue={setValue}
             dispatch={dispatch}
             register={register}
             handleFormChange={handleFormChange}
@@ -75,24 +59,15 @@ const MakerzTaskCreateStep4 = ({
         </div>
       </div>
 
-      {state.fundingStatus === true ? (
-        <div className="items-content flex w-full flex-row justify-center">
-          <Button
-            className={`disabled my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
-            type="submit"
-          >
-            Fund Task
-          </Button>
-        </div>
-      ) : (
+      <div className="items-content flex w-full flex-row justify-center">
         <Button
           className={`disabled my-2 border-blue-500 bg-blue-500 px-16 text-white hover:bg-blue-600`}
-          disabled={true}
+          disabled={doerzAvailableFunding < 0}
           type="submit"
         >
           Fund Task
         </Button>
-      )}
+      </div>
     </>
   );
 };
