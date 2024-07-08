@@ -38,18 +38,19 @@ const MakerzTaskCreateStep2 = ({
   register,
 }: MakerzTaskCreateStep2Props) => {
   const [loading, setLoading] = useState(false);
-  const { tokenInfo, isLoading, error, fetchTokenInfo } = useGetTokenInfoByProgramId(state.ownershipTokenAddress || "");
+  const { tokenInfo, isLoading, error, fetchTokenInfo } =
+    useGetTokenInfoByProgramId(state.ownershipTokenAddress || "");
 
   useEffect(() => {
     if (isLoading) {
       setLoading(true);
     } else {
       setLoading(false);
-      if (tokenInfo) {
+      if (tokenInfo && tokenInfo.pairs && tokenInfo.pairs[0]) {
         console.log(tokenInfo);
 
         const name = tokenInfo.pairs[0].baseToken.name;
-        const symbol = tokenInfo.pairs[0].baseToken.symbol;
+        const symbol = tokenInfo.pairs[0].baseToken.symbol.toUpperCase();
 
         dispatch({
           type: "SET_FIELD",
@@ -63,8 +64,25 @@ const MakerzTaskCreateStep2 = ({
           value: symbol,
         });
 
+        dispatch({
+          type: "SET_FIELD",
+          field: "title",
+          value: `Prove ownership of ${name} (${symbol})` ,
+        });
+
+        const descriptionAi = `You need to prove that you own at least 1 ${name} (${symbol}) token. To do this, you need to get the token from an DEX/exchange like Jupiter or coinbase, and put in your wallet. Then you can prove ownership by going to validate task page and clicking the validate button..`
+
+        dispatch({
+          type: "SET_FIELD",
+          field: "description",
+          value: descriptionAi
+        });
+
+
         setValue("ownershipTokenName", name);
         setValue("ownershipTokenSymbol", symbol);
+        setValue("title", `Prove ownership of ${name} (${symbol})`);
+        setValue("description", descriptionAi);
       }
       if (error) {
         console.error(error);
@@ -118,11 +136,11 @@ const MakerzTaskCreateStep2 = ({
 
   const handleAutoFill = async () => {
     if (!state.ownershipTokenAddress) {
-      alert('Please enter a Program ID.');
+      alert("Please enter a Program ID.");
       return;
     }
     fetchTokenInfo(state.ownershipTokenAddress);
-  }
+  };
 
   const handleNextStep = () => {
     if (state.hasMissingFields) {
@@ -199,7 +217,14 @@ const MakerzTaskCreateStep2 = ({
                   required={true}
                   ready={!!state.ownershipTokenAddress}
                 />
-                <Button type="button" variant="outline" className="ml-2 text-xs px-3 py-1" onClick={handleAutoFill}>Autofill</Button>
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="ml-2 px-3 py-1 text-xs"
+                  onClick={handleAutoFill}
+                >
+                  Autofill
+                </Button>
               </div>
               <Input
                 className="my-1 w-[250px] focus-visible:ring-1"

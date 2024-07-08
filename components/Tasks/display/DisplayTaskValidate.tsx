@@ -127,7 +127,7 @@ const DisplayTaskDetail = ({
         <div className="flex flex-col">
           <div
             onClick={handleToggleDateFormat}
-            className="mr-2 mt-2 text-red-600"
+            className="mr-2 mt-2 text-red-600 dark:text-red-300"
           >
             <span className="font-bold">Expires:</span>{" "}
             {toggleDateFormat ? (
@@ -154,12 +154,14 @@ const DisplayTaskDetail = ({
 
           <div className="mt-2 flex flex-row items-center justify-center">
             <Button
-              className={`${getStyleValidateResult(validateResult)}  dark:text-white} px-12 py-6 text-lg `}
+              className={`${getStyleValidateResult(validateResult)} px-12 py-6 text-lg dark:text-white `}
               onClick={handleValidateAction}
               disabled={validateResult === "success" || isLoadingValidation}
             >
               {getButtonIcon(validateResult)}
-              {getButtonText(validateResult, "Check Wallet for Ownership")}
+              {validateResult==="error"
+                ? getButtonText(validateResult, "Did Not Validate")
+                : getButtonText(validateResult, "Check Wallet for Ownership")}
             </Button>
           </div>
           <div className="mt-2 p-2 text-center text-sm text-zinc-800 dark:text-zinc-200">

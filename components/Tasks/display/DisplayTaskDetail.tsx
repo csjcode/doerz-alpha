@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Task } from "@/types";
 import Countdown from "../../Dates/Countdown";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import { formatDateTaskDetail } from "@/utils/dates";
 import TaskReward from "./TaskReward";
 import TaskImages from "./TaskImages";
@@ -49,13 +50,25 @@ const DisplayTaskDetail = ({
   // const dateNow = DateTime.now().toFormat("LLL. d, yyyy (h:mm a)");
 
   return (
-    <div className="w- p-4 md:w-[60%]">
+    <div className="w- p-4 w-[80%] md:w-[60%] md:w-[50%]">
+      {data?.images && data?.images[0] && (
+        <div className="my-4">
+          <Image
+            src={`/images/details/${data?.images[0]}`}
+            alt={data?.title}
+            className="h-32 md:h-64 w-full rounded-2xl object-cover"
+            width={600}
+            height={0}
+          />
+        </div>
+      )}
       <div className="flex flex-col items-start">
         <h1 className="text-2xl font-bold">{data?.title ?? "n/a"}</h1>{" "}
         <span className="border-0 border-zinc-100 py-1 text-xs text-zinc-500 dark:border-zinc-800">
           {data?.taskIdName ?? "n/a"}
         </span>
       </div>
+
       <div className="flex flex-col leading-4">
         {!preview && (
           <div className="flex flex-col">
@@ -72,6 +85,7 @@ const DisplayTaskDetail = ({
             </div>
           </div>
         )}
+
         <div className="mt-4 text-xl font-bold">Description</div>
         <p className="text-lg font-light">{data?.description}</p>
       </div>
